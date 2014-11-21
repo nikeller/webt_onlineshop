@@ -26,7 +26,7 @@ object Kategorie_Gebaeck extends BaseScalaTemplate[play.twirl.api.HtmlFormat.App
   def apply():play.twirl.api.HtmlFormat.Appendable = {
       _display_ {
 
-Seq[Any](format.raw/*1.1*/("""<!DOCTYPE html>
+Seq[Any](format.raw/*1.1*/("""﻿<!DOCTYPE html>TEST
 <html>
 	<head>
     <meta charset="utf-8">
@@ -133,9 +133,9 @@ Seq[Any](format.raw/*1.1*/("""<!DOCTYPE html>
 }
               /*
                   -- GENERATED --
-                  DATE: Fri Nov 21 21:24:08 CET 2014
+                  DATE: Fri Nov 21 22:25:07 CET 2014
                   SOURCE: C:/Users/Nina/workspace/webt_onlineshop/app/views/Kategorie_Gebaeck.scala.html
-                  HASH: 1959ec129bdede511bdd3f84b4a5ce0f33d8670d
+                  HASH: 9ed26da2493be7dc5bbcd32ac20fcccf3dcd143d
                   MATRIX: 810->0
                   LINES: 29->1
                   -- GENERATED --
