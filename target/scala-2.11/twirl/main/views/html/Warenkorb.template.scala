@@ -131,8 +131,8 @@ Seq[Any](format.raw/*1.1*/("""<!DOCTYPE html>
 }
               /*
                   -- GENERATED --
-                  DATE: Fri Nov 21 00:30:22 CET 2014
-                  SOURCE: C:/Users/Nina/SweetShop/app/views/Warenkorb.scala.html
+                  DATE: Fri Nov 21 21:24:08 CET 2014
+                  SOURCE: C:/Users/Nina/workspace/webt_onlineshop/app/views/Warenkorb.scala.html
                   HASH: 037d404835e34d3b07087b71ceefff50c6248008
                   MATRIX: 802->0
                   LINES: 29->1

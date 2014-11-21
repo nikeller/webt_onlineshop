@@ -97,8 +97,8 @@ Seq[Any](format.raw/*1.1*/("""<!DOCTYPE html>
 }
               /*
                   -- GENERATED --
-                  DATE: Fri Nov 21 00:30:22 CET 2014
-                  SOURCE: C:/Users/Nina/SweetShop/app/views/Kasse.scala.html
+                  DATE: Fri Nov 21 21:24:08 CET 2014
+                  SOURCE: C:/Users/Nina/workspace/webt_onlineshop/app/views/Kasse.scala.html
                   HASH: 0cebd0f3b24b78157f72ae07e5875d0e7c80368e
                   MATRIX: 798->0
                   LINES: 29->1

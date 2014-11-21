@@ -126,8 +126,8 @@ Seq[Any](format.raw/*1.1*/("""<!DOCTYPE html>
 }
               /*
                   -- GENERATED --
-                  DATE: Fri Nov 21 00:30:22 CET 2014
-                  SOURCE: C:/Users/Nina/SweetShop/app/views/SweetShop_Main.scala.html
+                  DATE: Fri Nov 21 21:24:08 CET 2014
+                  SOURCE: C:/Users/Nina/workspace/webt_onlineshop/app/views/SweetShop_Main.scala.html
                   HASH: 2c67ca691cb5572e13a5e0e8b80e72728f47524d
                   MATRIX: 807->0
                   LINES: 29->1

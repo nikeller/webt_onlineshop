@@ -1,6 +1,6 @@
-// @SOURCE:C:/Users/Nina/SweetShop/conf/routes
-// @HASH:dd5930f26986650d284261b9b89054ec2ef47760
-// @DATE:Fri Nov 21 01:24:39 CET 2014
+// @SOURCE:C:/Users/Nina/workspace/webt_onlineshop/conf/routes
+// @HASH:28ed18f6f5e3223d9f483cb0708d865557139c34
+// @DATE:Fri Nov 21 21:24:07 CET 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._

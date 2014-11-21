@@ -133,8 +133,8 @@ Seq[Any](format.raw/*1.1*/("""<!DOCTYPE html>
 }
               /*
                   -- GENERATED --
-                  DATE: Fri Nov 21 00:30:22 CET 2014
-                  SOURCE: C:/Users/Nina/SweetShop/app/views/Kategorie_Pralinen.scala.html
+                  DATE: Fri Nov 21 21:24:08 CET 2014
+                  SOURCE: C:/Users/Nina/workspace/webt_onlineshop/app/views/Kategorie_Pralinen.scala.html
                   HASH: 8df1f395911f48a75ca0e5964d1bc6b25d89787a
                   MATRIX: 811->0
                   LINES: 29->1
