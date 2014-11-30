@@ -28,11 +28,11 @@ object index extends BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,Form
 
 Seq[Any](format.raw/*1.19*/("""
 
-"""),_display_(/*3.2*/main("Welcome to Play")/*3.25*/ {_display_(Seq[Any](format.raw/*3.27*/("""
-
-    """),_display_(/*5.6*/play20/*5.12*/.welcome(message, style = "Java")),format.raw/*5.45*/("""
-
-""")))}),format.raw/*7.2*/("""
+ """),_display_(/*3.3*/main("Torten")/*3.17*/ {_display_(Seq[Any](format.raw/*3.19*/(""" 
+ 
+ """),_display_(/*5.3*/SweetShop_Main()),format.raw/*5.19*/(""" 
+ 
+ """)))}),format.raw/*7.3*/("""
 """))}
   }
 
@@ -45,11 +45,11 @@ Seq[Any](format.raw/*1.19*/("""
 }
               /*
                   -- GENERATED --
-                  DATE: Fri Nov 21 21:24:08 CET 2014
+                  DATE: Sun Nov 30 23:58:31 CET 2014
                   SOURCE: C:/Users/Nina/workspace/webt_onlineshop/app/views/index.scala.html
-                  HASH: 605e6cdfecebab24bb17d3e489b0562bafda5a2d
-                  MATRIX: 723->1|828->18|858->23|889->46|928->48|962->57|976->63|1029->96|1063->101
-                  LINES: 26->1|29->1|31->3|31->3|31->3|33->5|33->5|33->5|35->7
+                  HASH: 70456c583a12f9177f89c9081be0573493211fda
+                  MATRIX: 723->1|828->18|859->24|881->38|920->40|953->48|989->64|1026->72
+                  LINES: 26->1|29->1|31->3|31->3|31->3|33->5|33->5|35->7
                   -- GENERATED --
               */
           

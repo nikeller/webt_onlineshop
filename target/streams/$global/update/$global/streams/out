@@ -7,7 +7,7 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies for sweetshop#sweetshop_2.11;1.0-SNAPSHOT [compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies sweetshop#sweetshop_2.11;1.0-SNAPSHOT->org.scala-lang#scala-library;2.11.1 [compile->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving org.scala-lang#scala-library;2.11.1 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@38e48bf1[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@2fe4f2e5[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-library;2.11.1[0m
 [0m[[0mdebug[0m] [0m	local: revision in cache: org.scala-lang#scala-library;2.11.1[0m
 [0m[[0mdebug[0m] [0m	found org.scala-lang#scala-library;2.11.1 in sbt-chain[0m
@@ -9331,7 +9331,7 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] jline#jline;2.11!jline.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.aspectj#aspectjweaver;1.7.3!aspectjweaver.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.typesafe.trace#trace-sigar-libs;0.1.6!trace-sigar-libs.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 3610ms :: artifacts dl 156ms[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 4087ms :: artifacts dl 179ms[0m
 [0m[[0mdebug[0m] [0m	report for sweetshop#sweetshop_2.11;1.0-SNAPSHOT compile produced in C:\Users\Nina\workspace\webt_onlineshop\target\resolution-cache\reports\sweetshop-sweetshop_2.11-compile.xml[0m
 [0m[[0mdebug[0m] [0m	report for sweetshop#sweetshop_2.11;1.0-SNAPSHOT runtime produced in C:\Users\Nina\workspace\webt_onlineshop\target\resolution-cache\reports\sweetshop-sweetshop_2.11-runtime.xml[0m
 [0m[[0mdebug[0m] [0m	report for sweetshop#sweetshop_2.11;1.0-SNAPSHOT test produced in C:\Users\Nina\workspace\webt_onlineshop\target\resolution-cache\reports\sweetshop-sweetshop_2.11-test.xml[0m
@@ -9349,5 +9349,5 @@
 [0m[[0mdebug[0m] [0m	report for sweetshop#sweetshop_2.11;1.0-SNAPSHOT echo-trace-test produced in C:\Users\Nina\workspace\webt_onlineshop\target\resolution-cache\reports\sweetshop-sweetshop_2.11-echo-trace-test.xml[0m
 [0m[[0mdebug[0m] [0m	report for sweetshop#sweetshop_2.11;1.0-SNAPSHOT echo-weave produced in C:\Users\Nina\workspace\webt_onlineshop\target\resolution-cache\reports\sweetshop-sweetshop_2.11-echo-weave.xml[0m
 [0m[[0mdebug[0m] [0m	report for sweetshop#sweetshop_2.11;1.0-SNAPSHOT echo-sigar produced in C:\Users\Nina\workspace\webt_onlineshop\target\resolution-cache\reports\sweetshop-sweetshop_2.11-echo-sigar.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (3610ms resolve - 156ms download)[0m
+[0m[[0mdebug[0m] [0m	resolve done (4087ms resolve - 179ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m

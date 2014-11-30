@@ -31,15 +31,15 @@ Seq[Any](format.raw/*1.32*/("""
 """),format.raw/*3.1*/("""<!DOCTYPE html>
 
 <html>
-    <head>
-        <title>"""),_display_(/*7.17*/title),format.raw/*7.22*/("""</title>
-        <link rel="stylesheet" media="screen" href=""""),_display_(/*8.54*/routes/*8.60*/.Assets.at("stylesheets/main.css")),format.raw/*8.94*/("""">
-        <link rel="shortcut icon" type="image/png" href=""""),_display_(/*9.59*/routes/*9.65*/.Assets.at("images/favicon.png")),format.raw/*9.97*/("""">
-        <script src=""""),_display_(/*10.23*/routes/*10.29*/.Assets.at("javascripts/hello.js")),format.raw/*10.63*/("""" type="text/javascript"></script>
-    </head>
-    <body>
-        """),_display_(/*13.10*/content),format.raw/*13.17*/("""
-    """),format.raw/*14.5*/("""</body>
+<head>
+<title>"""),_display_(/*7.9*/title),format.raw/*7.14*/("""</title>
+<link rel="stylesheet" media="screen" href=""""),_display_(/*8.46*/routes/*8.52*/.Assets.at("stylesheets/main.css")),format.raw/*8.86*/("""">
+<link rel="shortcut icon" type="image/png" href=""""),_display_(/*9.51*/routes/*9.57*/.Assets.at("images/favicon.png")),format.raw/*9.89*/("""">
+<script src=""""),_display_(/*10.15*/routes/*10.21*/.Assets.at("javascript/jquery-1.11.1.min.js")),format.raw/*10.66*/("""" type=text/javascript"></script>
+<script src=""""),_display_(/*11.15*/routes/*11.21*/.Assets.at("javascripts/bootstrap.min.js")),format.raw/*11.63*/("""" type="text/javascript"></script>
+</head>
+<body>"""),_display_(/*13.8*/content),format.raw/*13.15*/("""
+"""),format.raw/*14.1*/("""</body>
 </html>
 """))}
   }
@@ -53,11 +53,11 @@ Seq[Any](format.raw/*1.32*/("""
 }
               /*
                   -- GENERATED --
-                  DATE: Fri Nov 21 21:24:08 CET 2014
+                  DATE: Sun Nov 30 22:19:37 CET 2014
                   SOURCE: C:/Users/Nina/workspace/webt_onlineshop/app/views/main.scala.html
-                  HASH: 81501f6c17c6b2d772d35d09fd6b07dbbc1f0e44
-                  MATRIX: 727->1|845->31|875->35|956->90|981->95|1070->158|1084->164|1138->198|1226->260|1240->266|1292->298|1345->324|1360->330|1415->364|1512->434|1540->441|1573->447
-                  LINES: 26->1|29->1|31->3|35->7|35->7|36->8|36->8|36->8|37->9|37->9|37->9|38->10|38->10|38->10|41->13|41->13|42->14
+                  HASH: 16d2d0770fbc4450cafdc6ba501f4f9a1ebb6154
+                  MATRIX: 727->1|845->31|875->35|943->78|968->83|1049->138|1063->144|1117->178|1197->232|1211->238|1263->270|1308->288|1323->294|1389->339|1465->388|1480->394|1543->436|1621->488|1649->495|1678->497
+                  LINES: 26->1|29->1|31->3|35->7|35->7|36->8|36->8|36->8|37->9|37->9|37->9|38->10|38->10|38->10|39->11|39->11|39->11|41->13|41->13|42->14
                   -- GENERATED --
               */
           
