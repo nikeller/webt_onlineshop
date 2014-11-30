@@ -1,6 +1,6 @@
 // @SOURCE:C:/Users/Nina/workspace/webt_onlineshop/conf/routes
-// @HASH:c0c7919c771fe238e487cb2af50ef810c6cb7a5b
-// @DATE:Mon Dec 01 00:01:06 CET 2014
+// @HASH:28ed18f6f5e3223d9f483cb0708d865557139c34
+// @DATE:Fri Nov 21 21:24:07 CET 2014
 
 package controllers;
 
