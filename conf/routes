@@ -3,13 +3,8 @@
 # ~~~~
 
 # Home page
-GET     /                           	controllers.Application.index()
-GET     /Kategorie_Torten.html         	controllers.Application.Kategorie_Torten()
-GET     /Kategorie_Pralinen.html        controllers.Application.Kategorie_Pralinen()
-GET     /Kategorie_Gebaeck.html         controllers.Application.Kategorie_Gebaeck()
-GET		/Registrierung.html				controllers.Application.Registrierung()
-GET		/Warenkorb.html					controllers.Application.Warenkorb()
-GET		/Kasse.html						controllers.Application.Kasse()
+GET     /                           controllers.Application.index()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 

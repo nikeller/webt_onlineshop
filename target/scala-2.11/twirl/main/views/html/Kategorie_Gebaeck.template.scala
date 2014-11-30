@@ -26,121 +26,102 @@ object Kategorie_Gebaeck extends BaseScalaTemplate[play.twirl.api.HtmlFormat.App
   def apply():play.twirl.api.HtmlFormat.Appendable = {
       _display_ {
 
-Seq[Any](format.raw/*1.1*/("""﻿"""),_display_(/*1.3*/main("Gebäck")/*1.17*/ {_display_(Seq[Any](format.raw/*1.19*/("""
-"""),format.raw/*2.1*/("""<!DOCTYPE html>
+Seq[Any](format.raw/*1.1*/("""﻿<!DOCTYPE html>TEST
 <html>
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sweet Shop</title>
+	<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sweet Shop</title>
 
-<!-- Bootstrap -->
-link rel="stylesheet" href=""""),_display_(/*11.30*/routes/*11.36*/.Assets.at("stylesheets/bootstrap.min.css")),format.raw/*11.79*/(""">
-<link rel="stylesheet" href=""""),_display_(/*12.31*/routes/*12.37*/.Assets.at("stylesheets/mainStyleSheet.css")),format.raw/*12.81*/(""">
+    <!-- Bootstrap -->
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
 
 
+ 
+  </head>
+  <body>
+  
+  <div class="row">
+  <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" href="SweetShop_Main.html"><h2>Sweet Shop</h2></a></div>
+  <div class="col-xs-6 col-sm-4"><form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Suchen">
+        </div>
+        <button type="submit" class="btn btn-default">Los</button>
+      </form></div>
+  <!-- Optional: Setze die Floats der XS-Spalten zurück, falls ihr Inhalt nicht gleich hoch ist -->
+  <div class="clearfix visible-xs-block"></div>
+  <div class="col-xs-6 col-sm-4"><ul class="nav navbar-nav navbar-right">
+       <li> <form action="Registrierung.html"><button>Anmelden</button></form></li>
+       <li> <form action="Warenkorb.html"><button>Warenkorb</button></form></li>
+      </ul></div>
+</div>
+  
+  
 
-</head>
-<body>
+<div class="row">
+  <div class="col-xs-6 col-md-4"><div class="page-header">
+  <h2 class="ueberschrift">Kategorien</h2>
+</div>  
 
-	<div class="row">
-		<div class="col-xs-6 col-sm-4">
-			<a class="navbar-brand" href=""""),_display_(/*21.35*/routes/*21.41*/.Application.index),format.raw/*21.59*/(""""><h2>Sweet
-					Shop</h2></a>
-		</div>
-		<div class="col-xs-6 col-sm-4">
-			<form class="navbar-form navbar-left" role="search">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Suchen">
-				</div>
-				<button type="submit" class="btn btn-default">Los</button>
-			</form>
-		</div>
-		<!-- Optional: Setze die Floats der XS-Spalten zurück, falls ihr Inhalt nicht gleich hoch ist -->
-		<div class="clearfix visible-xs-block"></div>
-		<div class="col-xs-6 col-sm-4">
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<form action=""""),_display_(/*37.21*/routes/*37.27*/.Application.Registrierung),format.raw/*37.53*/("""">
-						<button>Anmelden</button>
-					</form>
-				</li>
-				<li>
-					<form action=""""),_display_(/*42.21*/routes/*42.27*/.Application.Warenkorb),format.raw/*42.49*/("""">
-						<button>Warenkorb</button>
-					</form>
-				</li>
-			</ul>
-		</div>
+<ul>
+			<li><h3><a class="categorie" href="Kategorie_Torten.html">Torten</a></h3></li>
+			<li><h3><a class="categorie" href="Kategorie_Pralinen.html">Pralinen</a></h3></li>
+			<li><h3><a class="categorie" href="Kategorie_Gebaeck.html">Gebäck</a></h3>
+						<ul>
+					<li><h4>Muffins</h4></li>
+					<li><h4>Kekse</h4></li>
+					<li><h4>Cake Pops</h4></li>
+				</ul></li>
+</ul>  
+
+
+</div>
+
+
+  <div class="col-xs-12 col-sm-6 col-md-8">
+  	<div class="panel panel-default">
+  		<div class="panel-heading">
+   			 <h3 class="panel-title">Muffins</h3>
+ 		</div>
+ 		<div class="panel-body">
+  	  		Produktbilder
+ 		</div>
 	</div>
-
-
-
-	<div class="row">
-		<div class="col-xs-6 col-md-4">
-			<div class="page-header">
-				<h2 class="ueberschrift">Kategorien</h2>
-			</div>
-
-			<ul>
-				<li><h3>
-						<a class="categorie" href=""""),_display_(/*60.35*/routes/*60.41*/.Application.Kategorie_Torten),format.raw/*60.70*/("""">Torten</a>
-					</h3></li>
-				<li><h3>
-						<a class="categorie" href=""""),_display_(/*63.35*/routes/*63.41*/.Application.Kategorie_Pralinen),format.raw/*63.72*/("""">Pralinen</a>
-					</h3></li>
-				<li><h3>
-						<a class="categorie" href=""""),_display_(/*66.35*/routes/*66.41*/.Application.Kategorie_Gebaeck),format.raw/*66.71*/("""">Gebäck</a>
-					</h3>
-					<ul>
-						<li><h4>Muffins</h4></li>
-						<li><h4>Kekse</h4></li>
-						<li><h4>Cake Pops</h4></li>
-					</ul></li>
-			</ul>
-
-
-		</div>
-
-
-		<div class="col-xs-12 col-sm-6 col-md-8">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Muffins</h3>
-				</div>
-				<div class="panel-body">Produktbilder</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Kekse</h3>
-				</div>
-				<div class="panel-body">Produktbilder</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Cake Pops</h3>
-				</div>
-				<div class="panel-body">Produktbilder</div>
-			</div>
-
-		</div>
+	
+  	<div class="panel panel-default">
+  		<div class="panel-heading">
+   			 <h3 class="panel-title">Kekse</h3>
+ 		</div>
+ 		<div class="panel-body">
+  	  		Produktbilder
+ 		</div>
 	</div>
+	
+  	<div class="panel panel-default">
+  		<div class="panel-heading">
+   			 <h3 class="panel-title">Cake Pops</h3>
+ 		</div>
+ 		<div class="panel-body">
+  	  		Produktbilder
+ 		</div>
+	</div>
+  
+  </div>
+</div>
 
 
-	<div class="panel-footer">Über Uns!</div>
+<div class="panel-footer">Über Uns!</div>
 
 
-	<!-- jQuery (wird für Bootstrap JavaScript-Plugins benötigt) -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<!-- Binde alle kompilierten Plugins zusammen ein (wie hier unten) oder such dir einzelne Dateien nach Bedarf aus -->
-	<script src="bootstrap.min.js"></script>
-</body>
-</html>
-""")))}))}
+    <!-- jQuery (wird für Bootstrap JavaScript-Plugins benötigt) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Binde alle kompilierten Plugins zusammen ein (wie hier unten) oder such dir einzelne Dateien nach Bedarf aus -->
+    <script src="bootstrap.min.js"></script>
+  </body>
+</html>"""))}
   }
 
   def render(): play.twirl.api.HtmlFormat.Appendable = apply()
@@ -152,11 +133,11 @@ link rel="stylesheet" href=""""),_display_(/*11.30*/routes/*11.36*/.Assets.at("s
 }
               /*
                   -- GENERATED --
-                  DATE: Sun Nov 23 00:26:32 CET 2014
+                  DATE: Fri Nov 21 22:25:07 CET 2014
                   SOURCE: C:/Users/Nina/workspace/webt_onlineshop/app/views/Kategorie_Gebaeck.scala.html
-                  HASH: 833e87f156847c5639324ed9bccb592cddf8300b
-                  MATRIX: 810->0|837->2|859->16|898->18|926->20|1213->280|1228->286|1292->329|1352->362|1367->368|1432->412|1576->529|1591->535|1630->553|2248->1144|2263->1150|2310->1176|2429->1268|2444->1274|2487->1296|2813->1595|2828->1601|2878->1630|2984->1709|2999->1715|3051->1746|3159->1827|3174->1833|3225->1863
-                  LINES: 29->1|29->1|29->1|29->1|30->2|39->11|39->11|39->11|40->12|40->12|40->12|49->21|49->21|49->21|65->37|65->37|65->37|70->42|70->42|70->42|88->60|88->60|88->60|91->63|91->63|91->63|94->66|94->66|94->66
+                  HASH: 9ed26da2493be7dc5bbcd32ac20fcccf3dcd143d
+                  MATRIX: 810->0
+                  LINES: 29->1
                   -- GENERATED --
               */
           

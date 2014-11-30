@@ -1,6 +1,6 @@
 // @SOURCE:C:/Users/Nina/workspace/webt_onlineshop/conf/routes
-// @HASH:c0c7919c771fe238e487cb2af50ef810c6cb7a5b
-// @DATE:Mon Dec 01 00:01:06 CET 2014
+// @HASH:28ed18f6f5e3223d9f483cb0708d865557139c34
+// @DATE:Fri Nov 21 21:24:07 CET 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
@@ -15,21 +15,15 @@ import _root_.play.libs.F
 import Router.queryString
 
 
-// @LINE:14
-// @LINE:12
-// @LINE:11
-// @LINE:10
 // @LINE:9
-// @LINE:8
-// @LINE:7
 // @LINE:6
 package controllers {
 
-// @LINE:14
+// @LINE:9
 class ReverseAssets {
 
 
-// @LINE:14
+// @LINE:9
 def at(file:String): Call = {
    implicit val _rrc = new ReverseRouteContext(Map(("path", "/public")))
    Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[PathBindable[String]].unbind("file", file))
@@ -39,57 +33,9 @@ def at(file:String): Call = {
 }
                           
 
-// @LINE:12
-// @LINE:11
-// @LINE:10
-// @LINE:9
-// @LINE:8
-// @LINE:7
 // @LINE:6
 class ReverseApplication {
 
-
-// @LINE:9
-def Kategorie_Gebaeck(): Call = {
-   import ReverseRouteContext.empty
-   Call("GET", _prefix + { _defaultPrefix } + "Kategorie_Gebaeck.html")
-}
-                        
-
-// @LINE:10
-def Registrierung(): Call = {
-   import ReverseRouteContext.empty
-   Call("GET", _prefix + { _defaultPrefix } + "Registrierung.html")
-}
-                        
-
-// @LINE:12
-def Kasse(): Call = {
-   import ReverseRouteContext.empty
-   Call("GET", _prefix + { _defaultPrefix } + "Kasse.html")
-}
-                        
-
-// @LINE:11
-def Warenkorb(): Call = {
-   import ReverseRouteContext.empty
-   Call("GET", _prefix + { _defaultPrefix } + "Warenkorb.html")
-}
-                        
-
-// @LINE:8
-def Kategorie_Pralinen(): Call = {
-   import ReverseRouteContext.empty
-   Call("GET", _prefix + { _defaultPrefix } + "Kategorie_Pralinen.html")
-}
-                        
-
-// @LINE:7
-def Kategorie_Torten(): Call = {
-   import ReverseRouteContext.empty
-   Call("GET", _prefix + { _defaultPrefix } + "Kategorie_Torten.html")
-}
-                        
 
 // @LINE:6
 def index(): Call = {
@@ -104,22 +50,16 @@ def index(): Call = {
                   
 
 
-// @LINE:14
-// @LINE:12
-// @LINE:11
-// @LINE:10
 // @LINE:9
-// @LINE:8
-// @LINE:7
 // @LINE:6
 package controllers.javascript {
 import ReverseRouteContext.empty
 
-// @LINE:14
+// @LINE:9
 class ReverseAssets {
 
 
-// @LINE:14
+// @LINE:9
 def at : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Assets.at",
    """
@@ -133,81 +73,9 @@ def at : JavascriptReverseRoute = JavascriptReverseRoute(
 }
               
 
-// @LINE:12
-// @LINE:11
-// @LINE:10
-// @LINE:9
-// @LINE:8
-// @LINE:7
 // @LINE:6
 class ReverseApplication {
 
-
-// @LINE:9
-def Kategorie_Gebaeck : JavascriptReverseRoute = JavascriptReverseRoute(
-   "controllers.Application.Kategorie_Gebaeck",
-   """
-      function() {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "Kategorie_Gebaeck.html"})
-      }
-   """
-)
-                        
-
-// @LINE:10
-def Registrierung : JavascriptReverseRoute = JavascriptReverseRoute(
-   "controllers.Application.Registrierung",
-   """
-      function() {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "Registrierung.html"})
-      }
-   """
-)
-                        
-
-// @LINE:12
-def Kasse : JavascriptReverseRoute = JavascriptReverseRoute(
-   "controllers.Application.Kasse",
-   """
-      function() {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "Kasse.html"})
-      }
-   """
-)
-                        
-
-// @LINE:11
-def Warenkorb : JavascriptReverseRoute = JavascriptReverseRoute(
-   "controllers.Application.Warenkorb",
-   """
-      function() {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "Warenkorb.html"})
-      }
-   """
-)
-                        
-
-// @LINE:8
-def Kategorie_Pralinen : JavascriptReverseRoute = JavascriptReverseRoute(
-   "controllers.Application.Kategorie_Pralinen",
-   """
-      function() {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "Kategorie_Pralinen.html"})
-      }
-   """
-)
-                        
-
-// @LINE:7
-def Kategorie_Torten : JavascriptReverseRoute = JavascriptReverseRoute(
-   "controllers.Application.Kategorie_Torten",
-   """
-      function() {
-      return _wA({method:"GET", url:"""" + _prefix + { _defaultPrefix } + """" + "Kategorie_Torten.html"})
-      }
-   """
-)
-                        
 
 // @LINE:6
 def index : JavascriptReverseRoute = JavascriptReverseRoute(
@@ -226,22 +94,16 @@ def index : JavascriptReverseRoute = JavascriptReverseRoute(
         
 
 
-// @LINE:14
-// @LINE:12
-// @LINE:11
-// @LINE:10
 // @LINE:9
-// @LINE:8
-// @LINE:7
 // @LINE:6
 package controllers.ref {
 
 
-// @LINE:14
+// @LINE:9
 class ReverseAssets {
 
 
-// @LINE:14
+// @LINE:9
 def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.Assets.at(path, file), HandlerDef(this.getClass.getClassLoader, "", "controllers.Assets", "at", Seq(classOf[String], classOf[String]), "GET", """ Map static resources from the /public folder to the /assets URL path""", _prefix + """assets/$file<.+>""")
 )
@@ -250,51 +112,9 @@ def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.
 }
                           
 
-// @LINE:12
-// @LINE:11
-// @LINE:10
-// @LINE:9
-// @LINE:8
-// @LINE:7
 // @LINE:6
 class ReverseApplication {
 
-
-// @LINE:9
-def Kategorie_Gebaeck(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.Kategorie_Gebaeck(), HandlerDef(this.getClass.getClassLoader, "", "controllers.Application", "Kategorie_Gebaeck", Seq(), "GET", """""", _prefix + """Kategorie_Gebaeck.html""")
-)
-                      
-
-// @LINE:10
-def Registrierung(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.Registrierung(), HandlerDef(this.getClass.getClassLoader, "", "controllers.Application", "Registrierung", Seq(), "GET", """""", _prefix + """Registrierung.html""")
-)
-                      
-
-// @LINE:12
-def Kasse(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.Kasse(), HandlerDef(this.getClass.getClassLoader, "", "controllers.Application", "Kasse", Seq(), "GET", """""", _prefix + """Kasse.html""")
-)
-                      
-
-// @LINE:11
-def Warenkorb(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.Warenkorb(), HandlerDef(this.getClass.getClassLoader, "", "controllers.Application", "Warenkorb", Seq(), "GET", """""", _prefix + """Warenkorb.html""")
-)
-                      
-
-// @LINE:8
-def Kategorie_Pralinen(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.Kategorie_Pralinen(), HandlerDef(this.getClass.getClassLoader, "", "controllers.Application", "Kategorie_Pralinen", Seq(), "GET", """""", _prefix + """Kategorie_Pralinen.html""")
-)
-                      
-
-// @LINE:7
-def Kategorie_Torten(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
-   controllers.Application.Kategorie_Torten(), HandlerDef(this.getClass.getClassLoader, "", "controllers.Application", "Kategorie_Torten", Seq(), "GET", """""", _prefix + """Kategorie_Torten.html""")
-)
-                      
 
 // @LINE:6
 def index(): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
