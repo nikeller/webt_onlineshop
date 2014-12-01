@@ -61,3 +61,6 @@ play.PlayExceptions$CompilationException: Compilation error[identifier expected 
 2014-12-01 15:14:34,923 - [INFO] - from play in play-internal-execution-context-2 
 Application started (Dev)
 
+2014-12-01 15:58:39,432 - [INFO] - from play in play-internal-execution-context-2 
+Application started (Dev)
+
