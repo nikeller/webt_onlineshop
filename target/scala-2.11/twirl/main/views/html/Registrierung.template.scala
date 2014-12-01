@@ -138,10 +138,10 @@ Seq[Any](_display_(/*2.2*/main("Registrierung")/*2.23*/{_display_(Seq[Any](forma
 }
               /*
                   -- GENERATED --
-                  DATE: Mon Dec 01 01:11:05 CET 2014
-                  SOURCE: C:/Users/Nina/workspace/webt_onlineshop/app/views/Registrierung.scala.html
-                  HASH: d403b48d79ba904143f487a1e5e4074a87cb144f
-                  MATRIX: 806->2|835->23|873->24|900->25|1200->298|1215->304|1279->347|1338->379|1353->385|1418->429|1558->542|1573->548|1612->566
+                  DATE: Mon Dec 01 16:57:43 CET 2014
+                  SOURCE: C:/Svetik/web-tech/webt_onlineshop/app/views/Registrierung.scala.html
+                  HASH: 4ecd887488825ea2b9f88118fd2048b611be66b7
+                  MATRIX: 806->3|835->24|873->25|901->27|1210->309|1225->315|1289->358|1349->391|1364->397|1429->441|1577->562|1592->568|1631->586
                   LINES: 29->2|29->2|29->2|30->3|39->12|39->12|39->12|40->13|40->13|40->13|48->21|48->21|48->21
                   -- GENERATED --
               */

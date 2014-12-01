@@ -7,8 +7,8 @@
 <title>Sweet Shop</title>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")>
-<link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")>
+<link rel="stylesheet" type="css/text" @routes.Assets.at("stylesheets/bootstrap.min.css")>
+<link rel="stylesheet" type="css/text" @routes.Assets.at("stylesheets/mainStyleSheet.css")>
 
 <!-- jQuery (wird für Bootstrap JavaScript-Plugins benötigt) -->
 <script
@@ -23,7 +23,7 @@
 
 	<div class="row">
 		<div class="col-xs-6 col-sm-4">
-			<a class="navbar-brand" href="@routes.Application.index"><h2>Sweet
+			<a class="navbar-brand" @routes.Application.index><h2>Sweet
 					Shop</h2></a>
 		</div>
 		<div class="col-xs-6 col-sm-4">
@@ -58,13 +58,13 @@
 
 			<ul>
 				<li><h3>
-						<a class="categorie" href="@routes.Application.Kategorie_Torten">Torten</a>
+						<a class="categorie" @routes.Application.Kategorie_Torten>Torten</a>
 					</h3></li>
 				<li><h3>
-						<a class="categorie" href="@routes.Application.Kategorie_Pralinen">Pralinen</a>
+						<a class="categorie" @routes.Application.Kategorie_Pralinen>Pralinen</a>
 					</h3></li>
 				<li><h3>
-						<a class="categorie" href="@routes.Application.Kategorie_Gebaeck">Gebäck</a>
+						<a class="categorie" @routes.Application.Kategorie_Gebaeck>Gebäck</a>
 					</h3></li>
 			</ul>
 

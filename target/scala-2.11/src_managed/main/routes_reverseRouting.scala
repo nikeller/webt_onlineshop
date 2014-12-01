@@ -1,6 +1,6 @@
-// @SOURCE:C:/Users/Nina/workspace/webt_onlineshop/conf/routes
-// @HASH:2f846d9eeebe4bc459eae126195bdc76f08e898f
-// @DATE:Mon Dec 01 00:43:08 CET 2014
+// @SOURCE:C:/Svetik/web-tech/webt_onlineshop/conf/routes
+// @HASH:c8ffaa7adaded7d912d1c4a4acf5ad06584d53e4
+// @DATE:Mon Dec 01 18:14:29 CET 2014
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._

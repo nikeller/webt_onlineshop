@@ -36,8 +36,8 @@ Seq[Any](_display_(/*2.2*/main("Kasse")/*2.15*/ {_display_(Seq[Any](format.raw/*
     <title>Sweet Shop</title>
 
    <!-- Bootstrap -->
-<link rel="stylesheet" href=""""),_display_(/*12.31*/routes/*12.37*/.Assets.at("stylesheets/bootstrap.min.css")),format.raw/*12.80*/(""">
-<link rel="stylesheet" href=""""),_display_(/*13.31*/routes/*13.37*/.Assets.at("stylesheets/mainStyleSheet.css")),format.raw/*13.81*/(""">
+<link rel="stylesheet" type="text/css" href=""""),_display_(/*12.47*/routes/*12.53*/.Assets.at("stylesheets/bootstrap.min.css")),format.raw/*12.96*/("""">
+<link rel="stylesheet" type="text/css" href=""""),_display_(/*13.47*/routes/*13.53*/.Assets.at("stylesheets/mainStyleSheet.css")),format.raw/*13.97*/("""">
 
 
  
@@ -45,7 +45,7 @@ Seq[Any](_display_(/*2.2*/main("Kasse")/*2.15*/ {_display_(Seq[Any](format.raw/*
   <body>
   
   <div class="row">
-  <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" href=""""),_display_(/*21.66*/routes/*21.72*/.Application.index),format.raw/*21.90*/(""""><h2>Sweet Shop</h2></a></div>
+  <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" """),_display_(/*21.60*/routes/*21.66*/.Application.index),format.raw/*21.84*/("""><h2>Sweet Shop</h2></a></div>
   
   
   
@@ -99,10 +99,10 @@ Seq[Any](_display_(/*2.2*/main("Kasse")/*2.15*/ {_display_(Seq[Any](format.raw/*
 }
               /*
                   -- GENERATED --
-                  DATE: Mon Dec 01 01:11:05 CET 2014
-                  SOURCE: C:/Users/Nina/workspace/webt_onlineshop/app/views/Kasse.scala.html
-                  HASH: 59344884033184d2f15151f28f9af455ffd66d57
-                  MATRIX: 798->2|819->15|858->17|885->18|1194->300|1209->306|1273->349|1332->381|1347->387|1412->431|1552->544|1567->550|1606->568|1970->905|1985->911|2024->929
+                  DATE: Mon Dec 01 19:00:37 CET 2014
+                  SOURCE: C:/Svetik/web-tech/webt_onlineshop/app/views/Kasse.scala.html
+                  HASH: b8c69ccc6d85c54b36bc9054b1766eb04bb989cf
+                  MATRIX: 798->3|819->16|858->18|886->20|1220->327|1235->333|1299->376|1376->426|1391->432|1456->476|1599->592|1614->598|1653->616|2042->978|2057->984|2096->1002
                   LINES: 29->2|29->2|29->2|30->3|39->12|39->12|39->12|40->13|40->13|40->13|48->21|48->21|48->21|74->47|74->47|74->47
                   -- GENERATED --
               */
