@@ -1,3 +1,5 @@
+
+@main("Kasse") {
 <!DOCTYPE html>
 <html lang="de">
 	<head>
@@ -6,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sweet Shop</title>
 
-    <!-- Bootstrap -->
-    <link href="bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
+   <!-- Bootstrap -->
+<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")>
+<link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")>
 
 
  
@@ -16,7 +18,7 @@
   <body>
   
   <div class="row">
-  <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" href="SweetShop_Main.html"><h2>Sweet Shop</h2></a></div>
+  <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" href="@routes.Application.index"><h2>Sweet Shop</h2></a></div>
   
   
   
@@ -42,7 +44,7 @@
 </table>
   
   
- <form action="SweetShop_Main.html">
+ <form action="@routes.Application.index">
 			<button>Ware bestellen</button>
 		</form>
   </div>
@@ -58,3 +60,4 @@
     <script src="bootstrap.min.js"></script>
   </body>
 </html>
+}

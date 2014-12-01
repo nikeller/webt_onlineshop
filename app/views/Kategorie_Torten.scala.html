@@ -1,3 +1,5 @@
+
+@main("Torten"){
 <!DOCTYPE html>
 <html lang="de">
 	<head>
@@ -7,8 +9,8 @@
     <title>Sweet Shop</title>
 
     <!-- Bootstrap -->
-    <link href="bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")>
+<link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")>
 
 
  
@@ -16,7 +18,7 @@
   <body>
   
   <div class="row">
-  <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" href="SweetShop_Main.html"><h2>Sweet Shop</h2></a></div>
+  <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" href="@routes.Application.index"><h2>Sweet Shop</h2></a></div>
   <div class="col-xs-6 col-sm-4"><form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Suchen">
@@ -26,8 +28,12 @@
   <!-- Optional: Setze die Floats der XS-Spalten zurück, falls ihr Inhalt nicht gleich hoch ist -->
   <div class="clearfix visible-xs-block"></div>
   <div class="col-xs-6 col-sm-4"><ul class="nav navbar-nav navbar-right">
-        <li><form action="Registrierung.html"><button>Anmelden</button></form></li>
-      <li>  <form action="Warenkorb.html"><button>Warenkorb</button></form></li>
+        <li><form action="@routes.Application.Registrierung">
+						<button>Anmelden</button>
+					</form></li>
+      <li>  <form action="@routes.Application.Warenkorb">
+						<button>Warenkorb</button>
+					</form></li>
       </ul></div>
 </div>
   
@@ -39,14 +45,14 @@
 </div>  
 
 <ul>
-			<li><h3><a class="categorie" href="Kategorie_Torten.html">Torten</a></h3>
+			<li><h3><a class="categorie" href="@routes.Application.Kategorie_Torten">Torten</a></h3>
 				<ul>
 					<li><h4>Hochzeitstorten</h4></li>
 					<li><h4>Geburtstagstorten</h4></li>
 				</ul>
 			</li>
-			<li><h3><a class="categorie" href="Kategorie_Pralinen.html">Pralinen</a></h3></li>
-			<li><h3><a class="categorie" href="Kategorie_Gebaeck.html">Gebäck</a></h3></li>
+			<li><h3><a class="categorie" href="@routes.Application.Kategorie_Pralinen">Pralinen</a></h3></li>
+			<li><h3><a class="categorie" href="@routes.Application.Kategorie_Gebaeck">Gebäck</a></h3></li>
 </ul>  
 
 </div>
@@ -85,3 +91,4 @@
     <script src="bootstrap.min.js"></script>
   </body>
 </html>
+}

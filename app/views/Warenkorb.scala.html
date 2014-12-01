@@ -1,3 +1,4 @@
+@main("Warenkorb"){
 <!DOCTYPE html>
 <html>
 	 <head>
@@ -7,8 +8,8 @@
     <title>Sweet Shop</title>
 
     <!-- Bootstrap -->
-    <link href="bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")>
+<link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")>
 
 
  
@@ -16,7 +17,7 @@
   <body>
   
   <div class="row">
-  <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" href="SweetShop_Main.html"><h2>Sweet Shop</h2></a></div>
+  <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" href="@routes.Application.index"><h2>Sweet Shop</h2></a></div>
   <div class="col-xs-6 col-sm-4"><form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Suchen">
@@ -26,7 +27,9 @@
   <!-- Optional: Setze die Floats der XS-Spalten zurück, falls ihr Inhalt nicht gleich hoch ist -->
   <div class="clearfix visible-xs-block"></div>
   <div class="col-xs-6 col-sm-4"><ul class="nav navbar-nav navbar-right">
-       <li> <form action="Registrierung.html"><button>Anmelden</button></form></li>
+       <li> <form action="@routes.Application.Registrierung">
+						<button>Anmelden</button>
+					</form></li>
       </ul></div>
 </div>
   
@@ -72,10 +75,10 @@
  </tr>
 </table>
 
-<form action="SweetShop_Main.html">
+<form action="@routes.Application.index">
 			<button>weiter Einkaufen</button>
 		</form>
-		<form action="Kasse.html">
+		<form action="@routes.Application.Kasse">
 			<button>zur Kasse gehen</button>
 		</form>
 
@@ -92,3 +95,4 @@
     <script src="bootstrap.min.js"></script>
   </body>
 </html>
+}

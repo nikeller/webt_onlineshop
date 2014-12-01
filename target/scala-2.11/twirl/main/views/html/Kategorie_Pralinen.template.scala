@@ -26,7 +26,8 @@ object Kategorie_Pralinen extends BaseScalaTemplate[play.twirl.api.HtmlFormat.Ap
   def apply():play.twirl.api.HtmlFormat.Appendable = {
       _display_ {
 
-Seq[Any](format.raw/*1.1*/("""<!DOCTYPE html>
+Seq[Any](_display_(/*2.2*/main("Pralinen")/*2.18*/{_display_(Seq[Any](format.raw/*2.19*/("""
+"""),format.raw/*3.1*/("""<!DOCTYPE html>
 <html lang="de">
 	<head>
     <meta charset="utf-8">
@@ -35,8 +36,8 @@ Seq[Any](format.raw/*1.1*/("""<!DOCTYPE html>
     <title>Sweet Shop</title>
 
     <!-- Bootstrap -->
-    <link href="bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href=""""),_display_(/*12.31*/routes/*12.37*/.Assets.at("stylesheets/bootstrap.min.css")),format.raw/*12.80*/(""">
+<link rel="stylesheet" href=""""),_display_(/*13.31*/routes/*13.37*/.Assets.at("stylesheets/mainStyleSheet.css")),format.raw/*13.81*/(""">
 
 
  
@@ -44,7 +45,7 @@ Seq[Any](format.raw/*1.1*/("""<!DOCTYPE html>
   <body>
   
   <div class="row">
-  <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" href="SweetShop_Main.html"><h2>Sweet Shop</h2></a></div>
+  <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" href=""""),_display_(/*21.66*/routes/*21.72*/.Application.index),format.raw/*21.90*/(""""><h2>Sweet Shop</h2></a></div>
   <div class="col-xs-6 col-sm-4"><form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Suchen">
@@ -54,8 +55,12 @@ Seq[Any](format.raw/*1.1*/("""<!DOCTYPE html>
   <!-- Optional: Setze die Floats der XS-Spalten zurück, falls ihr Inhalt nicht gleich hoch ist -->
   <div class="clearfix visible-xs-block"></div>
   <div class="col-xs-6 col-sm-4"><ul class="nav navbar-nav navbar-right">
-        <li><form action="Registrierung.html"><button>Anmelden</button></form></li>
-        <li><form action="Warenkorb.html"><button>Warenkorb</button></form></li>
+        <li><form action=""""),_display_(/*31.28*/routes/*31.34*/.Application.Registrierung),format.raw/*31.60*/("""">
+						<button>Anmelden</button>
+					</form></li>
+        <li><form action=""""),_display_(/*34.28*/routes/*34.34*/.Application.Warenkorb),format.raw/*34.56*/("""">
+						<button>Warenkorb</button>
+					</form></li>
       </ul></div>
 </div>
   
@@ -67,14 +72,14 @@ Seq[Any](format.raw/*1.1*/("""<!DOCTYPE html>
 </div>  
 
 <ul>
-			<li><h3><a class="categorie" href="Kategorie_Torten.html">Torten</a></h3></li>
-			<li><h3><a class="categorie" href="Kategorie_Pralinen.html">Pralinen</a></h3>
+			<li><h3><a class="categorie" href=""""),_display_(/*48.40*/routes/*48.46*/.Application.Kategorie_Torten),format.raw/*48.75*/("""">Torten</a></h3></li>
+			<li><h3><a class="categorie" href=""""),_display_(/*49.40*/routes/*49.46*/.Application.Kategorie_Pralinen),format.raw/*49.77*/("""">Pralinen</a></h3>
 							<ul>
 					<li><h4>Milchschokolade</h4></li>
 					<li><h4>Bitterschokolade</h4></li>
 					<li><h4>Weiße Schokolade</h4></li>
 				</ul></li>
-			<li><h3><a class="categorie" href="Kategorie_Gebaeck.html">Gebäck</a></h3></li>
+			<li><h3><a class="categorie" href=""""),_display_(/*55.40*/routes/*55.46*/.Application.Kategorie_Gebaeck),format.raw/*55.76*/("""">Gebäck</a></h3></li>
 </ul>  
 
 
@@ -121,7 +126,8 @@ Seq[Any](format.raw/*1.1*/("""<!DOCTYPE html>
     <!-- Binde alle kompilierten Plugins zusammen ein (wie hier unten) oder such dir einzelne Dateien nach Bedarf aus -->
     <script src="bootstrap.min.js"></script>
   </body>
-</html>"""))}
+</html>
+""")))}))}
   }
 
   def render(): play.twirl.api.HtmlFormat.Appendable = apply()
@@ -133,11 +139,11 @@ Seq[Any](format.raw/*1.1*/("""<!DOCTYPE html>
 }
               /*
                   -- GENERATED --
-                  DATE: Fri Nov 21 21:24:08 CET 2014
+                  DATE: Mon Dec 01 01:11:05 CET 2014
                   SOURCE: C:/Users/Nina/workspace/webt_onlineshop/app/views/Kategorie_Pralinen.scala.html
-                  HASH: 8df1f395911f48a75ca0e5964d1bc6b25d89787a
-                  MATRIX: 811->0
-                  LINES: 29->1
+                  HASH: 1a49cac488d13684e2bea12933fba01dcfe62c10
+                  MATRIX: 811->2|835->18|873->19|900->20|1210->303|1225->309|1289->352|1348->384|1363->390|1428->434|1568->547|1583->553|1622->571|2223->1145|2238->1151|2285->1177|2392->1257|2407->1263|2450->1285|2737->1545|2752->1551|2802->1580|2891->1642|2906->1648|2958->1679|3190->1884|3205->1890|3256->1920
+                  LINES: 29->2|29->2|29->2|30->3|39->12|39->12|39->12|40->13|40->13|40->13|48->21|48->21|48->21|58->31|58->31|58->31|61->34|61->34|61->34|75->48|75->48|75->48|76->49|76->49|76->49|82->55|82->55|82->55
                   -- GENERATED --
               */
           
