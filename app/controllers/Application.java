@@ -17,7 +17,8 @@ public class Application extends Controller {
 		String bild = "Bild für Torte1";
 		String kategorie_id = "T";
 		Torten torten = new Torten(1, produkt_name , produkt_beschreibung, bild, kategorie_id, 14);
-        return ok(Kategorie_Torten.render(torten));
+       
+    	return ok(Kategorie_Torten.render(torten));
     }
     
     public static Result Kategorie_Pralinen() {
