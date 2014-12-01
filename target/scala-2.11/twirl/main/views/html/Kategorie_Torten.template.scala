@@ -20,13 +20,14 @@ import play.mvc.Http.Context.Implicit._
 import views.html._
 
 /**/
-object Kategorie_Torten extends BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with play.twirl.api.Template0[play.twirl.api.HtmlFormat.Appendable] {
+object Kategorie_Torten extends BaseScalaTemplate[play.twirl.api.HtmlFormat.Appendable,Format[play.twirl.api.HtmlFormat.Appendable]](play.twirl.api.HtmlFormat) with play.twirl.api.Template1[models.Torten,play.twirl.api.HtmlFormat.Appendable] {
 
   /**/
-  def apply():play.twirl.api.HtmlFormat.Appendable = {
+  def apply/*1.2*/(torten: models.Torten):play.twirl.api.HtmlFormat.Appendable = {
       _display_ {
 
-Seq[Any](_display_(/*2.2*/main("Torten")/*2.16*/{_display_(Seq[Any](format.raw/*2.17*/("""
+Seq[Any](format.raw/*1.25*/("""
+"""),_display_(/*2.2*/main("Torten")/*2.16*/{_display_(Seq[Any](format.raw/*2.17*/("""
 """),format.raw/*3.1*/("""<!DOCTYPE html>
 <html lang="de">
 	<head>
@@ -90,9 +91,31 @@ Seq[Any](_display_(/*2.2*/main("Torten")/*2.16*/{_display_(Seq[Any](format.raw/*
   		<div class="panel-heading">
    			 <h3 class="panel-title">Hochzeitstorten</h3>
  		</div>
- 		<div class="panel-body">
-  	  		Produktbilder
- 		</div>
+ 		
+ 		<table class="table">
+ 			<tr>
+ 				<th>Produktname</th>
+ 				<th>Produktbeschreibung</th>
+ 				<th>Produktbild</th>
+ 				<th>Preis in Euro</th>
+ 				<th></th>
+			</tr>
+			<tr>
+				<td>"""),_display_(/*76.10*/torten/*76.16*/.produkt_name),format.raw/*76.29*/("""</td>
+				<td>"""),_display_(/*77.10*/torten/*77.16*/.produkt_beschreibung),format.raw/*77.37*/("""</td>
+				<td>"""),_display_(/*78.10*/torten/*78.16*/.bild),format.raw/*78.21*/("""</td>
+				<td>"""),_display_(/*79.10*/torten/*79.16*/.preis),format.raw/*79.22*/("""</td>
+				<td><form action=""""),_display_(/*80.24*/routes/*80.30*/.Application.Warenkorb),format.raw/*80.52*/("""">
+						<button>In den Warenkorb</button>
+					</form></td>
+			</tr>
+			<tr>
+				
+			</tr>
+		</table>
+		
+ 		
+ 	
 	</div>
 	
   	<div class="panel panel-default">
@@ -121,20 +144,20 @@ Seq[Any](_display_(/*2.2*/main("Torten")/*2.16*/{_display_(Seq[Any](format.raw/*
 """)))}))}
   }
 
-  def render(): play.twirl.api.HtmlFormat.Appendable = apply()
+  def render(torten:models.Torten): play.twirl.api.HtmlFormat.Appendable = apply(torten)
 
-  def f:(() => play.twirl.api.HtmlFormat.Appendable) = () => apply()
+  def f:((models.Torten) => play.twirl.api.HtmlFormat.Appendable) = (torten) => apply(torten)
 
   def ref: this.type = this
 
 }
               /*
                   -- GENERATED --
-                  DATE: Mon Dec 01 01:11:05 CET 2014
+                  DATE: Mon Dec 01 13:35:59 CET 2014
                   SOURCE: C:/Users/Nina/workspace/webt_onlineshop/app/views/Kategorie_Torten.scala.html
-                  HASH: 85c9c64df22b8f5b0a3ba07d4d04b1ec1271982a
-                  MATRIX: 809->2|831->16|869->17|896->18|1206->301|1221->307|1285->350|1344->382|1359->388|1424->432|1564->545|1579->551|1618->569|2219->1143|2234->1149|2281->1175|2388->1255|2403->1261|2446->1283|2733->1543|2748->1549|2798->1578|2990->1743|3005->1749|3057->1780|3148->1844|3163->1850|3214->1880
-                  LINES: 29->2|29->2|29->2|30->3|39->12|39->12|39->12|40->13|40->13|40->13|48->21|48->21|48->21|58->31|58->31|58->31|61->34|61->34|61->34|75->48|75->48|75->48|81->54|81->54|81->54|82->55|82->55|82->55
+                  HASH: 209f69c52d35baaf92b4851468262491c4b99227
+                  MATRIX: 741->1|852->24|879->26|901->40|939->41|966->42|1276->325|1291->331|1355->374|1414->406|1429->412|1494->456|1634->569|1649->575|1688->593|2289->1167|2304->1173|2351->1199|2458->1279|2473->1285|2516->1307|2803->1567|2818->1573|2868->1602|3060->1767|3075->1773|3127->1804|3218->1868|3233->1874|3284->1904|3720->2313|3735->2319|3769->2332|3811->2347|3826->2353|3868->2374|3910->2389|3925->2395|3951->2400|3993->2415|4008->2421|4035->2427|4091->2456|4106->2462|4149->2484
+                  LINES: 26->1|29->1|30->2|30->2|30->2|31->3|40->12|40->12|40->12|41->13|41->13|41->13|49->21|49->21|49->21|59->31|59->31|59->31|62->34|62->34|62->34|76->48|76->48|76->48|82->54|82->54|82->54|83->55|83->55|83->55|104->76|104->76|104->76|105->77|105->77|105->77|106->78|106->78|106->78|107->79|107->79|107->79|108->80|108->80|108->80
                   -- GENERATED --
               */
           
