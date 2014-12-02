@@ -18,3 +18,7 @@ server.pid
 
 # Ignore Mac OS X
 .DS_Store
+
+.settings
+.project
+.classpath
