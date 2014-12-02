@@ -18,7 +18,7 @@ public class Application extends Controller {
     public static Result Kategorie_Torten() {
     	String produkt_name = "Torte1";
 		String produkt_beschreibung = "Beschreibung für Torte1";
-		String bild = "Dateiname";
+		String bild = "@routes.Assets.at(\"images/Torte_003.jpg\")";
 		String kategorie_id = "T";
 		Torten torten = new Torten(1, produkt_name, produkt_beschreibung, bild, kategorie_id, 14);
        //List<Torten> data = Data.getAllTorten();
@@ -44,4 +44,5 @@ public class Application extends Controller {
     public static Result Kasse(){
     	return ok(Kasse.render());
     }
+
 }
