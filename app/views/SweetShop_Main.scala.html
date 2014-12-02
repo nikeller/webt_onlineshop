@@ -7,8 +7,8 @@
 <title>Sweet Shop</title>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" type="css/text" @routes.Assets.at("stylesheets/bootstrap.min.css")>
-<link rel="stylesheet" type="css/text" @routes.Assets.at("stylesheets/mainStyleSheet.css")>
+<link rel="stylesheet" type="css/text" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" type="css/text" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")">
 
 <!-- jQuery (wird für Bootstrap JavaScript-Plugins benötigt) -->
 <script
@@ -18,7 +18,8 @@
 
 
 </head>
-<body>
+
+<body style="background-image:url(/public/images/sweet_hearts.jpg)">
 
 
 	<div class="row">
@@ -58,13 +59,13 @@
 
 			<ul>
 				<li><h3>
-						<a class="categorie" @routes.Application.Kategorie_Torten>Torten</a>
+						<a class="categorie" href="@routes.Application.Kategorie_Torten">Torten</a>
 					</h3></li>
 				<li><h3>
-						<a class="categorie" @routes.Application.Kategorie_Pralinen>Pralinen</a>
+						<a class="categorie" href="@routes.Application.Kategorie_Pralinen">Pralinen</a>
 					</h3></li>
 				<li><h3>
-						<a class="categorie" @routes.Application.Kategorie_Gebaeck>Gebäck</a>
+						<a class="categorie" href="@routes.Application.Kategorie_Gebaeck">Gebäck</a>
 					</h3></li>
 			</ul>
 

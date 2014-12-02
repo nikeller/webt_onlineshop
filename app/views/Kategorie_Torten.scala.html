@@ -1,116 +1,173 @@
-@(torten: models.Torten)
-@main("Torten"){
+@(torten: models.Torten) @main("Torten"){
 <!DOCTYPE html>
 <html lang="de">
-	<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sweet Shop</title>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sweet Shop</title>
 
-    <!-- Bootstrap -->
+<!-- Bootstrap -->
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")">
 
 
- 
-  </head>
-  <body>
-  
-  <div class="row">
-  <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" href="@routes.Application.index"><h2>Sweet Shop</h2></a></div>
-  <div class="col-xs-6 col-sm-4"><form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Suchen">
-        </div>
-        <button type="submit" class="btn btn-default">Los</button>
-      </form></div>
-  <!-- Optional: Setze die Floats der XS-Spalten zurück, falls ihr Inhalt nicht gleich hoch ist -->
-  <div class="clearfix visible-xs-block"></div>
-  <div class="col-xs-6 col-sm-4"><ul class="nav navbar-nav navbar-right">
-        <li><form action="@routes.Application.Registrierung">
+
+</head>
+<body>
+
+	<div class="row">
+		<div class="col-xs-6 col-sm-4">
+			<a class="navbar-brand" href="@routes.Application.index"><h2>Sweet
+					Shop</h2></a>
+		</div>
+		<div class="col-xs-6 col-sm-4">
+			<form class="navbar-form navbar-left" role="search">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Suchen">
+				</div>
+				<button type="submit" class="btn btn-default">Los</button>
+			</form>
+		</div>
+		<!-- Optional: Setze die Floats der XS-Spalten zurück, falls ihr Inhalt nicht gleich hoch ist -->
+		<div class="clearfix visible-xs-block"></div>
+		<div class="col-xs-6 col-sm-4">
+			<ul class="nav navbar-nav navbar-right">
+				<li><form action="@routes.Application.Registrierung">
 						<button>Anmelden</button>
 					</form></li>
-      <li>  <form action="@routes.Application.Warenkorb">
+				<li>
+					<form action="@routes.Application.Warenkorb">
 						<button>Warenkorb</button>
-					</form></li>
-      </ul></div>
-</div>
-  
-  
-
-<div class="row">
-  <div class="col-xs-6 col-md-4"><div class="page-header">
-  <h2 class="ueberschrift">Kategorien</h2>
-</div>  
-
-<ul>
-			<li><h3><a class="categorie" href="@routes.Application.Kategorie_Torten">Torten</a></h3>
-				<ul>
-					<li><h4>Hochzeitstorten</h4></li>
-					<li><h4>Geburtstagstorten</h4></li>
-				</ul>
-			</li>
-			<li><h3><a class="categorie" href="@routes.Application.Kategorie_Pralinen">Pralinen</a></h3></li>
-			<li><h3><a class="categorie" href="@routes.Application.Kategorie_Gebaeck">Gebäck</a></h3></li>
-</ul>  
-
-</div>
-
-
-  <div class="col-xs-12 col-sm-6 col-md-8">
-  	<div class="panel panel-default">
-  		<div class="panel-heading">
-   			 <h3 class="panel-title">Hochzeitstorten</h3>
- 		</div>
- 		
- 		<table class="table">
- 			<tr>
- 				<th>Produktname</th>
- 				<th>Produktbeschreibung</th>
- 				<th>Produktbild</th>
- 				<th>Preis in Euro</th>
- 				<th></th>
-			</tr>
-			<tr>
-				<td>@torten.produkt_name</td>
-				<td>@torten.produkt_beschreibung</td>
-				<td>@torten.bild</td>
-				<td>@torten.preis</td>
-				<td><form action="@routes.Application.Warenkorb">
-						<button>In den Warenkorb</button>
-					</form></td>
-			</tr>
-			<tr>
-				
-			</tr>
-		</table>
-		
- 		
- 	
-	</div>
-	
-  	<div class="panel panel-default">
-  		<div class="panel-heading">
-   			 <h3 class="panel-title">Geburtstagstorten</h3>
- 		</div>
- 		<div class="panel-body">
-  	  		Produktbilder
- 		</div>
+					</form>
+				</li>
+			</ul>
+		</div>
 	</div>
 
-  
-  </div>
-</div>
 
 
-<div class="panel-footer">Über Uns!</div>
+	<div class="row">
+		<div class="col-xs-6 col-md-4">
+			<div class="page-header">
+				<h2 class="ueberschrift">Kategorien</h2>
+			</div>
+
+			<ul>
+				<li><h3>
+						<a class="categorie" href="@routes.Application.Kategorie_Torten">Torten</a>
+					</h3>
+					<ul>
+						<li><h4>Hochzeitstorten</h4></li>
+						<li><h4>Geburtstagstorten</h4></li>
+					</ul></li>
+				<li><h3>
+						<a class="categorie" href="@routes.Application.Kategorie_Pralinen">Pralinen</a>
+					</h3></li>
+				<li><h3>
+						<a class="categorie" href="@routes.Application.Kategorie_Gebaeck">Gebäck</a>
+					</h3></li>
+			</ul>
+
+		</div>
 
 
-    <!-- jQuery (wird für Bootstrap JavaScript-Plugins benötigt) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Binde alle kompilierten Plugins zusammen ein (wie hier unten) oder such dir einzelne Dateien nach Bedarf aus -->
-    <script src="bootstrap.min.js"></script>
-  </body>
+		<div class="col-xs-12 col-sm-6 col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Hochzeitstorten</h3>
+				</div>
+
+				<table class="table">
+					<tr>
+						<th>Produktname</th>
+						<!-- 						<th>Produktbeschreibung</th> -->
+						<th>Produktbild</th>
+						<th>Preis in Euro</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td>@torten.produkt_name</td>
+						<!-- 						<td>@torten.produkt_beschreibung</td> -->
+						<!-- 				<td>@torten.bild</td> -->
+						<td><img class="img-responsive" alt="Responsives Bild" src="@torten.bild"></td>
+						<td>@torten.preis</td>
+						<td><form action="@routes.Application.Warenkorb">
+								<button type="button" class="btn btn-default btn-sm">In
+									den Warenkorb</button>
+							</form></td>
+					</tr>
+					<tr>
+
+					</tr>
+				</table>
+
+
+
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Geburtstagstorten</h3>
+				</div>
+				<!--  		<div class="panel-body"> -->
+				<!--   	  		Produktbilder -->
+				<!--  		</div> -->
+				<table class="table">
+					<tr>
+						<th>Produktname</th>
+						<!-- 						<th>Produktbeschreibung</th> -->
+						<th>Produktbild</th>
+						<th>Preis in Euro</th>
+						<th></th>
+					</tr>
+					<tr>
+						<td>@torten.produkt_name</td>
+						<!-- 						<td>@torten.produkt_beschreibung</td> -->
+
+						<!-- 				<td>@torten.bild</td> -->
+
+						<td><img class="img-responsive" alt="Responsives Bild"
+							src=@routes.Assets.at("images/Torte_001.jpg")></td>
+						<td>@torten.preis</td>
+						<td><form action="@routes.Application.Warenkorb">
+								<button type="button" class="btn btn-default btn-sm">In
+									den Warenkorb</button>
+							</form></td>
+					</tr>
+					<tr>
+						<td>@torten.produkt_name</td>
+						<!-- 						<td>@torten.produkt_beschreibung</td> -->
+
+						<!-- 				<td>@torten.bild</td> -->
+
+						<td><img class="img-responsive" alt="Responsives Bild"
+							src=@routes.Assets.at("images/Torte_002.jpg")></td>
+
+						<!-- 						<td><img class="bildgroesse" src=@routes.Assets.at("images/Torte_002.jpg")></td> -->
+						<td>@torten.preis</td>
+						<td><form action="@routes.Application.Warenkorb">
+								<button type="button" class="btn btn-default btn-sm">In
+									den Warenkorb</button>
+
+							</form></td>
+					</tr>
+				</table>
+			</div>
+
+
+		</div>
+	</div>
+
+
+	<div class="panel-footer">Über Uns!</div>
+
+
+	<!-- jQuery (wird für Bootstrap JavaScript-Plugins benötigt) -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<!-- Binde alle kompilierten Plugins zusammen ein (wie hier unten) oder such dir einzelne Dateien nach Bedarf aus -->
+	<script src="bootstrap.min.js"></script>
+</body>
 </html>
 }
