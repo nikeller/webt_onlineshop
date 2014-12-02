@@ -9,8 +9,8 @@
     <title>Sweet Shop</title>
 
     <!-- Bootstrap -->
-<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")>
-<link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")>
+<link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")">
 
 
  
@@ -68,14 +68,16 @@
  			<tr>
  				<th>Produktname</th>
  				<th>Produktbeschreibung</th>
- 				<th>Produktbild</th>
- 				<th>Preis in Euro</th>
+ 				<th>Bild</th>
+ 				<th>Produktkategorie</th>
+ 				<th>Preis</th>
  				<th></th>
 			</tr>
 			<tr>
 				<td>@torten.produkt_name</td>
 				<td>@torten.produkt_beschreibung</td>
 				<td>@torten.bild</td>
+				<td>@torten.kategorie_id</td>
 				<td>@torten.preis</td>
 				<td><form action="@routes.Application.Warenkorb">
 						<button>In den Warenkorb</button>
