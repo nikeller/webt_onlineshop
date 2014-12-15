@@ -19,7 +19,12 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <!-- Binde alle kompilierten Plugins zusammen ein (wie hier unten) oder such dir einzelne Dateien nach Bedarf aus -->
 <script src="bootstrap.min.js"></script>
-
+<script type=text/javascript" src="@routes.Assets.at("javascripts/javascript.js")"></script>
+ 
+     <style type="text/css">
+        .next { position: absolute; top: 0; left: 0; opacity: 0; filter:alpha(opacity=0); }
+        #meinFader { position: relative; }
+    </style>
 
 </head>
 <body>
@@ -75,7 +80,19 @@
 		</div>
 
 		<div class="col-xs-12 col-sm-6 col-md-8">
-			<div class="panel panel-default">
+		
+    <p id="meinFader">
+        <img src="@routes.Assets.at("images/Torte_001.jpg")" alt="">
+     <img src="@routes.Assets.at("images/Torte_002.jpg")" alt="" class="next">
+        <!-- <img src="images/berge3.jpg" alt="" class="next">
+        <img src="images/berge4.jpg" alt="" class="next">
+        <img src="images/berge5.jpg" alt="" class="next">
+        <img src="images/berge6.jpg" alt="" class="next"> -->
+    </p>
+    <p><a href="javascript:next()">Slideshow starten</a></p>
+		
+		
+			<!-- <div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Torten</h3>
 					
@@ -97,7 +114,7 @@
 				<div class="panel-body">Produktbilder</div>
 			</div>
 
-		</div>
+		</div> -->
 	</div>
 
 

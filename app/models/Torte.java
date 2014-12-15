@@ -7,8 +7,10 @@ import com.avaje.ebean.Ebean;
 import play.db.ebean.Model;
 
 
-public class Torten{
+public class Torte{
 
+	public Model model;
+	
 	public long produkt_id;
 	
 	public String produkt_name;
@@ -22,7 +24,7 @@ public class Torten{
 	public long preis;
 
 
-	public Torten(long produkt_id, String produkt_name,
+	public Torte(long produkt_id, String produkt_name,
 			String produkt_beschreibung, String bild, String kategorie_id,
 			long preis) {
 		this.produkt_id = produkt_id;
@@ -31,24 +33,69 @@ public class Torten{
 		this.bild = bild;
 		this.kategorie_id = kategorie_id;
 		this.preis = preis;
-	} 
-	
+	}
+
+
 	public long getProdukt_id() {
 		return produkt_id;
 	}
+
 
 	public void setProdukt_id(long produkt_id) {
 		this.produkt_id = produkt_id;
 	}
 
+
 	public String getProdukt_name() {
 		return produkt_name;
 	}
+
 
 	public void setProdukt_name(String produkt_name) {
 		this.produkt_name = produkt_name;
 	}
 
+
+	public String getProdukt_beschreibung() {
+		return produkt_beschreibung;
+	}
+
+
+	public void setProdukt_beschreibung(String produkt_beschreibung) {
+		this.produkt_beschreibung = produkt_beschreibung;
+	}
+
+
+	public String getBild() {
+		return bild;
+	}
+
+
+	public void setBild(String bild) {
+		this.bild = bild;
+	}
+
+
+	public String getKategorie_id() {
+		return kategorie_id;
+	}
+
+
+	public void setKategorie_id(String kategorie_id) {
+		this.kategorie_id = kategorie_id;
+	}
+
+
+	public long getPreis() {
+		return preis;
+	}
+
+
+	public void setPreis(long preis) {
+		this.preis = preis;
+	} 
+	
+	
 	/*public static Model.Finder<Long, Torten> find = new Model.Finder<Long, Torten>
 	(Long.class, Torten.class);
 	

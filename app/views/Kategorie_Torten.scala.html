@@ -1,4 +1,4 @@
-@(torten: models.Torten) @main("Torten"){
+@(torten: Collection[Torte]) @main("Torten"){
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -86,79 +86,69 @@
 						<th>Preis in Euro</th>
 						<th></th>
 					</tr>
-					<tr>
-						<td>@torten.produkt_name</td>
-						<!-- 						<td>@torten.produkt_beschreibung</td> -->
-						<!-- 				<td>@torten.bild</td> -->
-						<td><img class="img-responsive" alt="Responsives Bild" src="@torten.bild"></td>
-						<td>@torten.preis</td>
+					@for(torte <- torten) {
+					<tr>	
+						<td>@torte.produkt_name</td>
+						<td><img class="img-responsive" alt="Responsives Bild" src="@torte.bild"></td>
+						<td>@torte.preis</td>
 						<td><form action="@routes.Application.Warenkorb">
 								<button type="button" class="btn btn-default btn-sm">In
 									den Warenkorb</button>
 							</form></td>
 					</tr>
+					}
 					<tr>
-
 					</tr>
 				</table>
 
 
 
-			</div>
+<!-- 		</div>
 
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">Geburtstagstorten</h3>
 				</div>
-				<!--  		<div class="panel-body"> -->
-				<!--   	  		Produktbilder -->
-				<!--  		</div> -->
+				 		<div class="panel-body">
+				  	  		Produktbilder
+				 		</div>
 				<table class="table">
 					<tr>
 						<th>Produktname</th>
-						<!-- 						<th>Produktbeschreibung</th> -->
+												<th>Produktbeschreibung</th>
 						<th>Produktbild</th>
 						<th>Preis in Euro</th>
 						<th></th>
 					</tr>
-					<tr>
-						<td>@torten.produkt_name</td>
-						<!-- 						<td>@torten.produkt_beschreibung</td> -->
-
-						<!-- 				<td>@torten.bild</td> -->
-
-						<td><img class="img-responsive" alt="Responsives Bild"
-							src=@routes.Assets.at("images/Torte_001.jpg")></td>
-						<td>@torten.preis</td>
+					@for(torte <- torten) {
+					<tr>	
+						<td>@torte.produkt_name</td>
+						<td><img class="img-responsive" alt="Responsives Bild" src="@torte.bild"></td>
+						<td>@torte.preis</td>
 						<td><form action="@routes.Application.Warenkorb">
 								<button type="button" class="btn btn-default btn-sm">In
 									den Warenkorb</button>
 							</form></td>
 					</tr>
-					<tr>
-						<td>@torten.produkt_name</td>
-						<!-- 						<td>@torten.produkt_beschreibung</td> -->
-
-						<!-- 				<td>@torten.bild</td> -->
-
-						<td><img class="img-responsive" alt="Responsives Bild"
-							src=@routes.Assets.at("images/Torte_002.jpg")></td>
-
-						<!-- 						<td><img class="bildgroesse" src=@routes.Assets.at("images/Torte_002.jpg")></td> -->
-						<td>@torten.preis</td>
+					}
+					@for(torte <- torten) {
+					<tr>	
+						<td>@torte.produkt_name</td>
+						<td><img class="img-responsive" alt="Responsives Bild" src="@torte.bild"></td>
+						<td>@torte.preis</td>
 						<td><form action="@routes.Application.Warenkorb">
 								<button type="button" class="btn btn-default btn-sm">In
 									den Warenkorb</button>
-
 							</form></td>
 					</tr>
+					}
 				</table>
 			</div>
 
 
 		</div>
 	</div>
-
+ -->
 
 	<div class="panel-footer">Über Uns!</div>
 
