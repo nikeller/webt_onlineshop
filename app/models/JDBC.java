@@ -2,9 +2,9 @@ import java.sql.*;
 import play.db.*;
 
 public class JDBC {
-    
+// play does not execute this main method.
 /**  public static void main(String[] args) {
-	  
+
       try {
           Class.forName("org.apache.derby.jdbc.ClientDriver");
           System.out.println("JDBC Class found");
@@ -13,19 +13,19 @@ public class JDBC {
           System.out.println("Class not found "+ e);
        }
 
-    
-    
+
+
     try {
       Connection con = DB.getConnection();
-                      
+
       Statement stmt = con.createStatement();
-      String strCreateTorte = 
-    		  "CREATE TABLE Torte (" + 
-						"id  smallint,"	+ 
-						"name VARCHAR(50), " + 
-						"pfad  VARCHAR(100)," + 
-						"beschr VARCHAR(150)" + 
-						"preis smallint," + 
+      String strCreateTorte =
+    		  "CREATE TABLE Torte (" +
+						"id  smallint,"	+
+						"name VARCHAR(50), " +
+						"pfad  VARCHAR(100)," +
+						"beschr VARCHAR(150)" +
+						"preis smallint," +
 						")";
       stmt.executeUpdate(strCreateTorte);
       String strInsertIntoTorte =
@@ -35,16 +35,16 @@ public class JDBC {
 	        		  	"'@routes.Assets.at(\"images/Torte_003.jpg\")'"  +
 	        		  	"'leckere Geburtstagstorte mit einer Überraschung'" +
 	        		  	"50" +
-	          ")";    
-      stmt.executeUpdate(strInsertIntoTorte); 
-      
+	          ")";
+      stmt.executeUpdate(strInsertIntoTorte);
+
       ResultSet rs = stmt.executeQuery("SELECT * FROM Torte");
       rs.next();
       System.out.print(rs.getString(1) + ", ");
       System.out.println(rs.getInt(2));
-            
-      stmt.executeUpdate("DROP TABLE Torte");             
-      
+
+      stmt.executeUpdate("DROP TABLE Torte");
+
       rs.close();
       stmt.close();
       con.close();
@@ -55,7 +55,7 @@ public class JDBC {
         System.out.println("SQLState: " + e.getSQLState());
         e = e.getNextException();
       }
-    } 
-    
-  }*/  
+    }
+
+  }*/
 }
