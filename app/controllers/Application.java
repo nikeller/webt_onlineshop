@@ -5,7 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 
 import models.Data;
+import models.Gebaeck;
 import models.Model;
+import models.Praline;
 import models.Torte;
 import play.*;
 import play.data.*;
@@ -27,13 +29,14 @@ public class Application extends Controller {
 //		//Torte torte1 = new Torte(1, produkt_name, produkt_beschreibung, bild, kategorie_id, 14);
 		
     	Torten = Model.sharedInstance.gibAlleTorten();
-		System.out.println("Torten: " + Torten.size());
 		//List<Torten> data = Data.getAllTorten();
     	return ok(Kategorie_Torten.render(Torten));
     }
     
     public static Result Kategorie_Pralinen() {
-    	return ok(Kategorie_Pralinen.render());
+    	Collection<Praline> Pralinen = new HashSet<Praline>();
+    	Pralinen = Model.sharedInstance.gibAllePralinen();
+    	return ok(Kategorie_Pralinen.render(Pralinen));
     }
     
     public static Result Kategorie_Gebaeck() {

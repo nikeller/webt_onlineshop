@@ -1,5 +1,4 @@
-
-@main("Pralinen"){
+@(pralinen: Collection[Praline]) @main("Pralinen"){
 <!DOCTYPE html>
 <html lang="de">
 	<head>
@@ -64,10 +63,29 @@
   		<div class="panel-heading">
    			 <h3 class="panel-title">Milchschokolade</h3>
  		</div>
- 		<div class="panel-body">
-  	  		Produktbilder
- 		</div>
-	</div>
+ 		<table class="table">
+					<tr>
+						<th>Produktname</th>
+						<!-- 						<th>Produktbeschreibung</th> -->
+						<th>Produktbild</th>
+						<th>Preis in Euro</th>
+						<th></th>
+					</tr>
+					@for(praline <- pralinen) {
+					<tr>	
+						<td>@praline.produkt_name</td>
+						<td><img class="img-responsive" alt="Responsives Bild" src="@praline.bild"></td>
+						<td>@praline.preis</td>
+						<td><form action="@routes.Application.Warenkorb">
+								<button type="button" class="btn btn-default btn-sm">In
+									den Warenkorb</button>
+							</form></td>
+					</tr>
+					}
+					<tr>
+					</tr>
+				</table>
+
 	
   	<div class="panel panel-default">
   		<div class="panel-heading">

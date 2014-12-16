@@ -8,8 +8,6 @@ import play.db.ebean.Model;
 
 
 public class Torte{
-
-	public Model model;
 	
 	public long produkt_id;
 	
