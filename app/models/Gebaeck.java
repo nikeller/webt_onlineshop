@@ -1,0 +1,77 @@
+package models;
+
+public class Gebaeck {
+	
+	public long produkt_id;
+	
+	public String produkt_name;
+	
+	public String produkt_beschreibung;
+	
+	public String bild;
+	
+	public String kategorie_id;
+	
+	public long preis;
+
+	public Gebaeck(long produkt_id, String produkt_name,
+			String produkt_beschreibung, String bild, String kategorie_id,
+			long preis) {
+		this.produkt_id = produkt_id;
+		this.produkt_name = produkt_name;
+		this.produkt_beschreibung = produkt_beschreibung;
+		this.bild = bild;
+		this.kategorie_id = kategorie_id;
+		this.preis = preis;
+	}
+
+	public long getProdukt_id() {
+		return produkt_id;
+	}
+
+	public void setProdukt_id(long produkt_id) {
+		this.produkt_id = produkt_id;
+	}
+
+	public String getProdukt_name() {
+		return produkt_name;
+	}
+
+	public void setProdukt_name(String produkt_name) {
+		this.produkt_name = produkt_name;
+	}
+
+	public String getProdukt_beschreibung() {
+		return produkt_beschreibung;
+	}
+
+	public void setProdukt_beschreibung(String produkt_beschreibung) {
+		this.produkt_beschreibung = produkt_beschreibung;
+	}
+
+	public String getBild() {
+		return bild;
+	}
+
+	public void setBild(String bild) {
+		this.bild = bild;
+	}
+
+	public String getKategorie_id() {
+		return kategorie_id;
+	}
+
+	public void setKategorie_id(String kategorie_id) {
+		this.kategorie_id = kategorie_id;
+	}
+
+	public long getPreis() {
+		return preis;
+	}
+
+	public void setPreis(long preis) {
+		this.preis = preis;
+	}
+
+		
+}

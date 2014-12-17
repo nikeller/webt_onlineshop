@@ -1,9 +1,15 @@
 package controllers;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
-//import models.Data;
-import models.Torten;
+import models.Data;
+import models.Gebaeck;
+import models.Model;
+import models.Praline;
+import models.Torte;
+
 import play.*;
 import play.data.*;
 import play.mvc.*;
@@ -16,17 +22,22 @@ public class Application extends Controller {
     }
     
     public static Result Kategorie_Torten() {
-    	String produkt_name = "Torte1";
-		String produkt_beschreibung = "Beschreibung für Torte1";
-		String bild = "@routes.Assets.at(\"images/Torte_003.jpg\")";
-		String kategorie_id = "T";
-		Torten torten = new Torten(1, produkt_name, produkt_beschreibung, bild, kategorie_id, 14);
-       //List<Torten> data = Data.getAllTorten();
-    	return ok(Kategorie_Torten.render(torten));
+    	Collection<Torte> Torten =  new HashSet<Torte>();
+//    	String produkt_name = "Torte1";
+//		String produkt_beschreibung = "Beschreibung für Torte1";
+//		String bild = "@routes.Assets.at(\"images/Torte_003.jpg\")";
+//		String kategorie_id = "T";
+//		//Torte torte1 = new Torte(1, produkt_name, produkt_beschreibung, bild, kategorie_id, 14);
+		
+    	Torten = Model.sharedInstance.gibAlleTorten();
+		//List<Torten> data = Data.getAllTorten();
+    	return ok(Kategorie_Torten.render(Torten));
     }
     
     public static Result Kategorie_Pralinen() {
-    	return ok(Kategorie_Pralinen.render());
+    	Collection<Praline> Pralinen = new HashSet<Praline>();
+    	Pralinen = Model.sharedInstance.gibAllePralinen();
+    	return ok(Kategorie_Pralinen.render(Pralinen));
     }
     
     public static Result Kategorie_Gebaeck() {
