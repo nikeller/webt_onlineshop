@@ -6,10 +6,10 @@ import java.util.List;
 
 import models.Data;
 import models.Gebaeck;
+import models.JDBC;
 import models.Model;
 import models.Praline;
 import models.Torte;
-
 import play.*;
 import play.data.*;
 import play.mvc.*;
@@ -30,6 +30,13 @@ public class Application extends Controller {
 //		//Torte torte1 = new Torte(1, produkt_name, produkt_beschreibung, bild, kategorie_id, 14);
 		
     	Torten = Model.sharedInstance.gibAlleTorten();
+    	
+    	
+    	//Kontrolle zu JDBC --> jeweils nur eine zeile ausführen
+    	JDBC ausgabe = new JDBC();
+//    	ausgabe.createTable();
+//    	ausgabe.insertInto();
+    	ausgabe.select();
 		//List<Torten> data = Data.getAllTorten();
     	return ok(Kategorie_Torten.render(Torten));
     }
