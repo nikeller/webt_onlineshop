@@ -34,7 +34,7 @@ public class Application extends Controller {
     	
     	//Kontrolle zu JDBC --> jeweils nur eine zeile ausführen
     	JDBC ausgabe = new JDBC();
-//    	ausgabe.createTable();
+    	ausgabe.createTable();
 //    	ausgabe.insertInto();
     	ausgabe.select();
 		//List<Torten> data = Data.getAllTorten();

@@ -4,16 +4,15 @@ import java.sql.*;
 import play.db.*;
 
 public class JDBC {
-	
-	public Connection c = DB.getConnection();
-	public Statement stmt = null;
-	
+
 	 public void createTable()
 	  {
 		     try {
+		      Connection c = DB.getConnection();
+		      Statement stmt = null;
 		      stmt = c.createStatement();
 		      String strCreateTorte =
-		    		  "CREATE TABLE Torte (" +
+		    		  "CREATE TABLE IF NOT EXISTS Torte (" +
 								"id  smallint PRIMARY KEY,"	+
 								"name VARCHAR(50) NOT NULL, " +
 								"pfad  VARCHAR(100) NOT NULL," +
@@ -29,12 +28,15 @@ public class JDBC {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		      System.exit(0);
 		    }
-		    System.out.println("Table created successfully");
+		   
+		     System.out.println("If did not exist: Table created successfully");
 		  }
 	  
 	 public void insertInto(){
 		 
 		 try {
+			  Connection c = DB.getConnection();
+		      Statement stmt = null;
 		      stmt = c.createStatement();
 		      String strInsertIntoTorte = "INSERT INTO Torte (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
 		                   "VALUES (001, 'Olchi_torte', '@routes.Assets.at(\"images/Torte_001.jpg\")',"
@@ -66,10 +68,12 @@ public class JDBC {
 
 	 public void select() {
 		 try {
+			  Connection c = DB.getConnection();
+		      Statement stmt = null;
 		      stmt = c.createStatement();
 		      ResultSet rs = stmt.executeQuery( "SELECT * FROM Torte;" );
 		      
-//		      Schema: (id,name,pfad,beschr,kategorie_id, preis)
+//		      Schema: (id,name,pfad,beschr,kategorie_id, preis, bestand)
 		      while ( rs.next() ) {
 		         int id = rs.getInt("id");
 		         String  name = rs.getString("name");
