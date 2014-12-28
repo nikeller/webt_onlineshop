@@ -32,7 +32,7 @@ public class Application extends Controller {
     	Torten = Model.sharedInstance.gibAlleTorten();
     	
     	
-    	//Kontrolle zu JDBC --> jeweils nur eine zeile ausführen
+    	//Ausführungszeilen (Kontrolle) zu JDBC
     	JDBC ausgabe = new JDBC();
     	ausgabe.createTable();
 //    	ausgabe.insertInto();

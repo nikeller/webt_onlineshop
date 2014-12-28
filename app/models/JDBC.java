@@ -13,7 +13,7 @@ public class JDBC {
 		      stmt = c.createStatement();
 		      String strCreateTorte =
 		    		  "CREATE TABLE IF NOT EXISTS Torte (" +
-								"id  smallint PRIMARY KEY,"	+
+								"id  smallint AUTO_INCREMENT PRIMARY KEY,"	+
 								"name VARCHAR(50) NOT NULL, " +
 								"pfad  VARCHAR(100) NOT NULL," +
 								"beschr VARCHAR(150)," +
@@ -21,6 +21,13 @@ public class JDBC {
 								"preis decimal(4,2) NOT NULL," +
 								"bestand smallint NOT NULL" +
 								")";
+		      stmt.executeUpdate(strCreateTorte);
+//		      String strSearch =
+//		    		  "CREATE TABLE IF NOT EXISTS Search (" +
+//								"id smallint NOT NULL, " + //???AUTO_INCREMENT
+//							     "name CHAR(30) NOT NULL, " +
+//							     "PRIMARY KEY (id)"	+
+//								")";
 		      stmt.executeUpdate(strCreateTorte);
 		      stmt.close();
 		      c.close();
@@ -53,6 +60,10 @@ public class JDBC {
 	                   "VALUES (003, 'Hochzeitstorte', '@routes.Assets.at(\"images/Torte_003.jpg\")',"
 	                   + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 1);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
+		      
+//		      String strInsertIntoSearch = "INSERT INTO Search (id, name) " +
+//	                   "VALUES (01, 'Torte'), (02, 'Pfannkuchen'), (03, 'Bonbon'), (04, 'Pop-Cake'), (05, 'Muffin'), (06, 'Pralinen');"; 
+//		      stmt.executeUpdate(strInsertIntoSearch);
 
 		      stmt.close();
 //		      c.commit();
@@ -90,8 +101,19 @@ public class JDBC {
 		         System.out.println( "PREIS = " + preis );
 		         System.out.println( "LAGERBESTAND = " + bestand);
 		         System.out.println(); 
-       
+		         System.out.println("Operation done successfully");
+      
+    
 		      }
+//		      ResultSet rs = stmt.executeQuery( "SELECT * FROM Search;" );
+//		      while ( rs.next() ) {
+//		         int idS = rs.getInt("id");
+//		         String  nameS = rs.getString("name");
+//		         System.out.println( "ID = " + idS );
+//		         System.out.println( "NAME = " + nameS );
+//		         System.out.println();
+//			    System.out.println("Operation done successfully");
+//			  }
 		      rs.close();
 		      stmt.close();
 		      c.close();
@@ -99,7 +121,8 @@ public class JDBC {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		      System.exit(0);
 		    }
-		    System.out.println("Operation done successfully");
-		  }
+		 
+
 	 
+	 }
 }
