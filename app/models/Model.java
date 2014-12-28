@@ -3,6 +3,8 @@ package models;
 import java.util.Collection;
 import java.util.HashSet;
 
+import controllers.Assets;
+
 public class Model {
 
 	public static final Model sharedInstance = new Model();
@@ -13,7 +15,8 @@ public class Model {
 	
 	public Model() {
 		//Collections von Torte, Pralinen, Gebäck und User	
-		Torte torte1 = new Torte(1, "Torte1", "Beschreibung Torte1", "@routes.Assets.at(\"images/Torte_001.jpg\")", "T", 10);
+		String pfad="/assets/images/Torte_001.jpg";
+		Torte torte1 = new Torte(1, "Torte1", "Beschreibung Torte1", pfad, "T", 10);
 		Torte torte2 = new Torte(2, "Torte2", "Beschreibung Torte2", "Bild Torte2", "T", 11);
 		Torte torte3 = new Torte(3, "Torte3", "Beschreibung Torte3", "Bild Torte3", "T", 12);
 		TorteHinzufuegen(torte1);
