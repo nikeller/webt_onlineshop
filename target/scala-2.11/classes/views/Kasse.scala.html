@@ -1,0 +1,61 @@
+
+@main("Kasse") {
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sweet Shop</title>
+
+   <!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" type="text/css" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")">
+ 
+  </head>
+  <body>
+  
+  <div class="row">
+  <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" href="@routes.Application.index"><h2>Sweet Shop</h2></a></div>
+  
+  
+  
+</div>
+  
+  
+
+<div class="row">
+  <div class="col-xs-6 col-md-4"><div class="page-header">
+ <h2 class="ueberschrift">Kasse</h2>
+</div>  
+
+
+</div>
+
+
+  <div class="col-xs-12 col-sm-6 col-md-8">
+<table class="table">
+ <tr>
+ 	<th>Gesamtpreis</th>
+ 	<th>123</th>
+ </tr>
+</table>
+  
+  
+ <form action="@routes.Application.index">
+			<button>Ware bestellen</button>
+		</form>
+  </div>
+</div>
+
+
+<div class="panel-footer">Über Uns!</div>
+
+
+    <!-- jQuery (wird für Bootstrap JavaScript-Plugins benötigt) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Binde alle kompilierten Plugins zusammen ein (wie hier unten) oder such dir einzelne Dateien nach Bedarf aus -->
+    <script src="bootstrap.min.js"></script>
+  </body>
+</html>
+}

@@ -1,0 +1,17 @@
+run
+activator eclipse
+activator eclipsify
+activator eclipse
+stop
+end
+Stop
+Exit
+exit
+run
+exit
+run
+activator
+run
+exit
+rn
+run

@@ -1,26 +1,38 @@
 package controllers;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-import models.Data;
+
 import models.Gebaeck;
 import models.Model;
 import models.Praline;
 import models.Torte;
+import models.User;
 import play.*;
 import play.data.*;
 import play.mvc.*;
 import views.html.*;
 
-public class Application extends Controller {
+import com.google.gson.Gson; 
+import com.google.gson.JsonArray; 
+import com.google.gson.JsonObject; 
 
+public class Application extends Controller {
+	
     public static Result index() {
         return ok(index.render("Your new application is ready."));
     }
-    
-    public static Result Kategorie_Torten() {
+   
+
+
+	public static Result Kategorie_Torten() {
     	Collection<Torte> Torten =  new HashSet<Torte>();
 //    	String produkt_name = "Torte1";
 //		String produkt_beschreibung = "Beschreibung für Torte1";
@@ -43,10 +55,119 @@ public class Application extends Controller {
     	return ok(Kategorie_Gebaeck.render());
     }
     
-    public static Result Registrierung(){
-    	return ok(Registrierung.render());
+    public static Result Registrierung() throws IOException{  
+//        if (session("show") == null) {
+//            return redirect("/");
+//          }
+//    	
+//    	Gson gson = new Gson();
+//    	String allePLZ = "";
+//    	 try { 
+//    	        // Datei "personen.json" über einen Stream einlesen 
+//    	        FileInputStream input = new FileInputStream("app/views/PLZ.json"); 
+//    	        
+//    	        BufferedReader reader = new BufferedReader(new InputStreamReader(input)); 
+//    	        
+//    	        // Datei als JSON-Objekt einlesen 
+//    	        JsonObject json = gson.fromJson(reader, JsonObject.class); 
+//    	        
+//    	        // Attribut "personen" als Array lesen 
+//    	        com.google.gson.JsonArray plzOrte = json.getAsJsonArray("plzOrte"); 
+//
+//    	        for(int i = 0; i < plzOrte.size() && plzOrte.get(i).getAsJsonObject() != null; i++){ 
+//    	            JsonObject jObj = plzOrte.get(i).getAsJsonObject(); 
+//
+//    	            // Attribute ausgeben z.B.: name, alter und hobbies 
+////    	            System.out.println(jObj.get("plz").getAsString()); 
+////    	            System.out.println(jObj.get("ort").getAsString()); 
+//    	        
+//    	            String aktuellerWert = jObj.get("ort").getAsString();
+//    	            if(aktuellerWert.startsWith(eingabe))
+//    	            {
+//    	            	allePLZ= allePLZ + aktuellerWert;
+//    	            }
+//    	            session().clear();
+////    	            System.out.println(jObj.get("ort").getAsString()); 
+////    	        
+////    	            
+////    	            
+////    	            allePLZ= allePLZ + aktuellerWert;
+////    	            
+////    	            System.out.println("------"); 
+////    	            System.out.println(allePLZ);
+//    	            
+//    	           reader.close();
+//    	           
+//    	            
+//    	        } 
+//    	    } catch (FileNotFoundException e) { 
+//    	        e.printStackTrace(); 
+//    	        return redirect("/");
+//    	    } 
+// 
+
+         
+
+         
+    	return ok(Registrierung.render(" "));
     }
-        
+    
+    
+    public static Result TestStuff(String eingabe) throws IOException{
+    	
+//        if (session("show") == null) {
+//            return redirect("Kategorie_Gebaeck.scala.html");
+//          }
+    	
+    	Gson gson = new Gson();
+    	String allePLZ = "";
+    	 try { 
+    	        // Datei "plz.json" über einen Stream einlesen 
+    	        FileInputStream input = new FileInputStream("app/views/PLZ.json"); 
+    	        
+    	        BufferedReader reader = new BufferedReader(new InputStreamReader(input)); 
+    	        
+    	        // Datei als JSON-Objekt einlesen 
+    	        JsonObject json = gson.fromJson(reader, JsonObject.class); 
+    	        
+    	        // Attribut "plzorte" als Array lesen 
+    	        com.google.gson.JsonArray plzOrte = json.getAsJsonArray("plzOrte"); 
+
+    	        for(int i = 0; i < plzOrte.size() && plzOrte.get(i).getAsJsonObject() != null; i++){ 
+    	            JsonObject jObj = plzOrte.get(i).getAsJsonObject(); 
+    	        
+    	            String aktuellerWert = jObj.get("ort").getAsString();
+    	            if(aktuellerWert.startsWith(eingabe))
+    	            {
+    	            	allePLZ= allePLZ + aktuellerWert;
+    	            }
+    	            session().clear();
+//    	            System.out.println(jObj.get("ort").getAsString()); 
+//    	        
+//    	            
+//    	            
+//    	            allePLZ= allePLZ + aktuellerWert;
+//    	            
+    	            System.out.println("------"); 
+    	            System.out.println(allePLZ);
+    	            
+    	           reader.close();
+    	           
+    	            
+    	        } 
+    	    } catch (FileNotFoundException e) { 
+    	        e.printStackTrace(); 
+    	        return redirect("Kategorie_Gebaeck.scala.html");
+    	    } 
+ 
+
+         
+
+         
+    	return ok(Registrierung.render(allePLZ));
+    }
+    
+    
     public static Result Warenkorb(){
     	return ok(Warenkorb.render());
     }
@@ -54,5 +175,6 @@ public class Application extends Controller {
     public static Result Kasse(){
     	return ok(Kasse.render());
     }
+
 
 }
