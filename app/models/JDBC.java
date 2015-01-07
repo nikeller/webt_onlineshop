@@ -45,19 +45,20 @@ public class JDBC {
 			  Connection c = DB.getConnection();
 		      Statement stmt = null;
 		      stmt = c.createStatement();
+
 		      String strInsertIntoTorte = "INSERT INTO Torte (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
-		                   "VALUES (001, 'Olchi_torte', '@routes.Assets.at(\"images/Torte_001.jpg\")',"
+		                   "VALUES (001, 'Olchi_torte', '/assets/images/Torte_001.jpg',"
 		                   + "'Passend zum Kindergeburtstag', 'T', 35.50, 5);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 			 
 		      stmt = c.createStatement();
 		      strInsertIntoTorte = "INSERT INTO Torte (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
-		                   "VALUES (002, 'Herzliche Grüße', '@routes.Assets.at(\"images/Torte_002.jpg\")',"
+		                   "VALUES (002, 'Herzliche Grüße', '\"/assets/images/Torte_002.jpg\"',"
 		                   + "'Leckere Torte für unsere Lieblinge', 'T', 33.0, 3);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 
 		      strInsertIntoTorte = "INSERT INTO Torte (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
-	                   "VALUES (003, 'Hochzeitstorte', '@routes.Assets.at(\"images/Torte_003.jpg\")',"
+	                   "VALUES (003, 'Hochzeitstorte', '\"/assets/images/Torte_003.jpg\"',"
 	                   + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 1);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 		      

@@ -29,16 +29,20 @@ public class Application extends Controller {
 //		String kategorie_id = "T";
 //		//Torte torte1 = new Torte(1, produkt_name, produkt_beschreibung, bild, kategorie_id, 14);
 		
-    	Torten = Model.sharedInstance.gibAlleTorten();
+    	Torten = Model.sharedInstance.getTorten();
     	
     	
     	//Ausführungszeilen (Kontrolle) zu JDBC
-    	JDBC ausgabe = new JDBC();
-    	ausgabe.createTable();
+//    	JDBC ausgabe = new JDBC();
+//    	ausgabe.createTable();
 //    	ausgabe.insertInto();
-    	ausgabe.select();
+//    	ausgabe.select();
 		//List<Torten> data = Data.getAllTorten();
+    	
+//    	System.out.println(Model.sharedInstance.gibAlleTorten());
+    	
     	return ok(Kategorie_Torten.render(Torten));
+//    	return ok(Kategorie_Torten.render(Model.sharedInstance.gibAlleTorten()));
     }
     
     public static Result Kategorie_Pralinen() {
