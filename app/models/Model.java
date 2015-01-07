@@ -12,6 +12,7 @@ public class Model {
 	private Collection<Torte> torten = new HashSet<Torte>();
 	private Collection<Praline> pralinen = new HashSet<Praline>();
 	private Collection<Gebaeck> gebaecken = new HashSet<Gebaeck>();
+	private Collection<User> users = new HashSet<User>();
 	
 	public Model() {
 		//Collections von Torte, Pralinen, Gebäck und User	
@@ -36,6 +37,14 @@ public class Model {
 		GebaeckHinzufuegen(gebaeck1);
 		GebaeckHinzufuegen(gebaeck2);
 		GebaeckHinzufuegen(gebaeck3);
+		
+		User user1 = new User("a@b.com", "abcdef");
+		User user2 = new User("c@d.com", "ghijkl");
+		User user3 = new User("e@f.com", "mnopqr");
+		UserHinzufuegen(user1);
+		UserHinzufuegen(user2);
+		UserHinzufuegen(user3);
+		
 	}
 	
 	
@@ -76,4 +85,17 @@ public class Model {
 	public Collection<Gebaeck> gibAlleGebaecken(){
 		return gebaecken;
 	}
+	
+	public void UserHinzufuegen(User user){
+		users.add(user);
+	}
+
+	public void UserEntfernen(User user){
+		users.remove(user);
+	}
+	
+	public Collection<User> gibAlleUser(){
+		return users;
+	}
+	
 }

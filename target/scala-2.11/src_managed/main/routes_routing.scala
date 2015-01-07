@@ -1,6 +1,6 @@
 // @SOURCE:C:/Users/Nina/workspace/webt_onlineshop/conf/routes
-// @HASH:9a567b2b530cdbafc2d22f1b5c204d7dcc263c1d
-// @DATE:Wed Jan 07 13:19:11 CET 2015
+// @HASH:d67f462c18891061b401594661e3e5bcfa30296b
+// @DATE:Wed Jan 07 14:35:26 CET 2015
 
 
 import play.core._

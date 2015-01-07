@@ -55,7 +55,14 @@ public class Application extends Controller {
     	return ok(Kategorie_Gebaeck.render());
     }
     
-    public static Result Registrierung() throws IOException{  
+    public static Result Registrierung() throws IOException{ 
+    	if (session("connected") == null){
+    		return ok(Registrierung.render(""));
+    	}
+    	
+    	else {
+    		return redirect("/");
+    	}
 //        if (session("show") == null) {
 //            return redirect("/");
 //          }
@@ -109,8 +116,10 @@ public class Application extends Controller {
          
 
          
-    	return ok(Registrierung.render(" "));
+    	
     }
+    
+  
     
     
     public static Result TestStuff(String eingabe) throws IOException{
