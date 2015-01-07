@@ -1,6 +1,6 @@
 // @SOURCE:C:/Users/Nina/workspace/webt_onlineshop/conf/routes
-// @HASH:541fab991a7a0d7e9c92bb5279993498c9207ee0
-// @DATE:Tue Jan 06 12:19:17 CET 2015
+// @HASH:9a567b2b530cdbafc2d22f1b5c204d7dcc263c1d
+// @DATE:Wed Jan 07 13:19:11 CET 2015
 
 import Routes.{prefix => _prefix, defaultPrefix => _defaultPrefix}
 import play.core._
@@ -15,7 +15,7 @@ import _root_.play.libs.F
 import Router.queryString
 
 
-// @LINE:17
+// @LINE:16
 // @LINE:13
 // @LINE:12
 // @LINE:11
@@ -26,11 +26,11 @@ import Router.queryString
 // @LINE:6
 package controllers {
 
-// @LINE:17
+// @LINE:16
 class ReverseAssets {
 
 
-// @LINE:17
+// @LINE:16
 def at(file:String): Call = {
    implicit val _rrc = new ReverseRouteContext(Map(("path", "/public")))
    Call("GET", _prefix + { _defaultPrefix } + "assets/" + implicitly[PathBindable[String]].unbind("file", file))
@@ -113,7 +113,7 @@ def index(): Call = {
                   
 
 
-// @LINE:17
+// @LINE:16
 // @LINE:13
 // @LINE:12
 // @LINE:11
@@ -125,11 +125,11 @@ def index(): Call = {
 package controllers.javascript {
 import ReverseRouteContext.empty
 
-// @LINE:17
+// @LINE:16
 class ReverseAssets {
 
 
-// @LINE:17
+// @LINE:16
 def at : JavascriptReverseRoute = JavascriptReverseRoute(
    "controllers.Assets.at",
    """
@@ -248,7 +248,7 @@ def index : JavascriptReverseRoute = JavascriptReverseRoute(
         
 
 
-// @LINE:17
+// @LINE:16
 // @LINE:13
 // @LINE:12
 // @LINE:11
@@ -260,11 +260,11 @@ def index : JavascriptReverseRoute = JavascriptReverseRoute(
 package controllers.ref {
 
 
-// @LINE:17
+// @LINE:16
 class ReverseAssets {
 
 
-// @LINE:17
+// @LINE:16
 def at(path:String, file:String): play.api.mvc.HandlerRef[_] = new play.api.mvc.HandlerRef(
    controllers.Assets.at(path, file), HandlerDef(this.getClass.getClassLoader, "", "controllers.Assets", "at", Seq(classOf[String], classOf[String]), "GET", """ Map static resources from the /public folder to the /assets URL path""", _prefix + """assets/$file<.+>""")
 )

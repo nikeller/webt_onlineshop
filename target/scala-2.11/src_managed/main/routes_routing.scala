@@ -1,6 +1,6 @@
 // @SOURCE:C:/Users/Nina/workspace/webt_onlineshop/conf/routes
-// @HASH:541fab991a7a0d7e9c92bb5279993498c9207ee0
-// @DATE:Tue Jan 06 12:19:17 CET 2015
+// @HASH:9a567b2b530cdbafc2d22f1b5c204d7dcc263c1d
+// @DATE:Wed Jan 07 13:19:11 CET 2015
 
 
 import play.core._
@@ -88,7 +88,7 @@ controllers.Application.Kasse(),
 HandlerDef(this.getClass.getClassLoader, "", "controllers.Application", "Kasse", Nil,"GET", """""", Routes.prefix + """Kasse"""))
         
 
-// @LINE:17
+// @LINE:16
 private[this] lazy val controllers_Assets_at8_route = Route("GET", PathPattern(List(StaticPart(Routes.prefix),StaticPart(Routes.defaultPrefix),StaticPart("assets/"),DynamicPart("file", """.+""",false))))
 private[this] lazy val controllers_Assets_at8_invoker = createInvoker(
 controllers.Assets.at(fakeValue[String], fakeValue[String]),
@@ -166,7 +166,7 @@ case controllers_Application_Kasse7_route(params) => {
 }
         
 
-// @LINE:17
+// @LINE:16
 case controllers_Assets_at8_route(params) => {
    call(Param[String]("path", Right("/public")), params.fromPath[String]("file", None)) { (path, file) =>
         controllers_Assets_at8_invoker.call(controllers.Assets.at(path, file))
