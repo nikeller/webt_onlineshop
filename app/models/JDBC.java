@@ -13,7 +13,7 @@ public class JDBC {
 		      stmt = c.createStatement();
 		      String strCreateTorte =
 		    		  "CREATE TABLE IF NOT EXISTS Torte (" +
-								"id  smallint AUTO_INCREMENT PRIMARY KEY,"	+
+								"id  smallint PRIMARY KEY,"	+
 								"name VARCHAR(50) NOT NULL, " +
 								"pfad  VARCHAR(100) NOT NULL," +
 								"beschr VARCHAR(150)," +
