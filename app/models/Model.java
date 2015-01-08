@@ -3,6 +3,7 @@ package models;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -31,28 +32,30 @@ public class Model {
 //		TorteHinzufuegen(torte2);
 //		TorteHinzufuegen(torte3);
 
-		Praline praline1 = new Praline(4, "Praline1", "Beschreibung Praline1",
-				"Bild Praline1", "P", 1);
-		Praline praline2 = new Praline(5, "Praline2", "Beschreibung Praline2",
-				"Bild Praline2", "P", 1);
-		Praline praline3 = new Praline(6, "Praline3", "Beschreibung Praline3",
-				"Bild Praline3", "P", 1);
-		PralineHinzufuegen(praline1);
-		PralineHinzufuegen(praline2);
-		PralineHinzufuegen(praline3);
+//		Praline praline1 = new Praline(4, "Praline1", "Beschreibung Praline1",
+//				"Bild Praline1", "P", 1);
+//		Praline praline2 = new Praline(5, "Praline2", "Beschreibung Praline2",
+//				"Bild Praline2", "P", 1);
+//		Praline praline3 = new Praline(6, "Praline3", "Beschreibung Praline3",
+//				"Bild Praline3", "P", 1);
+//		PralineHinzufuegen(praline1);
+//		PralineHinzufuegen(praline2);
+//		PralineHinzufuegen(praline3);
 
-		Gebaeck gebaeck1 = new Gebaeck(7, "Gebäck1", "Beschreibung Gebäck1",
-				"Bild Gebäck1", "G", 6);
-		Gebaeck gebaeck2 = new Gebaeck(8, "Gebäck2", "Beschreibung Gebäck2",
-				"Bild Gebäck2", "G", 7);
-		Gebaeck gebaeck3 = new Gebaeck(9, "Gebäck3", "Beschreibung Gebäck3",
-				"Bild Gebäck3", "G", 8);
-		GebaeckHinzufuegen(gebaeck1);
-		GebaeckHinzufuegen(gebaeck2);
-		GebaeckHinzufuegen(gebaeck3);
+//		Gebaeck gebaeck1 = new Gebaeck(7, "Gebäck1", "Beschreibung Gebäck1",
+//				"Bild Gebäck1", "G", 6);
+//		Gebaeck gebaeck2 = new Gebaeck(8, "Gebäck2", "Beschreibung Gebäck2",
+//				"Bild Gebäck2", "G", 7);
+//		Gebaeck gebaeck3 = new Gebaeck(9, "Gebäck3", "Beschreibung Gebäck3",
+//				"Bild Gebäck3", "G", 8);
+//		GebaeckHinzufuegen(gebaeck1);
+//		GebaeckHinzufuegen(gebaeck2);
+//		GebaeckHinzufuegen(gebaeck3);
 	}
 
 	public static ArrayList<Torte> torte = new ArrayList<Torte>();
+	public static ArrayList<Praline> praline = new ArrayList<Praline>();
+	public static ArrayList<Gebaeck> gebaeck = new ArrayList<Gebaeck>();
 
 	private static Connection connection = DB.getConnection();
 
@@ -78,6 +81,66 @@ public class Model {
 
 	}
 
+	public Collection<Praline> getPralinen() {
+		praline.clear();
+		try {
+			String pralineInfoSQL = "SELECT * FROM Praline;";
+			PreparedStatement pstmt = connection.prepareStatement(pralineInfoSQL);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Praline pralinen = new Praline(rs.getInt("id"), rs.getString("name"),
+						rs.getString("pfad"), rs.getString("beschr"),
+						rs.getString("kategorie_id"), rs.getFloat("preis"));
+
+				praline.add(pralinen);
+
+			}
+		} catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+		}
+		return praline;
+
+	}
+	
+	public Collection<Gebaeck> getGebaeck() {
+		gebaeck.clear();
+		try {
+			String gebaeckInfoSQL = "SELECT * FROM Gebaeck;";
+			PreparedStatement pstmt = connection.prepareStatement(gebaeckInfoSQL);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Gebaeck gebaecken = new Gebaeck(rs.getInt("id"), rs.getString("name"),
+						rs.getString("pfad"), rs.getString("beschr"),
+						rs.getString("kategorie_id"), rs.getFloat("preis"));
+
+				gebaeck.add(gebaecken);
+
+			}
+		} catch (Exception e) {
+			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			System.exit(0);
+		}
+		return gebaeck;
+
+	}
+	
+	public User getUser(String email) {
+		String getUserSQL = "SELECT * FROM User WHERE User.EMail = '"
+				+ email + "'";
+		try {
+			PreparedStatement pstmt = connection.prepareStatement(getUserSQL);
+			ResultSet rs = pstmt.executeQuery();
+			User user = new User(rs.getString("KundenNr"),
+					rs.getString("EMail"));
+			return user;
+		} catch (SQLException e) {
+			System.out.println("User mit EMail " + email + " nicht gefunden!");
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public void TorteHinzufuegen(Torte torte) {
 		torten.add(torte);
 	}

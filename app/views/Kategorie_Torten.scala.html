@@ -10,7 +10,8 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")">
-<script language="JavaScript" type="text/javascript" src="ajax_search.js"></script>
+<script language="JavaScript" type="text/javascript"
+	src="ajax_search.js"></script>
 </head>
 <body>
 
@@ -20,10 +21,12 @@
 					Shop</h2></a>
 		</div>
 		<div class="col-xs-6 col-sm-4">
-			<form id="frmSearch" class="navbar-form navbar-left" role="search" method="get">
+			<form id="frmSearch" class="navbar-form navbar-left" role="search"
+				method="get">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Suchen" id="txtSearch" name="txtSearch" alt="Search Criteria" 
-		onkeyup="searchSuggest();" autocomplete="off"/> 
+					<input type="text" class="form-control" placeholder="Suchen"
+						id="txtSearch" name="txtSearch" alt="Search Criteria"
+						onkeyup="searchSuggest();" autocomplete="off" />
 				</div>
 				<button type="submit" class="btn btn-default">Los</button>
 			</form>
@@ -56,10 +59,6 @@
 				<li><h3>
 						<a class="categorie" href="@routes.Application.Kategorie_Torten">Torten</a>
 					</h3>
-					<ul>
-						<li><h4>Hochzeitstorten</h4></li>
-						<li><h4>Geburtstagstorten</h4></li>
-					</ul></li>
 				<li><h3>
 						<a class="categorie" href="@routes.Application.Kategorie_Pralinen">Pralinen</a>
 					</h3></li>
@@ -74,21 +73,21 @@
 		<div class="col-xs-12 col-sm-6 col-md-8">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title">Hochzeitstorten</h3>
+					<h3 class="panel-title">Torten</h3>
 				</div>
 
 				<table class="table">
 					<tr>
 						<th>Produktname</th>
-						<!-- 						<th>Produktbeschreibung</th> -->
 						<th>Produktbild</th>
 						<th>Preis in Euro</th>
 						<th></th>
 					</tr>
 					@for(torte <- torten) {
-					<tr>	
+					<tr>
 						<td>@torte.produkt_name</td>
-						<td><img class="img-responsive" alt="Responsives Bild" src="@torte.bild"></td>
+						<td><img class="img-responsive" alt="Responsives Bild"
+							src="@torte.bild"></td>
 						<td>@torte.preis</td>
 						<td><form action="@routes.Application.Warenkorb">
 								<button type="button" class="btn btn-default btn-sm">In
@@ -98,80 +97,30 @@
 					}
 					<tr>
 					</tr>
-				</table>
-
-
-
-<!-- 		</div>
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Geburtstagstorten</h3>
-				</div>
-				 		<div class="panel-body">
-				  	  		Produktbilder
-				 		</div>
-				<table class="table">
-					<tr>
-						<th>Produktname</th>
-												<th>Produktbeschreibung</th>
-						<th>Produktbild</th>
-						<th>Preis in Euro</th>
-						<th></th>
-					</tr>
-					@for(torte <- torten) {
-					<tr>	
-						<td>@torte.produkt_name</td>
-						<td><img class="img-responsive" alt="Responsives Bild" src="@torte.bild"></td>
-						<td>@torte.preis</td>
-						<td><form action="@routes.Application.Warenkorb">
-								<button type="button" class="btn btn-default btn-sm">In
-									den Warenkorb</button>
-							</form></td>
-					</tr>
-					}
-					@for(torte <- torten) {
-					<tr>	
-						<td>@torte.produkt_name</td>
-						<td><img class="img-responsive" alt="Responsives Bild" src="@torte.bild"></td>
-						<td>@torte.preis</td>
-						<td><form action="@routes.Application.Warenkorb">
-								<button type="button" class="btn btn-default btn-sm">In
-									den Warenkorb</button>
-							</form></td>
-					</tr>
-					}
 				</table>
 			</div>
-
-
 		</div>
 	</div>
- -->
 
-		</div>
-		</div>
-		</div>
-		
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="panel-footer">
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="panel-footer">
                 <a class="blind" href="/">
                     <img src="@routes.Assets.at("/images/sweet_hearts.jpg")" alt="SweetShop" width="150" height="60" class="logo">
                 </a>
                 (c) SweetShop K&K
-            </div>
-        </div>
-    </div>
-</footer>
+				</div>
+			</div>
+		</div>
+	</footer>
 
 	<!-- jQuery (wird für Bootstrap JavaScript-Plugins benötigt) -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<!-- Binde alle kompilierten Plugins zusammen ein (wie hier unten) oder such dir einzelne Dateien nach Bedarf aus -->
 	<script src="bootstrap.min.js"></script>
-	
+
 
 </body>
 </html>

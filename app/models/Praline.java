@@ -12,11 +12,11 @@ public class Praline {
 	
 	public String kategorie_id;
 	
-	public long preis;
+	public float preis;
 
 	public Praline(long produkt_id, String produkt_name,
 			String produkt_beschreibung, String bild, String kategorie_id,
-			long preis) {
+			float preis) {
 		this.produkt_id = produkt_id;
 		this.produkt_name = produkt_name;
 		this.produkt_beschreibung = produkt_beschreibung;
@@ -65,11 +65,11 @@ public class Praline {
 		this.kategorie_id = kategorie_id;
 	}
 
-	public long getPreis() {
+	public float getPreis() {
 		return preis;
 	}
 
-	public void setPreis(long preis) {
+	public void setPreis(float preis) {
 		this.preis = preis;
 	}
 	
