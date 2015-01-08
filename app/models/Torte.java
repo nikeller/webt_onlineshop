@@ -89,7 +89,7 @@ public class Torte{
 	}
 
 
-	public void setPreis(long preis) {
+	public void setPreis(float preis) {
 		this.preis = preis;
 	} 
 	

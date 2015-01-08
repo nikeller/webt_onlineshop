@@ -36,7 +36,7 @@ public class JDBC {
 		      System.exit(0);
 		    }
 		   
-		     System.out.println("If did not exist: Table created successfully");
+		     System.out.println("If did not exist: Table Torte created successfully");
 		  }
 	  
 	 public void insertInto(){
@@ -47,18 +47,18 @@ public class JDBC {
 		      stmt = c.createStatement();
 
 		      String strInsertIntoTorte = "INSERT INTO Torte (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
-		                   "VALUES (001, 'Olchi_torte', '/assets/images/Torte_001.jpg',"
+		                   "VALUES (001, 'Olchi_torte', '/public/images/Torte_001.jpg',"
 		                   + "'Passend zum Kindergeburtstag', 'T', 35.50, 5);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 			 
 		      stmt = c.createStatement();
 		      strInsertIntoTorte = "INSERT INTO Torte (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
-		                   "VALUES (002, 'Herzliche Grüße', '\"/assets/images/Torte_002.jpg\"',"
+		                   "VALUES (002, 'Herzliche Grüße', '/public/images/Torte_002.jpg',"
 		                   + "'Leckere Torte für unsere Lieblinge', 'T', 33.0, 3);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 
 		      strInsertIntoTorte = "INSERT INTO Torte (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
-	                   "VALUES (003, 'Hochzeitstorte', '\"/assets/images/Torte_003.jpg\"',"
+	                   "VALUES (003, 'Hochzeitstorte', '/public/images/Torte_003.jpg',"
 	                   + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 1);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 		      
@@ -73,7 +73,90 @@ public class JDBC {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 		      System.exit(0);
 		    }
-		    System.out.println("Records created successfully");
+		    System.out.println("Records(Torte) created successfully");
+	 }
+	 
+	 
+	 public void createTablePraline()
+	  {
+		     try {
+		      Connection c = DB.getConnection();
+		      Statement stmt = null;
+		      stmt = c.createStatement();
+		      String strCreatePraline =
+		    		  "CREATE TABLE IF NOT EXISTS Praline (" +
+								"id  smallint PRIMARY KEY,"	+
+								"name VARCHAR(50) NOT NULL, " +
+								"pfad  VARCHAR(100) NOT NULL," +
+								"beschr VARCHAR(150)," +
+								"kategorie_id VARCHAR(10) NOT NULL," +
+								"preis decimal(4,2) NOT NULL," +
+								"bestand smallint NOT NULL" +
+								")";
+		      stmt.executeUpdate(strCreatePraline);
+		      stmt.close();
+		      c.close();
+		    } catch ( Exception e ) {
+		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+		      System.exit(0);
+		    }
+		   
+		     System.out.println("If did not exist: Table Praline created successfully");
+		  }
+	 
+	 public void createTableUser()
+	  {
+		     try {
+		      Connection c = DB.getConnection();
+		      Statement stmt = null;
+		      stmt = c.createStatement();
+		      String strCreateUser =
+		    		  "CREATE TABLE IF NOT EXISTS User (" +
+								"email  VARCHAR(50) PRIMARY KEY,"	+
+								"passwort VARCHAR(50) NOT NULL" +
+								")";
+		      stmt.executeUpdate(strCreateUser);
+		      stmt.close();
+		      c.close();
+		    } catch ( Exception e ) {
+		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+		      System.exit(0);
+		    }
+		   
+		     System.out.println("If did not exist: Table User created successfully");
+		  }
+	  
+	 public void insertIntoPraline(){
+		 
+		 try {
+			  Connection c = DB.getConnection();
+		      Statement stmt = null;
+		      stmt = c.createStatement();
+
+		      String strInsertIntoTorte = "INSERT INTO Praline (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
+		                   "VALUES (001, 'Olchi_torte', '/public/images/Praline_001.jpg',"
+		                   + "'Passend zum Kindergeburtstag', 'T', 35.50, 5);"; 
+		      stmt.executeUpdate(strInsertIntoTorte);
+			 
+		      stmt = c.createStatement();
+		      strInsertIntoTorte = "INSERT INTO Praline (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
+		                   "VALUES (002, 'Herzliche Grüße', '/public/images/Praline_002.jpg',"
+		                   + "'Leckere Torte für unsere Lieblinge', 'T', 33.0, 3);"; 
+		      stmt.executeUpdate(strInsertIntoTorte);
+
+		      strInsertIntoTorte = "INSERT INTO Praline (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
+	                   "VALUES (003, 'Hochzeitstorte', '/public/images/Praline_003.jpg',"
+	                   + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 1);"; 
+		      stmt.executeUpdate(strInsertIntoTorte);
+
+		      stmt.close();
+//		      c.commit();
+		      c.close();
+		    } catch ( Exception e ) {
+		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+		      System.exit(0);
+		    }
+		    System.out.println("Records(Praline) created successfully");
 	 }
 	 
 	 

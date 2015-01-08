@@ -36,6 +36,8 @@ public class Application extends Controller {
 //    	JDBC ausgabe = new JDBC();
 //    	ausgabe.createTable();
 //    	ausgabe.insertInto();
+//    	ausgabe.createTablePraline();
+//    	ausgabe.insertIntoPraline();
 //    	ausgabe.select();
 		//List<Torten> data = Data.getAllTorten();
     	
@@ -47,13 +49,45 @@ public class Application extends Controller {
     
     public static Result Kategorie_Pralinen() {
     	Collection<Praline> Pralinen = new HashSet<Praline>();
-    	Pralinen = Model.sharedInstance.gibAllePralinen();
+    	Pralinen = Model.sharedInstance.getPralinen();
     	return ok(Kategorie_Pralinen.render(Pralinen));
     }
     
     public static Result Kategorie_Gebaeck() {
+    	JDBC ausgabe =new JDBC();
+    	ausgabe.createTableUser();
     	return ok(Kategorie_Gebaeck.render());
     }
+    
+//    public static Result login() {
+//		if (session("connected") == null) {
+//
+//			return ok(login.render());
+//		} else {
+//			// wenn schon eingeloggt weiterleitung auf index
+//			return redirect("/");
+//		}
+//	}
+//    
+//	public static Result checkLogin() {
+//		final Map<String, String[]> values = request().body()
+//				.asFormUrlEncoded();
+//		User registrierterUser = Model.sharedInstance.getUser(values
+//				.get("email")[0]);
+//		String checkEmail = values.get("email")[0];
+//		String checkPassword = values.get("password")[0];
+//		if (registrierterUser != null) {
+//			if (registrierterUser.getEmail().equals(checkEmail)) {
+//				if (registrierterUser.getPsw().equals(checkPassword)) {
+//					session("connected", "" + registrierterUser.getEmail());
+//					return redirect("/Warenkorb");
+//				}
+//			}
+//		}
+//		// return
+//		// redirect(controllers.routes.Application.login("Falsche Email oder Password"));
+//		return redirect("/Registrierung");
+//	}
     
     public static Result Registrierung(){
     	return ok(Registrierung.render());
