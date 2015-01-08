@@ -120,12 +120,6 @@ public class Application extends Controller {
 //		return redirect("/Registrierung");
 //	}
     
-    public static Result Registrierung(){
-    	return ok(Registrierung.render());
-
-                
-    	return ok(Kategorie_Gebaeck.render());
-    }
     
     public static Result Registrierung() throws IOException{ 
     		return ok(Registrierung.render(""));
