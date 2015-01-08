@@ -17,21 +17,27 @@
 <script type="text/javascript">
 
 function test() {
-	 var g = document.getElementById("eingabe").value;
-	sendGuess(g);
+	var g = document.getElementById("eingabe").value;
+	Check(g);
 	}
-	function sendGuess(g) {
+	function Check(g) {
 	 var requestObj = new XMLHttpRequest();
 	 requestObj.onreadystatechange = function() {
-	 /* if (requestObj.readyState == 4 && requestObj.status == 200){ */
-	 document.getElementById("stelle").innerHTML = requestObj.responseText;
-	 /* } */
+	 if (requestObj.readyState == 4 && requestObj.status == 200){
+	 /* document.getElementById("stelle").innerHTML = requestObj.responseText; */
+	 $("#stelle").append(requestObj.responseText);
+	 	} 
 	 }
-	 requestObj.open("GET", "TestStuff?eingabe="+g, true);
+	 requestObj.open("GET", "CheckPLZ?eingabe="+g, true);
 	 requestObj.send();
 	} 
 
-
+function abc(name){
+	console.log("ERREICHT ABC");
+	console.log(name);
+	var x= document.getElementById("name").value;
+	$("#eingabe").html(x);
+}
 
 </script>
 
@@ -93,7 +99,7 @@ function test() {
     <label for="beispielPLZ">PLZ</label>
     <input type="text" class="form-control" id="eingabe" placeholder="PLZ" onkeyup="test()">
   </div>
-  <div id = "stelle"></div>
+ <div id = "stelle"></div> 
   <div class="form-group">
     <label for="beispielEmail">E-Mail</label>
     <input type="email" class="form-control" id="beispielEmail" placeholder="E-Mail">

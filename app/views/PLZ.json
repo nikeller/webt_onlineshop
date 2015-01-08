@@ -1,21 +1,23 @@
 {
 	"plzOrte" : [
-		{"ort":"10115 Berlin,"},
+		{"ort":"10115 Berlin"},
 		
-		{"ort":"21029 Hamburg,"},
+		{"ort":"11115 Berlin"},
 		
-		{"ort":"33602 Bielefeld,"},
+		{"ort":"21029 Hamburg"},
 		
-		{"ort": "40210 Düsseldorf,"},
+		{"ort":"33602 Bielefeld"},
 		
-		{"ort": "55116 Mainz,"},
+		{"ort": "40210 Düsseldorf"},
 		
-		{"ort": "66111 Saarbrücken,"},
+		{"ort": "55116 Mainz"},
 		
-		{"ort": "78462 Konstanz,"},
+		{"ort": "66111 Saarbrücken"},
 		
-		{"ort": "80331 München,"},
+		{"ort": "78462 Konstanz"},
 		
-		{"ort": "99084 Erfurt,"}
+		{"ort": "80331 München"},
+		
+		{"ort": "99084 Erfurt"}
 	]
 }

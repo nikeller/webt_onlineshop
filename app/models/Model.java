@@ -1,5 +1,6 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -12,7 +13,7 @@ public class Model {
 	private Collection<Torte> torten = new HashSet<Torte>();
 	private Collection<Praline> pralinen = new HashSet<Praline>();
 	private Collection<Gebaeck> gebaecken = new HashSet<Gebaeck>();
-	private Collection<User> users = new HashSet<User>();
+	private ArrayList<User> users = new ArrayList<User>();
 	
 	public Model() {
 		//Collections von Torte, Pralinen, Gebäck und User	
@@ -97,5 +98,6 @@ public class Model {
 	public Collection<User> gibAlleUser(){
 		return users;
 	}
+
 	
 }

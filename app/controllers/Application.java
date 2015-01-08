@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 
 
+
 import models.Gebaeck;
 import models.Model;
 import models.Praline;
@@ -27,12 +28,28 @@ import com.google.gson.JsonObject;
 public class Application extends Controller {
 	
     public static Result index() {
+        session("Bezeichnung","");
+       session("Preis", "");
         return ok(index.render("Your new application is ready."));
     }
    
-
+    public static Result submit(String ware, String preis){
+//	      if (session("warenkorb") == null) {
+//	            return redirect("/");
+//	          }
+//      session("warenkorb","Test");
+    	session("Bezeichnung", "ware");
+    	session("Preis", "preis");
+    	
+     return ok();
+//	      
+   }
 
 	public static Result Kategorie_Torten() {
+	      if (session("warenkorb") == null) {
+//	            return redirect("/");
+	          }
+        
     	Collection<Torte> Torten =  new HashSet<Torte>();
 //    	String produkt_name = "Torte1";
 //		String produkt_beschreibung = "Beschreibung für Torte1";
@@ -46,88 +63,27 @@ public class Application extends Controller {
     }
     
     public static Result Kategorie_Pralinen() {
+        
+    	
     	Collection<Praline> Pralinen = new HashSet<Praline>();
     	Pralinen = Model.sharedInstance.gibAllePralinen();
     	return ok(Kategorie_Pralinen.render(Pralinen));
     }
     
     public static Result Kategorie_Gebaeck() {
+                
     	return ok(Kategorie_Gebaeck.render());
     }
     
     public static Result Registrierung() throws IOException{ 
-    	if (session("connected") == null){
     		return ok(Registrierung.render(""));
-    	}
-    	
-    	else {
-    		return redirect("/");
-    	}
-//        if (session("show") == null) {
-//            return redirect("/");
-//          }
-//    	
-//    	Gson gson = new Gson();
-//    	String allePLZ = "";
-//    	 try { 
-//    	        // Datei "personen.json" über einen Stream einlesen 
-//    	        FileInputStream input = new FileInputStream("app/views/PLZ.json"); 
-//    	        
-//    	        BufferedReader reader = new BufferedReader(new InputStreamReader(input)); 
-//    	        
-//    	        // Datei als JSON-Objekt einlesen 
-//    	        JsonObject json = gson.fromJson(reader, JsonObject.class); 
-//    	        
-//    	        // Attribut "personen" als Array lesen 
-//    	        com.google.gson.JsonArray plzOrte = json.getAsJsonArray("plzOrte"); 
-//
-//    	        for(int i = 0; i < plzOrte.size() && plzOrte.get(i).getAsJsonObject() != null; i++){ 
-//    	            JsonObject jObj = plzOrte.get(i).getAsJsonObject(); 
-//
-//    	            // Attribute ausgeben z.B.: name, alter und hobbies 
-////    	            System.out.println(jObj.get("plz").getAsString()); 
-////    	            System.out.println(jObj.get("ort").getAsString()); 
-//    	        
-//    	            String aktuellerWert = jObj.get("ort").getAsString();
-//    	            if(aktuellerWert.startsWith(eingabe))
-//    	            {
-//    	            	allePLZ= allePLZ + aktuellerWert;
-//    	            }
-//    	            session().clear();
-////    	            System.out.println(jObj.get("ort").getAsString()); 
-////    	        
-////    	            
-////    	            
-////    	            allePLZ= allePLZ + aktuellerWert;
-////    	            
-////    	            System.out.println("------"); 
-////    	            System.out.println(allePLZ);
-//    	            
-//    	           reader.close();
-//    	           
-//    	            
-//    	        } 
-//    	    } catch (FileNotFoundException e) { 
-//    	        e.printStackTrace(); 
-//    	        return redirect("/");
-//    	    } 
-// 
-
-         
-
-         
-    	
     }
     
   
     
     
-    public static Result TestStuff(String eingabe) throws IOException{
-    	
-//        if (session("show") == null) {
-//            return redirect("Kategorie_Gebaeck.scala.html");
-//          }
-    	
+    public static Result CheckPLZ(String eingabe) throws IOException{
+   	
     	Gson gson = new Gson();
     	String allePLZ = "";
     	 try { 
@@ -141,43 +97,38 @@ public class Application extends Controller {
     	        
     	        // Attribut "plzorte" als Array lesen 
     	        com.google.gson.JsonArray plzOrte = json.getAsJsonArray("plzOrte"); 
-
+    	        String aktuellerWert="";
+    	        
     	        for(int i = 0; i < plzOrte.size() && plzOrte.get(i).getAsJsonObject() != null; i++){ 
     	            JsonObject jObj = plzOrte.get(i).getAsJsonObject(); 
-    	        
-    	            String aktuellerWert = jObj.get("ort").getAsString();
+    	            System.out.println(i+".DEBUG Ort:"+ jObj.get("ort").getAsString());
+    	            aktuellerWert = jObj.get("ort").getAsString();
     	            if(aktuellerWert.startsWith(eingabe))
     	            {
-    	            	allePLZ= allePLZ + aktuellerWert;
-    	            }
-    	            session().clear();
-//    	            System.out.println(jObj.get("ort").getAsString()); 
-//    	        
-//    	            
-//    	            
-//    	            allePLZ= allePLZ + aktuellerWert;
-//    	            
-    	            System.out.println("------"); 
-    	            System.out.println(allePLZ);
+    	            	allePLZ= "<p id='"+i+"' onclick='abc("+i+")'>" +aktuellerWert+"</p>" + allePLZ;
+    	            } 
     	            
-    	           reader.close();
-    	           
+    	            reader.close();    
     	            
     	        } 
+    	        System.out.println("------"); 
+	            System.out.println(allePLZ);
     	    } catch (FileNotFoundException e) { 
     	        e.printStackTrace(); 
-    	        return redirect("Kategorie_Gebaeck.scala.html");
     	    } 
- 
-
-         
-
-         
-    	return ok(Registrierung.render(allePLZ));
+  
+    	return ok(allePLZ);
     }
     
+    public static Result AddWare(String Name, String Menge, String Preis) throws IOException{
+       
+  
+    	return ok(Name, Menge);
+    } 
     
     public static Result Warenkorb(){
+//    	String ware= session("Bezeichnung", "ware");
+    			
     	return ok(Warenkorb.render());
     }
     

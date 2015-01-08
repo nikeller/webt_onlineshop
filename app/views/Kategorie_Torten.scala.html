@@ -11,7 +11,26 @@
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")">
 
+<script type="text/javascript">
 
+function uebergabe() {
+	var g = document.getElementById("ware").value;
+	Check(g);
+	}
+	function Check(g) {
+	 var requestObj = new XMLHttpRequest();
+	 requestObj.onreadystatechange = function() {
+	/*  if (requestObj.readyState == 4 && requestObj.status == 200){
+	  document.getElementById("stelle").innerHTML = requestObj.responseText;  
+	 	}  */
+	 }
+	 requestObj.open("GET", "submit?ware="+g, true);
+	 requestObj.send();
+	} 
+
+
+
+</script>
 
 </head>
 <body>
@@ -88,11 +107,11 @@
 					</tr>
 					@for(torte <- torten) {
 					<tr>	
-						<td>@torte.produkt_name</td>
+						<td id="ware">@torte.produkt_name</td>
 						<td><img class="img-responsive" alt="Responsives Bild" src="@torte.bild"></td>
-						<td>@torte.preis</td>
-						<td><form action="@routes.Application.Warenkorb">
-								<button type="button" class="btn btn-default btn-sm">In
+						<td id="preis">@torte.preis</td>
+						<td><form method="GET" action="submit">
+								<button type="submit" href="@routes.Application.Registrierung" onklick="uebergabe()">In
 									den Warenkorb</button>
 							</form></td>
 					</tr>
