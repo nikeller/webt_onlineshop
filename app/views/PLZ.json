@@ -1,0 +1,23 @@
+{
+	"plzOrte" : [
+		{"ort":"10115 Berlin"},
+		
+		{"ort":"11115 Berlin"},
+		
+		{"ort":"21029 Hamburg"},
+		
+		{"ort":"33602 Bielefeld"},
+		
+		{"ort": "40210 Düsseldorf"},
+		
+		{"ort": "55116 Mainz"},
+		
+		{"ort": "66111 Saarbrücken"},
+		
+		{"ort": "78462 Konstanz"},
+		
+		{"ort": "80331 München"},
+		
+		{"ort": "99084 Erfurt"}
+	]
+}
