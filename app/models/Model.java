@@ -77,8 +77,8 @@ public class Model {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Torte torten = new Torte(rs.getInt("id"), rs.getString("name"),
-						rs.getString("pfad"), rs.getString("beschr"),
-						rs.getString("kategorie_id"), rs.getFloat("preis"));
+						rs.getString("beschr"), rs.getString("pfad"),
+						rs.getString("kategorie_id"), rs.getInt("bestand"), rs.getFloat("preis"));
 
 				torte.add(torten);
 
@@ -99,8 +99,8 @@ public class Model {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Praline pralinen = new Praline(rs.getInt("id"), rs.getString("name"),
-						rs.getString("pfad"), rs.getString("beschr"),
-						rs.getString("kategorie_id"), rs.getFloat("preis"));
+						rs.getString("beschr"), rs.getString("pfad"),
+						rs.getString("kategorie_id"), rs.getInt("bestand"), rs.getFloat("preis"));
 
 				praline.add(pralinen);
 

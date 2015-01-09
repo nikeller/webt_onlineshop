@@ -13,7 +13,7 @@ public class JDBC {
 		      stmt = c.createStatement();
 		      String strCreateTorte =
 		    		  "CREATE TABLE IF NOT EXISTS Torte (" +
-								"id  smallint PRIMARY KEY,"	+
+								"id  INTEGER PRIMARY KEY AUTOINCREMENT,"	+
 								"name VARCHAR(50) NOT NULL, " +
 								"pfad  VARCHAR(100) NOT NULL," +
 								"beschr VARCHAR(150)," +
@@ -21,13 +21,6 @@ public class JDBC {
 								"preis decimal(4,2) NOT NULL," +
 								"bestand smallint NOT NULL" +
 								")";
-		      stmt.executeUpdate(strCreateTorte);
-//		      String strSearch =
-//		    		  "CREATE TABLE IF NOT EXISTS Search (" +
-//								"id smallint NOT NULL, " + //???AUTO_INCREMENT
-//							     "name CHAR(30) NOT NULL, " +
-//							     "PRIMARY KEY (id)"	+
-//								")";
 		      stmt.executeUpdate(strCreateTorte);
 		      stmt.close();
 		      c.close();
@@ -46,28 +39,22 @@ public class JDBC {
 		      Statement stmt = null;
 		      stmt = c.createStatement();
 
-		      String strInsertIntoTorte = "INSERT INTO Torte (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
-		                   "VALUES (001, 'Olchi_torte', '/public/images/Torte_001.jpg',"
+		      String strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+		                   "VALUES ('Olchi_torte', '/assets/images/Torte_001.jpg',"
 		                   + "'Passend zum Kindergeburtstag', 'T', 35.50, 5);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 			 
 		      stmt = c.createStatement();
-		      strInsertIntoTorte = "INSERT INTO Torte (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
-		                   "VALUES (002, 'Herzliche Grüße', '/public/images/Torte_002.jpg',"
+		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+		                   "VALUES ('Herzliche Grüße', '/assets/images/Torte_002.jpg',"
 		                   + "'Leckere Torte für unsere Lieblinge', 'T', 33.0, 3);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 
-		      strInsertIntoTorte = "INSERT INTO Torte (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
-	                   "VALUES (003, 'Hochzeitstorte', '/public/images/Torte_003.jpg',"
+		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+	                   "VALUES ('Hochzeitstorte', '/assets/images/Torte_003.jpg',"
 	                   + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 1);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
-		      
-//		      String strInsertIntoSearch = "INSERT INTO Search (id, name) " +
-//	                   "VALUES (01, 'Torte'), (02, 'Pfannkuchen'), (03, 'Bonbon'), (04, 'Pop-Cake'), (05, 'Muffin'), (06, 'Pralinen');"; 
-//		      stmt.executeUpdate(strInsertIntoSearch);
-
 		      stmt.close();
-//		      c.commit();
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
@@ -85,7 +72,7 @@ public class JDBC {
 		      stmt = c.createStatement();
 		      String strCreatePraline =
 		    		  "CREATE TABLE IF NOT EXISTS Praline (" +
-								"id  smallint PRIMARY KEY,"	+
+								"id  INTEGER PRIMARY KEY AUTOINCREMENT,"	+
 								"name VARCHAR(50) NOT NULL, " +
 								"pfad  VARCHAR(100) NOT NULL," +
 								"beschr VARCHAR(150)," +
@@ -112,8 +99,13 @@ public class JDBC {
 		      stmt = c.createStatement();
 		      String strCreateUser =
 		    		  "CREATE TABLE IF NOT EXISTS User (" +
-								"email  VARCHAR(50) PRIMARY KEY,"	+
-								"passwort VARCHAR(50) NOT NULL" +
+								"email  VARCHAR(50) PRIMARY KEY, "	+
+								"passwort VARCHAR(50) NOT NULL, " +
+								"passwortWDH VARCHAR(50) NOT NULL, " +
+								"vorname VARCHAR(50) NOT NULL, " +
+								"nachname VARCHAR(50) NOT NULL, " +
+								"adresse  VARCHAR(100) NOT NULL," +
+								"PLZ INTEGER NOT NULL" +
 								")";
 		      stmt.executeUpdate(strCreateUser);
 		      stmt.close();
@@ -133,19 +125,19 @@ public class JDBC {
 		      Statement stmt = null;
 		      stmt = c.createStatement();
 
-		      String strInsertIntoTorte = "INSERT INTO Praline (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
-		                   "VALUES (001, 'Olchi_torte', '/public/images/Praline_001.jpg',"
+		      String strInsertIntoTorte = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+		                   "VALUES ('Pralinen', '/assets/images/Praline_001.jpg',"
 		                   + "'Passend zum Kindergeburtstag', 'T', 35.50, 5);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 			 
 		      stmt = c.createStatement();
-		      strInsertIntoTorte = "INSERT INTO Praline (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
-		                   "VALUES (002, 'Herzliche Grüße', '/public/images/Praline_002.jpg',"
+		      strInsertIntoTorte = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+		                   "VALUES ('Herzliche Grüße', '/assets/images/Praline_002.jpg',"
 		                   + "'Leckere Torte für unsere Lieblinge', 'T', 33.0, 3);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 
-		      strInsertIntoTorte = "INSERT INTO Praline (id,name,pfad,beschr,kategorie_id, preis, bestand) " +
-	                   "VALUES (003, 'Hochzeitstorte', '/public/images/Praline_003.jpg',"
+		      strInsertIntoTorte = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+	                   "VALUES ('Pralinen', '/assets/images/Praline_003.jpg',"
 	                   + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 1);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 

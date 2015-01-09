@@ -103,6 +103,7 @@ function uebergabe() {
 					<tr>
 						<th>Produktname</th>
 						<th>Produktbild</th>
+						<th>Lagerbestand</th>
 						<th>Preis in Euro</th>
 						<th></th>
 					</tr>
@@ -111,6 +112,7 @@ function uebergabe() {
 					<tr>	
 						<td id="ware">@torte.produkt_name</td>
 						<td><img class="img-responsive" alt="Responsives Bild" src="@torte.bild"></td>
+						<td id="bestand">@torte.bestand</td>
 						<td id="preis">@torte.preis</td>
 						<td><form method="GET" action="submit">
 								<button type="submit" href="@routes.Application.Registrierung" onklick="uebergabe()">In

@@ -19,18 +19,21 @@ public class Torte{
 	
 	public String kategorie_id;
 	
+	public int bestand;
+	
 	public float preis;
 
 
 	public Torte(long produkt_id, String produkt_name,
 			String produkt_beschreibung, String bild, String kategorie_id,
-			float f) {
+			int bestand, float preis) {
 		this.produkt_id = produkt_id;
 		this.produkt_name = produkt_name;
 		this.produkt_beschreibung = produkt_beschreibung;
 		this.bild = bild;
 		this.kategorie_id = kategorie_id;
-		this.preis = f;
+		this.bestand = bestand;
+		this.preis = preis;
 	}
 
 

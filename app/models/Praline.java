@@ -12,16 +12,19 @@ public class Praline {
 	
 	public String kategorie_id;
 	
+	public int bestand;
+	
 	public float preis;
 
 	public Praline(long produkt_id, String produkt_name,
 			String produkt_beschreibung, String bild, String kategorie_id,
-			float preis) {
+			int bestand, float preis) {
 		this.produkt_id = produkt_id;
 		this.produkt_name = produkt_name;
 		this.produkt_beschreibung = produkt_beschreibung;
 		this.bild = bild;
 		this.kategorie_id = kategorie_id;
+		this.bestand = bestand;
 		this.preis = preis;
 	}
 

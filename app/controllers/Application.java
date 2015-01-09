@@ -50,27 +50,18 @@ public class Application extends Controller {
 	      if (session("warenkorb") == null) {
 //	            return redirect("/");
 	          }
-        
-    	Collection<Torte> Torten =  new HashSet<Torte>();
-//    	String produkt_name = "Torte1";
-//		String produkt_beschreibung = "Beschreibung für Torte1";
-//		String bild = "@routes.Assets.at(\"images/Torte_003.jpg\")";
-//		String kategorie_id = "T";
-//		//Torte torte1 = new Torte(1, produkt_name, produkt_beschreibung, bild, kategorie_id, 14);
-		
-    	Torten = Model.sharedInstance.getTorten();
-    	
-    	
+
+	      
+	      Collection<Torte> Torten =  new HashSet<Torte>();
+	      Torten = Model.sharedInstance.getTorten();
     	//Ausführungszeilen (Kontrolle) zu JDBC
-//    	JDBC ausgabe = new JDBC();
+    	JDBC ausgabe = new JDBC();
 //    	ausgabe.createTable();
 //    	ausgabe.insertInto();
 //    	ausgabe.createTablePraline();
 //    	ausgabe.insertIntoPraline();
+    	ausgabe.createTableUser();
 //    	ausgabe.select();
-		//List<Torten> data = Data.getAllTorten();
-    	
-//    	System.out.println(Model.sharedInstance.gibAlleTorten());
     	
     	return ok(Kategorie_Torten.render(Torten));
 //    	return ok(Kategorie_Torten.render(Model.sharedInstance.gibAlleTorten()));
@@ -85,8 +76,7 @@ public class Application extends Controller {
     }
     
     public static Result Kategorie_Gebaeck() {
-    	JDBC ausgabe =new JDBC();
-    	ausgabe.createTableUser();
+    	
     	return ok(Kategorie_Gebaeck.render());
     }
     

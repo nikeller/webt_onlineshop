@@ -69,6 +69,7 @@
 						<th>Produktname</th>
 						<!-- 						<th>Produktbeschreibung</th> -->
 						<th>Produktbild</th>
+						<th>Lagerbestand</th>
 						<th>Preis in Euro</th>
 						<th></th>
 					</tr>
@@ -76,7 +77,8 @@
 					<tr>	
 						<td>@praline.produkt_name</td>
 						<td><img class="img-responsive" alt="Responsives Bild" src="@praline.bild"></td>
-						<td>@praline.preis</td>
+						<td id="bestand">@praline.bestand</td>
+						<td id="preis">@praline.preis</td>
 						<td><form action="@routes.Application.Warenkorb">
 								<button type="button" class="btn btn-default btn-sm">In
 									den Warenkorb</button>
