@@ -55,12 +55,12 @@ public class Application extends Controller {
 	      Collection<Torte> Torten =  new HashSet<Torte>();
 	      Torten = Model.sharedInstance.getTorten();
     	//Ausführungszeilen (Kontrolle) zu JDBC
-    	JDBC ausgabe = new JDBC();
+//    	JDBC ausgabe = new JDBC();
 //    	ausgabe.createTable();
 //    	ausgabe.insertInto();
 //    	ausgabe.createTablePraline();
 //    	ausgabe.insertIntoPraline();
-    	ausgabe.createTableUser();
+//    	ausgabe.createTableUser();
 //    	ausgabe.select();
     	
     	return ok(Kategorie_Torten.render(Torten));
