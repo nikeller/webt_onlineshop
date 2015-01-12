@@ -11,24 +11,21 @@
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")">
 
-<script language="JavaScript" type="text/javascript"
-	src="ajax_search.js"></script>
+<!-- <script language="JavaScript" type="text/javascript"
+	src="ajax_search.js"></script> -->
 
 <script type="text/javascript">
 
-function uebergabe() {
-	var g = document.getElementById("ware").value;
-	Check(g);
+function uebergabe(cake) {
+	var ware = cake.cells[0].innerHTML;
+	var preis = cake.cells[3].innerHTML;
+
+	Check(ware,preis);
 	}
-	function Check(g) {
-	 var requestObj = new XMLHttpRequest();
-	 requestObj.onreadystatechange = function() {
-	/*  if (requestObj.readyState == 4 && requestObj.status == 200){
-	  document.getElementById("stelle").innerHTML = requestObj.responseText;  
-	 	}  */
-	 }
-	 requestObj.open("GET", "submit?ware="+g, true);
-	 requestObj.send();
+	function Check(wareF,preisF) {
+	 var requestObjT = new XMLHttpRequest();
+	 requestObjT.open("GET", "submit?ware="+wareF+"&preis="+preisF, true);
+	 requestObjT.send(); 
 	} 
 
 
@@ -44,21 +41,13 @@ function uebergabe() {
 					Shop</h2></a>
 		</div>
 		<div class="col-xs-6 col-sm-4">
-			<form id="frmSearch" class="navbar-form navbar-left" role="search"
-				method="get">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Suchen"
-						id="txtSearch" name="txtSearch" alt="Search Criteria"
-						onkeyup="searchSuggest();" autocomplete="off" />
-				</div>
-				<button type="submit" class="btn btn-default">Los</button>
-			</form>
+			
 		</div>
 		<!-- Optional: Setze die Floats der XS-Spalten zurück, falls ihr Inhalt nicht gleich hoch ist -->
 		<div class="clearfix visible-xs-block"></div>
 		<div class="col-xs-6 col-sm-4">
 			<ul class="nav navbar-nav navbar-right">
-				<li><form action="@routes.Application.Registrierung">
+				<li><form action="@routes.Application.Anmeldung">
 						<button>Anmelden</button>
 					</form></li>
 				<li>
@@ -109,13 +98,13 @@ function uebergabe() {
 					</tr>
 					@for(torte <- torten) {
 
-					<tr>	
-						<td id="ware">@torte.produkt_name</td>
+					<tr id="Cake@torte.getProdukt_id">	
+						<td id="ware@torte.getProdukt_id">@torte.produkt_name</td>
 						<td><img class="img-responsive" alt="Responsives Bild" src="@torte.bild"></td>
 						<td id="bestand">@torte.bestand</td>
-						<td id="preis">@torte.preis</td>
-						<td><form method="GET" action="submit">
-								<button type="submit" href="@routes.Application.Registrierung" onklick="uebergabe()">In
+						<td id="preis@torte.getProdukt_id">@torte.preis</td>
+						<td><form  onsubmit="uebergabe(Cake@torte.getProdukt_id);" action="@routes.Application.Warenkorb">
+								<button type="submit">In
 									den Warenkorb</button>
 							</form></td>
 					</tr>

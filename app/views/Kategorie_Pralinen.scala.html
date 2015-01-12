@@ -11,6 +11,21 @@
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")">
 
+<script type="text/javascript">
+
+function uebergabe(chocolate) {
+	var ware = chocolate.cells[0].innerHTML;
+	var preis = chocolate.cells[3].innerHTML;
+
+	Check(ware,preis);
+	}
+	function Check(wareF,preisF) {
+	 var requestObjT = new XMLHttpRequest();
+	 requestObjT.open("GET", "submit?ware="+wareF+"&preis="+preisF, true);
+	 requestObjT.send(); 
+	} 
+
+</script>
 
  
   </head>
@@ -18,16 +33,11 @@
   
   <div class="row">
   <div class="col-xs-6 col-sm-4"> <a class="navbar-brand" href="@routes.Application.index"><h2>Sweet Shop</h2></a></div>
-  <div class="col-xs-6 col-sm-4"><form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Suchen">
-        </div>
-        <button type="submit" class="btn btn-default">Los</button>
-      </form></div>
+  <div class="col-xs-6 col-sm-4"></div>
   <!-- Optional: Setze die Floats der XS-Spalten zurück, falls ihr Inhalt nicht gleich hoch ist -->
   <div class="clearfix visible-xs-block"></div>
   <div class="col-xs-6 col-sm-4"><ul class="nav navbar-nav navbar-right">
-        <li><form action="@routes.Application.Registrierung">
+        <li><form action="@routes.Application.Anmeldung">
 						<button>Anmelden</button>
 					</form></li>
         <li><form action="@routes.Application.Warenkorb">
@@ -74,13 +84,13 @@
 						<th></th>
 					</tr>
 					@for(praline <- pralinen) {
-					<tr>	
-						<td>@praline.produkt_name</td>
+					<tr id=Chocolate@praline.getProdukt_id>	
+						<td id="ware@praline.getProdukt_id">@praline.produkt_name</td>
 						<td><img class="img-responsive" alt="Responsives Bild" src="@praline.bild"></td>
 						<td id="bestand">@praline.bestand</td>
-						<td id="preis">@praline.preis</td>
-						<td><form action="@routes.Application.Warenkorb">
-								<button type="button" class="btn btn-default btn-sm">In
+						<td id="preis@praline.getProdukt_id">@praline.preis</td>
+						<td><form onsubmit="uebergabe(Chocolate@praline.getProdukt_id);" action="@routes.Application.Warenkorb">
+								<button type="submit">In
 									den Warenkorb</button>
 							</form></td>
 					</tr>

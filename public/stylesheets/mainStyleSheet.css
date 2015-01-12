@@ -41,3 +41,7 @@ h3,.categorie {
 /* 	background-image: url("public/images/Torte_002.jpg"); */
 /* 	background-image: url(@routes.Assets.at("images/sweet_hearts.jpg")); */
 }
+
+.table {
+	background-color: #FFE4E1;
+}

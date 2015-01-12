@@ -117,6 +117,44 @@ public class JDBC {
 		   
 		     System.out.println("If did not exist: Table User created successfully");
 		  }
+	 
+	 public void insertIntoUser(String email, String passwort, String passwortWDH,
+				String vorname, String nachname, String adresse, String PLZ) {
+			Connection c = null;
+			Statement stmt = null;
+
+			try {
+				c = DB.getConnection();
+
+				// Insert Student
+				stmt = c.createStatement();
+				String strInsertIntoUser = "INSERT INTO User (email, passwort, passwortWDH, vorname, nachname, adresse, PLZ) VALUES ('"
+						+ email
+						+ "','"
+						+ passwort
+						+ "','"
+						+ passwortWDH
+						+ "','"
+						+ vorname
+						+ "','" 
+						+ nachname 
+						+ "','" 
+						+ adresse
+						+ "','"
+						+PLZ +"'"+
+						")";
+				
+				System.out.println(strInsertIntoUser);
+				stmt.executeUpdate(strInsertIntoUser);
+
+				stmt.close();
+				c.close();
+			} catch (Exception e) {
+				System.err.println(e.getClass().getName() + ": " + e.getMessage());
+				System.exit(0);
+			}
+			System.out.println("Records created successfully");
+		}
 	  
 	 public void insertIntoPraline(){
 		 
