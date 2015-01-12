@@ -40,20 +40,31 @@ public class JDBC {
 		      stmt = c.createStatement();
 
 		      String strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
-		                   "VALUES ('Olchi_torte', '/assets/images/Torte_001.jpg',"
-		                   + "'Passend zum Kindergeburtstag', 'T', 35.50, 5);"; 
+		                   "VALUES ('Goldene Freude', '/assets/images/Torte_001.jpg',"
+		                   + "'Hochzeitstorte', 'T', 35.50, 1);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 			 
 		      stmt = c.createStatement();
 		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
-		                   "VALUES ('Herzliche Grüße', '/assets/images/Torte_002.jpg',"
-		                   + "'Leckere Torte für unsere Lieblinge', 'T', 33.0, 3);"; 
+		                   "VALUES ('Himmlische Torte', '/assets/images/Torte_002.jpg',"
+		                   + "'Passend zur Hochzeit, Geburtstag', 'T', 33.0, 2);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 
 		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
 	                   "VALUES ('Hochzeitstorte', '/assets/images/Torte_003.jpg',"
 	                   + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 1);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
+		      
+		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+	                   "VALUES ('Nusstorte', '/assets/images/Torte_004.jpg',"
+	                   + "'Zum Frühstück oder Geburtstag', 'T', 10.00, 5);"; 
+		      stmt.executeUpdate(strInsertIntoTorte);
+		      
+		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+	                   "VALUES ('Wuff-Wuff', '/assets/images/Torte_005.jpg',"
+	                   + "'Passend zum Kindergeburtstag', 'T', 25.00, 3);"; 
+		      stmt.executeUpdate(strInsertIntoTorte);
+		      
 		      stmt.close();
 		      c.close();
 		    } catch ( Exception e ) {
@@ -101,7 +112,6 @@ public class JDBC {
 		    		  "CREATE TABLE IF NOT EXISTS User (" +
 								"email  VARCHAR(50) PRIMARY KEY, "	+
 								"passwort VARCHAR(50) NOT NULL, " +
-								"passwortWDH VARCHAR(50) NOT NULL, " +
 								"vorname VARCHAR(50) NOT NULL, " +
 								"nachname VARCHAR(50) NOT NULL, " +
 								"adresse  VARCHAR(100) NOT NULL," +
@@ -128,12 +138,10 @@ public class JDBC {
 
 				// Insert Student
 				stmt = c.createStatement();
-				String strInsertIntoUser = "INSERT INTO User (email, passwort, passwortWDH, vorname, nachname, adresse, PLZ) VALUES ('"
+				String strInsertIntoUser = "INSERT INTO User (email, passwort, vorname, nachname, adresse, PLZ) VALUES ('"
 						+ email
 						+ "','"
 						+ passwort
-						+ "','"
-						+ passwortWDH
 						+ "','"
 						+ vorname
 						+ "','" 
@@ -164,23 +172,32 @@ public class JDBC {
 		      stmt = c.createStatement();
 
 		      String strInsertIntoTorte = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
-		                   "VALUES ('Pralinen', '/assets/images/Praline_001.jpg',"
-		                   + "'Passend zum Kindergeburtstag', 'T', 35.50, 5);"; 
+		                   "VALUES ('Pralinen aus Milchschokolade', '/assets/images/Praline_001.jpg',"
+		                   + "'Für unsere Lieblinge', 'T', 10.00, 5);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 			 
 		      stmt = c.createStatement();
 		      strInsertIntoTorte = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
-		                   "VALUES ('Herzliche Grüße', '/assets/images/Praline_002.jpg',"
-		                   + "'Leckere Torte für unsere Lieblinge', 'T', 33.0, 3);"; 
+		                   "VALUES ('Marmorpralinen', '/assets/images/Praline_002.jpg',"
+		                   + "'Für unsere Lieblinge', 'T', 8.00, 3);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 
 		      strInsertIntoTorte = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
-	                   "VALUES ('Pralinen', '/assets/images/Praline_003.jpg',"
-	                   + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 1);"; 
+	                   "VALUES ('Pralinen aus weisser Schokolade', '/assets/images/Praline_003.jpg',"
+	                   + "'Für unsere Lieblinge', 'T', 9.00, 1);"; 
+		      stmt.executeUpdate(strInsertIntoTorte);
+		      
+		      strInsertIntoTorte = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+	                   "VALUES ('Pralinen-Assorti', '/assets/images/Praline_004.jpg',"
+	                   + "'Für unsere Lieblinge', 'T', 12.50, 1);"; 
+		      stmt.executeUpdate(strInsertIntoTorte);
+		      
+		      strInsertIntoTorte = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+	                   "VALUES ('Assorti', '/assets/images/Praline_005.jpg',"
+	                   + "'Für unsere Lieblinge', 'T', 11.00, 1);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 
 		      stmt.close();
-//		      c.commit();
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );

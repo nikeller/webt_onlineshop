@@ -90,7 +90,6 @@ public class Application extends Controller {
 //    	ausgabe.select();
     	
     	return ok(Kategorie_Torten.render(Torten));
-//    	return ok(Kategorie_Torten.render(Model.sharedInstance.gibAlleTorten()));
 	
     }
     
