@@ -1,5 +1,4 @@
 @(message: String)
-
 @main("SweetShop") {
 
    <!DOCTYPE html>
@@ -29,30 +28,24 @@
 </head>
 <body>
 
-
 	<div class="row">
 		<div class="col-xs-6 col-sm-4">
 			<a class="navbar-brand" href="@routes.Application.index"><h2>Sweet
 					Shop</h2></a>
 		</div>
 		<div class="col-xs-6 col-sm-4">
-			<form class="navbar-form navbar-left" role="search">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Suchen">
-				</div>
-				<button type="submit" class="btn btn-default">Los</button>
-			</form>
+			
 		</div>
 		<!-- Optional: Setze die Floats der XS-Spalten zurück, falls ihr Inhalt nicht gleich hoch ist -->
 		<div class="clearfix visible-xs-block"></div>
 		<div class="col-xs-6 col-sm-4">
 			<ul class="nav navbar-nav navbar-right">
-				<li><form action="@routes.Application.Registrierung">
-						<button>Anmelden</button>
-					</form></li>
+				<li><form action="@routes.Application.Anmeldung">
+				<button>Anmelden</button></form><li>
 				<li><form action="@routes.Application.Warenkorb">
 						<button>Warenkorb</button>
 					</form></li>
+
 			</ul>
 		</div>
 	</div>
@@ -79,8 +72,8 @@
 
 		</div>
 
-		<div class="col-xs-12 col-sm-6 col-md-8">
-<div class="panel panel-default">
+	<div class="col-xs-12 col-sm-6 col-md-8"> 
+
 				
 							
 		
@@ -106,35 +99,10 @@ function swapImage()
 }
 window.onload=swapImage;
 </script>
-<img class="imp-responsive" alt="Responsives Bild" height="400" name="slide" src="image_1.gif" width="500" />
+<img class="img-rounded" alt="Responsives Bild" height="400" name="slide" src="image_1.gif" width="450" />
 		
-</div>		
+
 		
-   
-		
-			<!-- <div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Torten</h3>
-					
-				</div>
-				<div class="panel-body">Produktbilder</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Pralinen</h3>
-				</div>
-				<div class="panel-body">Produktbilder</div>
-			</div>
-
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">Gebäck</h3>
-				</div>
-				<div class="panel-body">Produktbilder</div>
-			</div>
-
-		</div> -->
 	</div>
 
 

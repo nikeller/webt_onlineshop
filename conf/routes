@@ -4,14 +4,17 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+GET		/submit						controllers.Application.submit(ware, preis)
 GET		/Kategorie_Torten			controllers.Application.Kategorie_Torten()
 GET		/Kategorie_Pralinen			controllers.Application.Kategorie_Pralinen()
 GET		/Kategorie_Gebaeck			controllers.Application.Kategorie_Gebaeck()
+GET		/Anmeldung					controllers.Application.Anmeldung()
 GET		/Registrierung				controllers.Application.Registrierung()
 GET		/CheckPLZ					controllers.Application.CheckPLZ(eingabe)
 GET		/Warenkorb					controllers.Application.Warenkorb()
 GET		/Kasse						controllers.Application.Kasse()
-GET		/submit						controllers.Application.submit(ware, preis)
+POST	/RegistrierungP				controllers.Application.RegistrierungP()
+POST	/AnmeldenP					controllers.Application.AnmeldenP()
 
 # Map static resources from the /public folder to the /assets URL path
 GET  /assets/*file        controllers.Assets.at(path="/public", file)
