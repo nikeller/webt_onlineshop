@@ -1,4 +1,4 @@
-@(ware: String, preis: String)
+@(ware : String, preis : String, status : Int)
 @main("Warenkorb"){
 
 <!DOCTYPE html>
@@ -25,10 +25,21 @@
   <!-- Optional: Setze die Floats der XS-Spalten zurück, falls ihr Inhalt nicht gleich hoch ist -->
   <div class="clearfix visible-xs-block"></div>
   <div class="col-xs-6 col-sm-4"><ul class="nav navbar-nav navbar-right">
-       <li> <form action="@routes.Application.Anmeldung">
+		<ul class="nav navbar-nav navbar-right">
+				@if(status==1){
+				<li><form action="/Abmeldung"><button>Abmelden</button></form></li>
+					} else {
+					
+					<li><form action="@routes.Application.Anmeldung">
 						<button>Anmelden</button>
 					</form></li>
-      </ul></div>
+					}
+				<li>
+					<form action="@routes.Application.Warenkorb">
+						<button>Warenkorb</button>
+					</form>
+				</li>
+			</ul></div>
 </div>
   
   

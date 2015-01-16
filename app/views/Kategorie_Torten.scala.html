@@ -1,4 +1,4 @@
-@(torten: Collection[Torte]) @main("Torten"){
+@(torten: Collection[Torte], status: Int) @main("Torten"){
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -47,9 +47,14 @@ function uebergabe(cake) {
 		<div class="clearfix visible-xs-block"></div>
 		<div class="col-xs-6 col-sm-4">
 			<ul class="nav navbar-nav navbar-right">
-				<li><form action="@routes.Application.Anmeldung">
+				@if(status==1){
+				<li><form action="/Abmeldung"><button>Abmelden</button></form></li>
+					} else {
+					
+					<li><form action="@routes.Application.Anmeldung">
 						<button>Anmelden</button>
 					</form></li>
+					}
 				<li>
 					<form action="@routes.Application.Warenkorb">
 						<button>Warenkorb</button>
@@ -82,10 +87,41 @@ function uebergabe(cake) {
 
 		<div class="col-xs-12 col-sm-6 col-md-8">
 			<div class="panel panel-default">
+			@if(status==0){
+		
+
+<!-- <marquee scrollamount="3" scrolldelay="5">
+  <h2>Bitte melden Sie sich an, wenn Sie etwas bestellen wollen!</h2>
+</marquee> -->
+			<h2>Bitte melden Sie sich an, wenn Sie etwas bestellen wollen!</h2>
+			
+			}
 				<div class="panel-heading">
 					<h3 class="panel-title">Torten</h3>
 				</div>
 
+				@if(status==0){
+				<table class="table">
+					<tr>
+						<th>Produktname</th>
+						<th>Produktbild</th>
+						<th>Lagerbestand</th>
+						<th>Preis in Euro</th>
+						<th></th>
+					</tr>
+					@for(torte <- torten) {
+
+					<tr id="Cake@torte.getProdukt_id">	
+						<td id="ware@torte.getProdukt_id">@torte.produkt_name</td>
+						<td><img class="img-responsive" alt="Responsives Bild" src="@torte.bild"></td>
+						<td id="bestand">@torte.bestand</td>
+						<td id="preis@torte.getProdukt_id">@torte.preis</td>
+					</tr>
+					}
+					<tr>
+					</tr>
+				</table>
+				} else {
 				<table class="table">
 					<tr>
 						<th>Produktname</th>
@@ -110,6 +146,8 @@ function uebergabe(cake) {
 					<tr>
 					</tr>
 				</table>
+				}
+				
 			</div>
 		</div>
 	</div>

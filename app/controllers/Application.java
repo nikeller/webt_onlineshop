@@ -42,19 +42,29 @@ import com.google.gson.JsonObject;
 
 public class Application extends Controller {
 	
+	private static Application application = new Application();
 	private static final Object JDialog = null;
 	public static HashMap<String, HashMap<String, String>> outerMap = new HashMap<String, HashMap<String, String>>();
 	public static HashMap<String, String> innerMap = new HashMap<String, String>();
 	public static int a;
 	public static int eingeloggt;
 	static JDBC database = new JDBC();
-	
+	public static int status; 
     private static Random rand = new Random();
-//    static String wareGlobal;
-//    static String preisGlobal;
+    
     public static Result index() {
-
-        return ok(index.render("Your new application is ready."));
+//session().clear();
+    	String user = session("connected");
+		System.out.println(user);
+    	if (user!=null){
+    		System.out.println("eingeloggt");
+    		status = 1;
+    	}
+    	else {
+    		System.out.println("nicht eingeloggt");
+    		status = 0;
+    	}
+        return ok(index.render(status));
     }
    
     public static Result submit(String ware, String preis) throws IOException{
@@ -72,6 +82,16 @@ public class Application extends Controller {
 
 	public static Result Kategorie_Torten() {
 
+		String user = session("connected");
+		System.out.println(user);
+    	if (user!=null){
+    		System.out.println("Torten: immernoch eingeloggt");
+    		status = 1;
+    	}
+    	else {
+    		System.out.println("Torten: nicht eingeloggt");
+    		status = 0;
+    	}
 			
 	      if (session("warenkorb") == null) {
 //	            return redirect("/");
@@ -89,16 +109,24 @@ public class Application extends Controller {
 //    	ausgabe.createTableUser();
 //    	ausgabe.select();
     	
-    	return ok(Kategorie_Torten.render(Torten));
+    	return ok(Kategorie_Torten.render(Torten, status));
 	
     }
     
     public static Result Kategorie_Pralinen() {
-
+    	String user = session("connected");
+    	if (user!=null){
+    		System.out.println("Pralinen: immernoch eingeloggt");
+    		status = 1;
+    	}
+    	else {
+    		System.out.println("Pralinen: nicht eingeloggt");
+    		status = 0;
+    	}
      	
     	Collection<Praline> Pralinen = new HashSet<Praline>();
     	Pralinen = Model.sharedInstance.getPralinen();
-    	return ok(Kategorie_Pralinen.render(Pralinen));
+    	return ok(Kategorie_Pralinen.render(Pralinen, status));
 
     }
     
@@ -194,23 +222,14 @@ public class Application extends Controller {
 
      	return ok(allePLZ);
     }
-//    public static Result Warenkorb() throws IOException{
-//    	String ware= session("Ware");
-//    	String preis =session("Preis");
-//    	try {
-//			Thread.sleep(400);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//    	return ok(Warenkorb.render(wareGlobal , preisGlobal));
-//    }
+
     
     
     public static Result AnmeldenP() {
     	
 		final Map<String, String[]> values = request().body().asFormUrlEncoded();
 		String Help= values.get("emailA")[0];
+		System.out.println("---------------------" +Help);
 		User KundeReg = Model.sharedInstance.getUser(Help);
 		String EmailCheck = values.get("emailA")[0];
 		String PasswortCheck = values.get("passwortA")[0];
@@ -237,6 +256,10 @@ public class Application extends Controller {
 		            meinJDialog.setVisible(true);
 						//session("connected", "" + KundeReg.getEmail());
 					
+		            session("connected", values.get("emailA")[0]);
+		            System.out.println("Eingeloggt");
+		            System.out.println(session("connected"));
+		            
 					return redirect("/");
 				} else {
 					JDialog meinJDialog = new JDialog();
@@ -298,18 +321,56 @@ public class Application extends Controller {
 
 	}
     
+    public static Result Abmeldung(){
+    	String user = session("connected");
+    	session().clear();
+    	return redirect("/");
+    }
+    
+//    public static Result Abmeldung() {
+////    	String user = session("connected");
+//////    	Model.sharedInstance.
+////    	session().clear();
+////    	System.out.println("Abgemeldet");
+////    	status = "nicht eingeloggt";
+////    	application.index();
+////    	return ok(index.render("status"));
+//    // --------------------------------------	
+////    	String user = session("connected");
+////    	if (user!=null){
+////    		System.out.println("Session wird gleich beendet");
+////    		session().clear();
+////    		status = "nicht mehr eingeloggt";
+////    		application.index();
+////    	}
+////    	else {
+////    		System.out.println("Torten: nicht eingeloggt");
+////    		status = "nicht eingeloggt";
+////    	}
+//    	return redirect("/");
+//    }
     
     public static Result Warenkorb() throws IOException{
-
-//    	String ware= session("Ware");
-//    	String preis =session("Preis");
+    	
+    	String user = session("connected");
+    	if (user!=null){
+    		System.out.println("Warenkorb: immernoch eingeloggt");
+    		status = 1;
+    	}
+    	else {
+    		System.out.println("Warenkorb: nicht eingeloggt");
+    		status = 0;
+    	}
+    	
+    	String ware= session("Ware");
+ 	String preis =session("Preis");
     	try {
 			Thread.sleep(400);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	return ok(Warenkorb.render(session("Ware") , session("Preis")));
+    	return ok(Warenkorb.render(ware , preis, status));
     }
     
     public static Result Kasse(){
