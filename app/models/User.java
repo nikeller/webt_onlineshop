@@ -3,16 +3,14 @@ package models;
 public class User {
 	public String email;
 	public String passwort;
-	public String passwortWDH;
 	public String vorname;
 	public String nachname;
 	public String adresse;
 	public String plz;
-	public User(String email, String passwort, String passwortWDH,  String vorname, String nachname,
+	public User(String email, String passwort,  String vorname, String nachname,
 			String adresse, String plz) {
 		this.email = email;
 		this.passwort = passwort;
-		this.passwortWDH=passwortWDH;
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.adresse = adresse;
@@ -29,14 +27,6 @@ public class User {
 
 	public void setPasswort(String passwort) {
 		this.passwort = passwort;
-	}
-
-	public String getPasswortWDH() {
-		return passwortWDH;
-	}
-
-	public void setPasswortWDH(String passwortWDH) {
-		this.passwortWDH = passwortWDH;
 	}
 
 	public String getVorname() {

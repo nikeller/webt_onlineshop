@@ -1,4 +1,4 @@
-@(message: String)
+@(status: Int)
 @main("SweetShop") {
 
    <!DOCTYPE html>
@@ -40,8 +40,12 @@
 		<div class="clearfix visible-xs-block"></div>
 		<div class="col-xs-6 col-sm-4">
 			<ul class="nav navbar-nav navbar-right">
-				<li><form action="@routes.Application.Anmeldung">
-				<button>Anmelden</button></form><li>
+				@if(status==1){
+				<li><form action="/Abmeldung"><button>Abmelden</button></form></li>
+				} else {
+				
+				<li><form action="@routes.Application.Anmeldung"><button>Anmelden</button></form></li>
+				}
 				<li><form action="@routes.Application.Warenkorb">
 						<button>Warenkorb</button>
 					</form></li>
@@ -105,8 +109,8 @@ window.onload=swapImage;
 	</div>
 
 
-<footer class="footer">
-<!--     <div class="container"> -->
+<footer>
+    <div class="container">
         <div class="row">
             <div class="panel-footer">
                 <a class="blind" href="/">

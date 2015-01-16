@@ -107,7 +107,7 @@ public class Model {
 			PreparedStatement pstmt = connection.prepareStatement(getUserSQL);
 			ResultSet rs = pstmt.executeQuery();
 			User user = new User(rs.getString("email"),
-					rs.getString("passwort"), rs.getString("passwortWDH"), rs.getString("vorname"),
+					rs.getString("passwort"), rs.getString("vorname"),
 					rs.getString("nachname"), rs.getString("adresse"),
 					rs.getString("plz"));
 			return user;
@@ -119,5 +119,19 @@ public class Model {
 		return null;
 		
 	}
+	
+//	public User eingeloggterUser(User user){
+//		Connection conn = null;
+//		PreparedStatement stmt = null;
+//		ResultSet rs = null;
+//		
+//		Kunde eingeloggterKunde = null;
+//		
+//		String select = "SELECT * FROM User WHERE User.email = ? AND User.passwort = ?;";
+//		try {
+//			conn = DB.getConnection();
+//			stmt = conn.preparedStatment
+//		}
+//	}
 	
 }
