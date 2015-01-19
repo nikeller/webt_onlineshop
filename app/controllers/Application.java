@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -30,6 +31,7 @@ import models.Model;
 import models.Praline;
 import models.Torte;
 import models.User;
+import models.WarenkorbM;
 import play.*;
 import play.api.mvc.Session;
 import play.data.*;
@@ -51,9 +53,12 @@ public class Application extends Controller {
 	static JDBC database = new JDBC();
 	public static int status; 
     private static Random rand = new Random();
+    private static int i=0;
     
-    public static Result index() {
+    
+    public static Result index() throws SQLException {
 //session().clear();
+//    	Model.sharedInstance.deleteWk();
     	String user = session("connected");
 		System.out.println(user);
     	if (user!=null){
@@ -68,15 +73,20 @@ public class Application extends Controller {
     }
    
     public static Result submit(String ware, String preis) throws IOException{
+    	String email = session("connected");
+    	double preisd = Double.parseDouble(preis);
 
-			
-    	//int r = Math.abs(rand.nextInt());
-    	System.out.println(ware);
-    	System.out.println(preis);
-    	session("Ware", ware);
-    	session("Preis", preis);
-		
-     return ok();
+
+//    	final Map<String, float[]> values = request().body().asFormUrlEncoded();
+//    	if (Model.sharedInstance.getUser(values.get("email")[0]) == null) {
+    		database.insertIntoWarenkorb(email, ware, preisd);
+    
+//    		models.Warenkorb warenkorb = Model.sharedInstance.getWarenkorb(email);
+//    		int a =warenkorb.getNr();    
+    		
+    		System.out.println(email +  ware + preisd);
+    		return redirect("/Warenkorb");
+    
 //	      
    }
 
@@ -92,24 +102,22 @@ public class Application extends Controller {
     		System.out.println("Torten: nicht eingeloggt");
     		status = 0;
     	}
-			
-	      if (session("warenkorb") == null) {
-//	            return redirect("/");
-	          }
+	
 
 	      
 	      Collection<Torte> Torten =  new HashSet<Torte>();
 	      Torten = Model.sharedInstance.getTorten();
-    	//Ausführungszeilen (Kontrolle) zu JDBC
-//    	JDBC ausgabe = new JDBC();
+//    	Ausführungszeilen (Kontrolle) zu JDBC
+//    JDBC ausgabe = new JDBC();
 //    	ausgabe.createTable();
 //    	ausgabe.insertInto();
 //    	ausgabe.createTablePraline();
 //    	ausgabe.insertIntoPraline();
 //    	ausgabe.createTableUser();
 //    	ausgabe.select();
+//		ausgabe.createTableWarenkorb();
     	
-    	return ok(Kategorie_Torten.render(Torten, status));
+		return ok(Kategorie_Torten.render(Torten, status));
 	
     }
     
@@ -158,22 +166,8 @@ public class Application extends Controller {
     		int hash = passwort.hashCode();
     		
     		database.insertIntoUser(email, passwort, passwortWDH, vorname, nachname, adresse, plz);
-    		
-    		JDialog meinJDialog = new JDialog();
-            // Titel wird gesetzt
-            meinJDialog.setTitle("Registriert");         
-            JLabel jReg = new JLabel("Hallo "+vorname +" "+ nachname +", Sie haben sich erfolgreich registriert!");
-            jReg.setFont(new Font("Serif", Font.BOLD, 24));
-            meinJDialog.add(jReg);
-            // Breite und Höhe des Fensters werden 
-            // auf 200 Pixel gesetzt
-            meinJDialog.setSize(800,200);
-            // Dialog wird auf modal gesetzt
-            meinJDialog.setModal(true);
-            // Wir lassen unseren Dialog anzeigen
-            meinJDialog.setVisible(true);
-            
-    		
+    		    
+
     		System.out.println(email + passwort +  vorname + nachname + adresse + plz + hash);
     		return redirect("/");
     	}
@@ -240,21 +234,6 @@ public class Application extends Controller {
 			if (KundeReg.getEmail().equals(EmailCheck)) {
 
 				if (KundeReg.getPasswort().equals(PasswortCheck)) {
-
-					JDialog meinJDialog = new JDialog();
-		            // Titel wird gesetzt
-		            meinJDialog.setTitle("Anmeldung erfolgreich");         
-		            JLabel jReg = new JLabel("Hallo,"+KundeReg.nachname + " " + KundeReg.vorname + " Sie sind jetzt angemeldet!");
-		            jReg.setFont(new Font("Serif", Font.BOLD, 24));
-		            meinJDialog.add(jReg);
-		            // Breite und Höhe des Fensters werden 
-		            // auf 200 Pixel gesetzt
-		            meinJDialog.setSize(800,200);
-		            // Dialog wird auf modal gesetzt
-		            meinJDialog.setModal(true);
-		            // Wir lassen unseren Dialog anzeigen
-		            meinJDialog.setVisible(true);
-						//session("connected", "" + KundeReg.getEmail());
 					
 		            session("connected", values.get("emailA")[0]);
 		            System.out.println("Eingeloggt");
@@ -262,62 +241,19 @@ public class Application extends Controller {
 		            
 					return redirect("/");
 				} else {
-					JDialog meinJDialog = new JDialog();
-		            // Titel wird gesetzt
-		            meinJDialog.setTitle("Anmeldung fehlgeschlagen");         
-		            JLabel jReg = new JLabel("Falsches Passwort");
-		            jReg.setFont(new Font("Serif", Font.BOLD, 24));
-		            meinJDialog.add(jReg);
-		            // Breite und Höhe des Fensters werden 
-		            // auf 200 Pixel gesetzt
-		            meinJDialog.setSize(800,200);
-		            // Dialog wird auf modal gesetzt
-		            meinJDialog.setModal(true);
-		            // Wir lassen unseren Dialog anzeigen
-		            meinJDialog.setVisible(true);
-					// Passwort falsch
 					int b = -1;
 					return redirect("/Registrierung");
 				}
 			} else {
-				JDialog meinJDialog = new JDialog();
-	            // Titel wird gesetzt
-	            meinJDialog.setTitle("Registriert");         
-	            JLabel jReg = new JLabel("Falsche E-Mail");
-	            jReg.setFont(new Font("Serif", Font.BOLD, 24));
-	            meinJDialog.add(jReg);
-	            // Breite und Höhe des Fensters werden 
-	            // auf 200 Pixel gesetzt
-	            meinJDialog.setSize(800,200);
-	            // Dialog wird auf modal gesetzt
-	            meinJDialog.setModal(true);
-	            // Wir lassen unseren Dialog anzeigen
-	            meinJDialog.setVisible(true);
-				// Benutzername falsch
 				int b = -1;
 				return redirect("/Registrierung");
 			}
 		} else {
-			//modal bootstrap
-			JDialog meinJDialog = new JDialog();
-            // Titel wird gesetzt
-            meinJDialog.setTitle("Registriert");         
-            JLabel jReg = new JLabel("Noch nicht registriert!");
-            jReg.setFont(new Font("Serif", Font.BOLD, 24));
-            meinJDialog.add(jReg);
-            // Breite und Höhe des Fensters werden 
-            // auf 200 Pixel gesetzt
-            meinJDialog.setSize(800,200);
-            // Dialog wird auf modal gesetzt
-            meinJDialog.setModal(true);
-            // Wir lassen unseren Dialog anzeigen
-            meinJDialog.setVisible(true);
+		
 			int b = -1;
 			return redirect("/Registrierung");
 
 		}
-		// return
-		// redirect(controllers.routes.Application.login("Falsche Email o. pwd"));
 
 	}
     
@@ -327,50 +263,49 @@ public class Application extends Controller {
     	return redirect("/");
     }
     
-//    public static Result Abmeldung() {
-////    	String user = session("connected");
-//////    	Model.sharedInstance.
-////    	session().clear();
-////    	System.out.println("Abgemeldet");
-////    	status = "nicht eingeloggt";
-////    	application.index();
-////    	return ok(index.render("status"));
-//    // --------------------------------------	
-////    	String user = session("connected");
-////    	if (user!=null){
-////    		System.out.println("Session wird gleich beendet");
-////    		session().clear();
-////    		status = "nicht mehr eingeloggt";
-////    		application.index();
-////    	}
-////    	else {
-////    		System.out.println("Torten: nicht eingeloggt");
-////    		status = "nicht eingeloggt";
-////    	}
-//    	return redirect("/");
-//    }
     
     public static Result Warenkorb() throws IOException{
-    	
     	String user = session("connected");
     	if (user!=null){
     		System.out.println("Warenkorb: immernoch eingeloggt");
     		status = 1;
+    		
+    		
+    		
     	}
     	else {
     		System.out.println("Warenkorb: nicht eingeloggt");
     		status = 0;
     	}
-    	
-    	String ware= session("Ware");
- 	String preis =session("Preis");
-    	try {
-			Thread.sleep(400);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+    	Collection<WarenkorbM> WKM = new HashSet<WarenkorbM>();
+		for (int i=0;i<WKM.size();i++){
+		WKM.remove(i);
 		}
-    	return ok(Warenkorb.render(ware , preis, status));
+		//System.out.print("----------------"+WKM.size());
+    	WKM = Model.sharedInstance.getWarenkorb(user);
+//		System.out.print(WKM.size());
+    	return ok(Warenkorb.render(WKM, status));
+    	
+    }
+   
+    public static Result Bestellung(){
+    	Collection<WarenkorbM> WKM = new HashSet<WarenkorbM>();
+
+		for (int i=0;i<WKM.size();i++){
+		WKM.remove(i);
+		}
+		
+    	String user = session("connected");
+    	if (user!=null){
+    		WKM = Model.sharedInstance.getWarenkorb(user);
+    		Model.sharedInstance.WarenkorbL(user);
+    		return redirect("/");
+    		}
+    	else{
+    		return redirect("/Anmeldung");
+    	}
+	    	
     }
     
     public static Result Kasse(){
