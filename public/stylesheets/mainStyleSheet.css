@@ -50,3 +50,7 @@ h3,.categorie {
     position:fixed;
     bottom:0px;
 }
+
+  #stelle {border: 1px solid #8FABFF; visibility:hidden; text-align: left;  white-space: nowrap; background-color: #eeeeee;}
+  .suggestions { font-size: 14;background-color: #eeeeee;  }
+  .suggestionMouseOver { font-size: 14;background: #3333ff; color: white;  }
