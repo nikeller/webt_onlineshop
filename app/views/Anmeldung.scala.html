@@ -29,43 +29,61 @@
   			<div class="col-xs-6 col-md-4">
   				<div class="page-header"></div>  
 			</div>
-		</div>			
-  
-  		<div class="col-xs-12 col-sm-6 col-md-8">
+		</div>
+
+	<div class="row">
+		<div class="col-xs-6 col-md-4">
+			<div class="page-header"></div>
+
+			</form>
+
+
+
+
+		</div>
+
+		<div class="col-xs-12 col-sm-6 col-md-8">
+
+
 			<form role="form" action="AnmeldenP" method="POST">
- 				<h4>Anmeldung</h4>
+				<h4>Anmeldung</h4>
 				<div class="form-group">
-  					<label for="beispielFeldEmail1">Email-Adresse</label>
-  					<input type="email" name="emailA" class="form-control" id="beispielFeldEmail1" placeholder="Email-Adresse">
-  				</div>
-  				<div class="form-group">
-  					<label for="beispielFeldPasswort1">Passwort</label>
-  					<input type="password" name="passwortA" class="form-control" id="beispielFeldPasswort1" placeholder="Passwort">
-  				</div>
-  				<button type="submit" class="btn btn-default">Anmelden</button>
-  			</form>
-  			<form action="@routes.Application.Registrierung">
-  				<button type="submit" class="btn btn-default">Registrieren</button>
-  			</form>
-		 </div>
-
-		<footer class="footer">
-			<!--     <div class="container"> -->
-        		<div class="row">
-            		<div class="panel-footer">
-                		<a class="blind" href="/">
-                    		<img src="@routes.Assets.at("/images/sweet_hearts.jpg")" alt="SweetShop" width="150" height="60" class="logo">
-                		</a>
-                		(c) SweetShop K&K
-            		</div>
-        		</div>
-    	</footer>
+					<label for="beispielFeldEmail1">Email-Adresse</label> <input
+						type="email" name="emailA" class="form-control"
+						id="beispielFeldEmail1" placeholder="Email-Adresse">
+				</div>
+				<div class="form-group">
+					<label for="beispielFeldPasswort1">Passwort</label> <input
+						type="password" name="passwortA" class="form-control"
+						id="beispielFeldPasswort1" placeholder="Passwort">
+				</div>
+				<button type="submit" class="btn btn-default">Anmelden</button>
+			</form>
+			<form action="@routes.Application.Registrierung">
+				<button type="submit" class="btn btn-default">Registrieren</button>
+			</form>
 
 
-    	<!-- jQuery (wird für Bootstrap JavaScript-Plugins benötigt) -->
-    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    	<!-- Binde alle kompilierten Plugins zusammen ein (wie hier unten) oder such dir einzelne Dateien nach Bedarf aus -->
-    	<script src="bootstrap.min.js"></script>
+		</div>
+	</div>
+
+
+	<footer class="footer">
+        <div class="row">
+            <div class="panel-footer">
+                <a class="blind" href="/">
+                    <img src="@routes.Assets.at("/images/sweet_hearts.jpg")" alt="SweetShop" width="150" height="60" class="logo">
+                </a>
+                (c) SweetShop K&K
+            </div>
+        </div>
+</footer>
+
+
+    <!-- jQuery (wird für Bootstrap JavaScript-Plugins benötigt) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Binde alle kompilierten Plugins zusammen ein (wie hier unten) oder such dir einzelne Dateien nach Bedarf aus -->
+    <script src="bootstrap.min.js"></script>
   </body>
 </html>
 }
