@@ -107,7 +107,7 @@ public class Application extends Controller {
 	      
 	      Collection<Torte> Torten =  new HashSet<Torte>();
 	      Torten = Model.sharedInstance.getTorten();
-//    	Ausführungszeilen (Kontrolle) zu JDBC
+//    	Ausführungszeilen zu JDBC
 //    JDBC ausgabe = new JDBC();
 //    	ausgabe.createTable();
 //    	ausgabe.insertInto();
@@ -200,7 +200,8 @@ public class Application extends Controller {
     	            if(aktuellerWert.startsWith(eingabe))
     	            {
     
-    	            	allePLZ= "<p id='"+i+"' onclick='abc("+i+")'>" +aktuellerWert+"</p>" + allePLZ;
+    	            	allePLZ= "<p id='"+i+"' abc("+i+")'>" +aktuellerWert+"</p>" + allePLZ;
+//    	            	allePLZ= aktuellerWert+  "." + allePLZ ;
     	            } 
     	            
     	            reader.close();    

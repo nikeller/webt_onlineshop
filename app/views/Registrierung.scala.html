@@ -12,83 +12,75 @@
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")">
 
-
 <script type="text/javascript">
 
 function test() {
-	var g = document.getElementById("eingabe").value;
-	Check(g);
+ 	var g = document.getElementById("eingabe").value;
+ 	Check(g);
+ 	}
+ var postalcodes; 
+ function Check(g) {
+ 		 var requestObj = new XMLHttpRequest();
+ 		 requestObj.onreadystatechange = function() {
+			 if (requestObj.readyState == 4 && requestObj.status == 200){
+				 var a = requestObj.responseText;
+				 var res = a.split(".");
+			 document.getElementById("stelle").innerHTML = res; 
+			 // save place array in 'postalcodes' to make it accessible from mouse event handlers
+			 postalcodes = eingabe.postalcodes;
+		    	 
+			  if (res.length != 0) {
+			    // we got several places for the postalcode
+			    // make suggest box visible
+			    document.getElementById('stelle').style.visibility = 'visible';
+			    var suggestBoxHTML  = '';
+			    // iterate over places and build suggest box content
+			    for (i=0;i< res.length;i++) {
+			      // for every postalcode record we create a html div 
+			      // each div gets an id using the array index for later retrieval 
+			      // define mouse event handlers to highlight places on mouseover
+			      // and to select a place on click
+			      // all events receive the postalcode array index as input parameter
+			      suggestBoxMouseOver(i);
+			      suggestBoxHTML += "<div class='suggestions' id=pcId" + i + " onmousedown='suggestBoxMouseDown(" + i +")' onmouseover='suggestBoxMouseOver(" +  i +")' onmouseout='suggestBoxMouseOut(" + i +")'> " +'</div>';
+			  	 alert(suggestBoxHTML);
+			    }
+			    // display suggest box
+			    document.getElementById('suggestBoxElement').innerHTML = suggestBoxHTML;
+			  } 
+		
+		 	} 
+		 }
+		 requestObj.open("GET", "CheckPLZ?eingabe="+g, true);
+		 requestObj.send();
+		} 	
+	function abc(name){
+		console.log("ERREICHT ABC");
+		console.log(name);
+		var x= document.getElementById("name").value;
+		$("#eingabe").html(x);  
 	}
-	
-var postalcodes; 
-function Check(g) {
-	 var requestObj = new XMLHttpRequest();
-	 requestObj.onreadystatechange = function() {
-		 if (requestObj.readyState == 4 && requestObj.status == 200){
-		 document.getElementById("stelle").innerHTML = requestObj.responseText; 
-		 document.getElementById('stelle').style.visibility = 'visible';
-	// 	  $("#stelle").append(requestObj.responseText); 
-	
-		 // save place array in 'postalcodes' to make it accessible from mouse event handlers
-		 
-		 postalcodes = eingabe.postalcodes;
-		    	
-		  if (postalcodes.length > 1) {
-		    // we got several places for the postalcode
-		    // make suggest box visible
-		    document.getElementById('stelle').style.visibility = 'visible';
-		    var suggestBoxHTML  = '';
-		    // iterate over places and build suggest box content
-		    for (i=0;i< eingabe.postalcodes.length;i++) {
-		      // for every postalcode record we create a html div 
-		      // each div gets an id using the array index for later retrieval 
-		      // define mouse event handlers to highlight places on mouseover
-		      // and to select a place on click
-		      // all events receive the postalcode array index as input parameter
-		      suggestBoxHTML += "<div class='suggestions' id=pcId" + i + " onmousedown='suggestBoxMouseDown(" + i +")' onmouseover='suggestBoxMouseOver(" +  i +")' onmouseout='suggestBoxMouseOut(" + i +")'> " +'</div>';
-		    }
-		    // display suggest box
-		    document.getElementById('suggestBoxElement').innerHTML = suggestBoxHTML;
-		  } 
-	
-	 	} 
-	 }
-	 requestObj.open("GET", "CheckPLZ?eingabe="+g, true);
-	 requestObj.send();
+	function closeSuggestBox() {
+		  document.getElementById('stelle').innerHTML = '';
+		  document.getElementById('stelle').style.visibility = 'hidden';
+		}
+		// remove highlight on mouse out event
+		function suggestBoxMouseOut(obj) {
+		  document.getElementById('pcId'+ obj).className = 'suggestions';
+		}
+		// the user has selected a place name from the suggest box
+		function suggestBoxMouseDown(obj) {
+		  closeSuggestBox();
+		  var placeInput = document.getElementById("stelle");
+		  placeInput.value = res[obj];
+		}
+		// function to highlight places on mouse over event
+		function suggestBoxMouseOver(obj) {
+		  document.getElementById('pcId'+ obj).className = 'suggestionMouseOver';
+		  alert("suggestBoxMouseOver");
+		}
 
-	} 	
-
-function abc(name){
-	console.log("ERREICHT ABC");
-	console.log(name);
-	var x= document.getElementById("name").value;
-	$("#eingabe").html(x); 
-}
-
-function closeSuggestBox() {
-	  document.getElementById('suggestBoxElement').innerHTML = '';
-	  document.getElementById('suggestBoxElement').style.visibility = 'hidden';
-	}
-
-
-	// remove highlight on mouse out event
-	function suggestBoxMouseOut(obj) {
-	  document.getElementById('pcId'+ obj).className = 'suggestions';
-	}
-
-	// the user has selected a place name from the suggest box
-	function suggestBoxMouseDown(obj) {
-	  closeSuggestBox();
-	  var placeInput = document.getElementById("placeInput");
-	  placeInput.value = postalcodes[obj].placeName;
-	}
-
-	// function to highlight places on mouse over event
-	function suggestBoxMouseOver(obj) {
-	  document.getElementById('pcId'+ obj).className = 'suggestionMouseOver';
-	}
-
-</script>
+ </script>
 
  
   </head>
