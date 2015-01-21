@@ -107,7 +107,7 @@ public class Application extends Controller {
 	      
 	      Collection<Torte> Torten =  new HashSet<Torte>();
 	      Torten = Model.sharedInstance.getTorten();
-//    	Ausführungszeilen (Kontrolle) zu JDBC
+//    	Ausführungszeilen zu JDBC
 //    JDBC ausgabe = new JDBC();
 //    	ausgabe.createTable();
 //    	ausgabe.insertInto();
