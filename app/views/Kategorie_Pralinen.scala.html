@@ -13,6 +13,8 @@
 
 <script type="text/javascript">
 
+
+
 function uebergabe(chocolate) {
 	var ware = chocolate.cells[0].innerHTML;
 	var preis = chocolate.cells[3].innerHTML;
@@ -99,7 +101,7 @@ function uebergabe(chocolate) {
 						<td><img class="img-responsive" alt="Responsives Bild" src="@praline.bild"></td>
 						<td id="bestand">@praline.bestand</td>
 						<td id="preis@praline.getProdukt_id">@praline.preis</td>
-						<td><form onsubmit="uebergabe(Chocolate@praline.getProdukt_id);" action="@routes.Application.Warenkorb">
+						<td><form onsubmit="uebergabe(Chocolate@praline.getProdukt_id);" action="@routes.Application.WaitingTime">
 								<button type="submit">In
 									den Warenkorb</button>
 							</form></td>

@@ -16,7 +16,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-
+import play.libs.F.Callback;
+import play.libs.F.Callback0;
+import play.mvc.WebSocket;
 
 import java.util.Map;
 import java.util.Random;
@@ -35,6 +37,7 @@ import models.WarenkorbM;
 import play.*;
 import play.api.mvc.Session;
 import play.data.*;
+import play.libs.F.Callback0;
 import play.mvc.*;
 import views.html.*;
 
@@ -43,7 +46,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject; 
 
 public class Application extends Controller {
-	
+	private static final Object lock = new Object();
 	private static Application application = new Application();
 	private static final Object JDialog = null;
 	public static HashMap<String, HashMap<String, String>> outerMap = new HashMap<String, HashMap<String, String>>();
@@ -72,7 +75,7 @@ public class Application extends Controller {
         return ok(index.render(status));
     }
    
-    public static Result submit(String ware, String preis) throws IOException{
+    public static Result submit(String ware, String preis) throws IOException, SQLException{
     	String email = session("connected");
     	double preisd = Double.parseDouble(preis);
 
@@ -83,14 +86,12 @@ public class Application extends Controller {
     
 //    		models.Warenkorb warenkorb = Model.sharedInstance.getWarenkorb(email);
 //    		int a =warenkorb.getNr();    
-    		
+    		Warenkorb();
     		System.out.println(email +  ware + preisd);
-    		return redirect("/Warenkorb");
-    
-//	      
+    		return ok();      
    }
 
-	public static Result Kategorie_Torten() {
+	public static Result Kategorie_Torten() throws SQLException {
 
 		String user = session("connected");
 		System.out.println(user);
@@ -121,7 +122,7 @@ public class Application extends Controller {
 	
     }
     
-    public static Result Kategorie_Pralinen() {
+    public static Result Kategorie_Pralinen() throws SQLException {
     	String user = session("connected");
     	if (user!=null){
     		System.out.println("Pralinen: immernoch eingeloggt");
@@ -164,8 +165,9 @@ public class Application extends Controller {
     		String adresse = values.get("adresse")[0];
     		String plz = values.get("plz")[0];
     		int hash = passwort.hashCode();
+    		String hashString = Integer.toString(hash);
     		
-    		database.insertIntoUser(email, passwort, passwortWDH, vorname, nachname, adresse, plz);
+    		database.insertIntoUser(email, hashString, passwortWDH, vorname, nachname, adresse, plz);
     		    
 
     		System.out.println(email + passwort +  vorname + nachname + adresse + plz + hash);
@@ -219,7 +221,7 @@ public class Application extends Controller {
 
     
     
-    public static Result AnmeldenP() {
+    public static Result AnmeldenP() throws SQLException {
     	
 		final Map<String, String[]> values = request().body().asFormUrlEncoded();
 		String Help= values.get("emailA")[0];
@@ -233,7 +235,7 @@ public class Application extends Controller {
 		if (KundeReg != null) {
 			if (KundeReg.getEmail().equals(EmailCheck)) {
 
-				if (KundeReg.getPasswort().equals(PasswortCheck)) {
+				if (KundeReg.getPasswort().equals(Integer.toString(PasswortCheck.hashCode()))) {
 					
 		            session("connected", values.get("emailA")[0]);
 		            System.out.println("Eingeloggt");
@@ -264,7 +266,7 @@ public class Application extends Controller {
     }
     
     
-    public static Result Warenkorb() throws IOException{
+    public static Result Warenkorb() throws IOException, SQLException{
     	String user = session("connected");
     	if (user!=null){
     		System.out.println("Warenkorb: immernoch eingeloggt");
@@ -289,7 +291,7 @@ public class Application extends Controller {
     	
     }
    
-    public static Result Bestellung(){
+    public static Result Bestellung() throws SQLException{
     	Collection<WarenkorbM> WKM = new HashSet<WarenkorbM>();
 
 		for (int i=0;i<WKM.size();i++){
@@ -311,9 +313,42 @@ public class Application extends Controller {
     public static Result Kasse(){
     	return ok(Kasse.render());
     }
-
+    public static Result WaitingTime() throws InterruptedException{
+    	synchronized(lock){
+    		lock.wait(250);}
+    	return redirect("/Warenkorb");
+    }
     public static Result Anmeldung(){
     	return ok(Anmeldung.render());
     }
+    
+//    public static WebSocket<Integer[]> socket() {
+//
+//		return new WebSocket<Integer[]>() {
+//
+//			public void onReady(WebSocket.In<Integer[]> in,
+//					final WebSocket.Out<Integer[]> out) {
+//				System.out.println("WebSocketArtikel ready");
+//				final ObserverPage observerP = new ObserverPage();
+//				observerP.shop = out;
+//				
+//				in.onMessage(new Callback<Integer[]>() {
+//					public void invoke(Integer[] obj) {
+//					}
+//
+//				});
+//
+//				in.onClose(new Callback0() {
+//					public void invoke() {
+//						Model.sharedInstance.deleteObserver(observerP);
+//					}
+//				});
+//
+//			}
+//		};
+//	}
+//    
+    
+    
 
 }
