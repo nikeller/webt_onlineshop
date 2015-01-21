@@ -41,16 +41,16 @@ function uebergabe(chocolate) {
   <div class="col-xs-6 col-sm-4"><ul class="nav navbar-nav navbar-right">
 				<ul class="nav navbar-nav navbar-right">
 				@if(status==1){
-				<li><form action="/Abmeldung"><button>Abmelden</button></form></li>
+				<li><form action="/Abmeldung"><button class="btn btn-default">Abmelden</button></form></li>
 					} else {
 					
 					<li><form action="@routes.Application.Anmeldung">
-						<button>Anmelden</button>
+						<button class="btn btn-default">Anmelden</button>
 					</form></li>
 					}
 				<li>
 					<form action="@routes.Application.Warenkorb">
-						<button>Warenkorb</button>
+						<button class="btn btn-default">Warenkorb</button>
 					</form>
 				</li>
 			</ul></div>
@@ -65,13 +65,7 @@ function uebergabe(chocolate) {
 
 <ul>
 			<li><h3><a class="categorie" href="@routes.Application.Kategorie_Torten">Torten</a></h3></li>
-			<li><h3><a class="categorie" href="@routes.Application.Kategorie_Pralinen">Pralinen</a></h3>
-<!-- 							<ul> -->
-<!-- 					<li><h4>Milchschokolade</h4></li> -->
-<!-- 					<li><h4>Bitterschokolade</h4></li> -->
-<!-- 					<li><h4>Weiße Schokolade</h4></li> -->
-<!-- 				</ul> -->
-				</li>
+			<li><h3><a class="categorie" href="@routes.Application.Kategorie_Pralinen">Pralinen</a></h3></li>
 			
 </ul>  
 
@@ -81,22 +75,51 @@ function uebergabe(chocolate) {
 
   <div class="col-xs-12 col-sm-6 col-md-8">
   	<div class="panel panel-default">
-  		<div class="panel-heading">
-   			 <h3 class="panel-title">Pralinen</h3>
- 		</div>
- 		<table class="table">
+  		@if(status==0){
+		
+
+<!-- <marquee scrollamount="3" scrolldelay="5">
+  <h2>Bitte melden Sie sich an, wenn Sie etwas bestellen wollen!</h2>
+</marquee> -->
+			<h2>Bitte melden Sie sich an, wenn Sie etwas bestellen wollen!</h2>
+			
+			}
+				<div class="panel-heading">
+					<h3 class="panel-title">Torten</h3>
+				</div>
+
+				@if(status==0){
+				<table class="table">
 					<tr>
 						<th>Produktname</th>
-						<!-- 						<th>Produktbeschreibung</th> -->
 						<th>Produktbild</th>
 						<th>Lagerbestand</th>
 						<th>Preis in Euro</th>
 						<th></th>
 					</tr>
-
-					
 					@for(praline <- pralinen) {
-					<tr id=Chocolate@praline.getProdukt_id>	
+
+					<tr id="Chocolate@praline.getProdukt_id">	
+						<td id="ware@praline.getProdukt_id">@praline.produkt_name</td>
+						<td><img class="img-responsive" alt="Responsives Bild" src="@praline.bild"></td>
+						<td id="bestand">@praline.bestand</td>
+						<td id="preis@praline.getProdukt_id">@praline.preis</td>
+					</tr>
+					}
+					<tr>
+					</tr>
+				</table>
+				} else {
+				<table class="table">
+					<tr>
+						<th>Produktname</th>
+						<th>Produktbild</th>
+						<th>Lagerbestand</th>
+						<th>Preis in Euro</th>
+						<th></th>
+					</tr>
+					@for(praline <- pralinen) {
+					<tr id="Chocolate@praline.getProdukt_id">	
 						<td id="ware@praline.getProdukt_id">@praline.produkt_name</td>
 						<td><img class="img-responsive" alt="Responsives Bild" src="@praline.bild"></td>
 						<td id="bestand">@praline.bestand</td>
@@ -110,6 +133,7 @@ function uebergabe(chocolate) {
 					<tr>
 					</tr>
 				</table>
+				}
 
   
   </div>
