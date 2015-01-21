@@ -41,13 +41,13 @@
 		<div class="col-xs-6 col-sm-4">
 			<ul class="nav navbar-nav navbar-right">
 				@if(status==1){
-				<li><form action="/Abmeldung"><button>Abmelden</button></form></li>
+				<li><form action="/Abmeldung"><button class="btn btn-default">Abmelden</button></form></li>
 				} else {
 				
-				<li><form action="@routes.Application.Anmeldung"><button>Anmelden</button></form></li>
+				<li><form action="@routes.Application.Anmeldung"><button class="btn btn-default">Anmelden</button></form></li>
 				}
 				<li><form action="@routes.Application.Warenkorb">
-						<button>Warenkorb</button>
+						<button class="btn btn-default">Warenkorb</button>
 					</form></li>
 
 			</ul>

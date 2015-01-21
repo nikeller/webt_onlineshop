@@ -200,7 +200,8 @@ public class Application extends Controller {
     	            if(aktuellerWert.startsWith(eingabe))
     	            {
     
-    	            	allePLZ= "<p id='"+i+"' onclick='abc("+i+")'>" +aktuellerWert+"</p>" + allePLZ;
+    	            	allePLZ= "<p id='"+i+"' abc("+i+")'>" +aktuellerWert+"</p>" + allePLZ;
+//    	            	allePLZ= aktuellerWert+  "." + allePLZ ;
     	            } 
     	            
     	            reader.close();    
