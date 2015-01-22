@@ -6,10 +6,11 @@ import play.db.*;
 
 public class JDBC {
 
-	 public void createTable()
+	 public void createTable() throws SQLException
 	  {
+		 Connection c = null;
 		     try {
-		      Connection c = DB.getConnection();
+		      c = DB.getConnection();
 		      Statement stmt = null;
 		      stmt = c.createStatement();
 		      String strCreateTorte =
@@ -27,33 +28,33 @@ public class JDBC {
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		      System.exit(0);
+		      c.close();
 		    }
 		   
 		     System.out.println("If did not exist: Table Torte created successfully");
 		  }
 	  
-	 public void insertInto(){
-		 
+	 public void insertInto() throws SQLException{
+		 Connection c = null;
 		 try {
-			  Connection c = DB.getConnection();
+			  c = DB.getConnection();
 		      Statement stmt = null;
 		      stmt = c.createStatement();
 
 		      String strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
 		                   "VALUES ('Goldene Freude', '/assets/images/Torte_001.jpg',"
-		                   + "'Hochzeitstorte', 'T', 35.50, 10);"; 
+		                   + "'Hochzeitstorte', 'T', 35.50, 30);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 			 
 		      stmt = c.createStatement();
 		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
 		                   "VALUES ('Himmlische Torte', '/assets/images/Torte_002.jpg',"
-		                   + "'Passend zur Hochzeit, Geburtstag', 'T', 33.0, 20);"; 
+		                   + "'Passend zur Hochzeit, Geburtstag', 'T', 33.0, 36);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 
 		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
 	                   "VALUES ('Hochzeitstorte', '/assets/images/Torte_003.jpg',"
-	                   + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 10);"; 
+	                   + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 53);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 		      
 		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
@@ -63,23 +64,24 @@ public class JDBC {
 		      
 		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
 	                   "VALUES ('Wuff-Wuff', '/assets/images/Torte_005.jpg',"
-	                   + "'Passend zum Kindergeburtstag', 'T', 25.00, 30);"; 
+	                   + "'Passend zum Kindergeburtstag', 'T', 25.00, 42);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 		      
 		      stmt.close();
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		      System.exit(0);
+		      c.close();
 		    }
 		    System.out.println("Records(Torte) created successfully");
 	 }
 	 
 	 
-	 public void createTablePraline()
+	 public void createTablePraline() throws SQLException
 	  {
+		 Connection c = null;
 		     try {
-		      Connection c = DB.getConnection();
+		      c = DB.getConnection();
 		      Statement stmt = null;
 		      stmt = c.createStatement();
 		      String strCreatePraline =
@@ -97,16 +99,17 @@ public class JDBC {
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		      System.exit(0);
+		      c.close();
 		    }
 		   
 		     System.out.println("If did not exist: Table Praline created successfully");
 		  }
 	 
-	 public void createTableUser()
+	 public void createTableUser() throws SQLException
 	  {
+		 Connection c = null;
 		     try {
-		      Connection c = DB.getConnection();
+		      c = DB.getConnection();
 		      Statement stmt = null;
 		      stmt = c.createStatement();
 		      String strCreateUser =
@@ -123,16 +126,17 @@ public class JDBC {
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		      System.exit(0);
+		      c.close();
 		    }
 		   
 		     System.out.println("If did not exist: Table User created successfully");
 		  }
 	 
-	 public void createTableWarenkorb()
+	 public void createTableWarenkorb() throws SQLException
 	  {
+		 Connection c = null;
 		     try {
-		      Connection c = DB.getConnection();
+		      c = DB.getConnection();
 		      Statement stmt = null;
 		      stmt = c.createStatement();
 		      String strCreateWarenkorb =
@@ -147,15 +151,15 @@ public class JDBC {
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );		   
-		      System.exit(0);
+		      c.close();
 		    }
 		   
 		     System.out.println("If did not exist: Table Warenkorb created successfully");
 		  }
 	 
 	
-	 public void insertIntoUser(String email, String passwort, String passwortWDH,
-				String vorname, String nachname, String adresse, String PLZ) {
+	 public void insertIntoUser(String email, String passwort,
+				String vorname, String nachname, String adresse, String PLZ) throws SQLException {
 			Connection c = null;
 			Statement stmt = null;
 
@@ -183,17 +187,19 @@ public class JDBC {
 
 				stmt.close();
 				c.close();
+				System.out.println("InsertIntoUser fertig___________________________________");
 			} catch (Exception e) {
 				System.err.println(e.getClass().getName() + ": " + e.getMessage());
-				System.exit(0);
+				c.close();
 			}
 			System.out.println("Records created successfully");
 		}
 	  
-	 public void insertIntoPraline(){
-		 
+	 public void insertIntoPraline() throws SQLException{
+		 Connection c = null;
 		 try {
-			  Connection c = DB.getConnection();
+			 
+			  c = DB.getConnection();
 		      Statement stmt = null;
 		      stmt = c.createStatement();
 
@@ -227,13 +233,13 @@ public class JDBC {
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		      System.exit(0);
+		      c.close();
 		    }
 		    System.out.println("Records(Praline) created successfully");
 	 }
 	 
 	 public void insertIntoWarenkorb(String email, String ware,
-				double preis) {
+				double preis) throws SQLException {
 			Connection c = null;
 			Statement stmt = null;
 
@@ -254,17 +260,19 @@ public class JDBC {
 				stmt.executeUpdate(strInsertIntoWarenkorb);
 				stmt.close();
 				c.close();
+				System.out.println("InsertInToWarenkorb fertig-----------------------------");
 			} catch (Exception e) {
 				System.err.println(e.getClass().getName() + ": " + e.getMessage());
-				System.exit(0);
+				c.close();
 			}
 			System.out.println("Records created successfully");
 		}
 	 
 
-	 public void select() {
+	 public void select() throws SQLException {
+		 Connection c = null;
 		 try {
-			  Connection c = DB.getConnection();
+			  c = DB.getConnection();
 		      Statement stmt = null;
 		      stmt = c.createStatement();
 		      ResultSet rs = stmt.executeQuery( "SELECT * FROM Torte;" );
@@ -304,7 +312,7 @@ public class JDBC {
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		      System.exit(0);
+		      c.close();
 		    }
 		 
 

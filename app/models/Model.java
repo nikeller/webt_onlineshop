@@ -16,6 +16,8 @@ import java.util.Observable;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
+import org.json.*;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -81,6 +83,7 @@ public class Model extends Observable {
 			}
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			connection.close();
 		}
 		connection.close();
 		return praline;
@@ -105,6 +108,7 @@ public class Model extends Observable {
 			}
 		} catch (Exception e) {
 			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+			connection.close();
 		}
 		connection.close();
 		return gebaeck;
@@ -130,6 +134,7 @@ public class Model extends Observable {
 		} catch (SQLException e) {
 			System.out.println("User mit EMail " + email + " nicht gefunden!");
 			e.printStackTrace();
+			connection.close();
 		
 		}
 		connection.close();
@@ -158,6 +163,7 @@ public class Model extends Observable {
 		} catch (SQLException e) {
 			System.out.println("User mit EMail " + email + " nicht gefunden!");
 			e.printStackTrace();
+			connection.close();
 		
 		}
 		connection.close();
@@ -203,8 +209,6 @@ public class Model extends Observable {
 			System.out.println("aus Pralinen gelesen: "+ produkt_id_praline);
 			
 			if(produkt_id_torte != null){
-				
-			
 				while(produkt_id_torte.next()){
 				
 					stmt4 = c.createStatement();
@@ -216,7 +220,8 @@ public class Model extends Observable {
 					System.out.println(" ArtikelNummer "
 							+ produkt_id_torte.getInt("id") + " bestellt...");
 				
-				
+					int observertestt = countObservers();
+					System.out.println("Anzahl Observer="+observertestt);
 					if (countObservers() > 0) {
 						setChanged();
 						notifyObservers(produkt_id_torte.getInt("id"));
@@ -229,21 +234,21 @@ public class Model extends Observable {
 			
 			
 			if(produkt_id_praline != null){
-			while(produkt_id_praline.next()){
-				stmt5 = c.createStatement();
-				String UpdateStringP = "UPDATE Praline SET bestand = bestand" + eins
-										+ " WHERE id = '" + produkt_id_praline.getInt("id") +"';";
-				
-				anzahlUpdateP = stmt5.executeUpdate(UpdateStringP);	
-				
-				System.out.println(" ArtikelNummer "
-						+ produkt_id_praline.getInt("id") + " bestellt...");
-				
-				if (countObservers() > 0) {
-					setChanged();
-					notifyObservers(produkt_id_praline.getInt("id"));	
-					}
-				
+				while(produkt_id_praline.next()){
+					stmt5 = c.createStatement();
+					String UpdateStringP = "UPDATE Praline SET bestand = bestand" + eins
+											+ " WHERE id = '" + produkt_id_praline.getInt("id") +"';";
+					
+					anzahlUpdateP = stmt5.executeUpdate(UpdateStringP);	
+					
+					System.out.println(" ArtikelNummer "
+							+ produkt_id_praline.getInt("id") + " bestellt...");
+					int observertestp = countObservers();
+					System.out.println("Anzahl Observer="+observertestp);
+					if (countObservers() > 0) {
+						setChanged();
+						notifyObservers(produkt_id_praline.getInt("id"));	
+						}
 				}
 			}
 			System.out.println("--------If did not exist: Table created successfully");}
@@ -264,42 +269,66 @@ public class Model extends Observable {
 		System.out.println("If did not exist: Table deleted");
 	}
 
-
-
-
-public Integer[] BestandAktuell(int produkt_id) throws SQLException {
 	
-	Connection connection = null;
-	Integer bestandT = null;
-	Integer bestandP = null;
-	Integer[] Parameter = new Integer[2];
-	
-	String waehlenT = "SELECT * FROM Torte WHERE produkt_id = '"
-			+ produkt_id + "'";;
-			
-	String waehlenP = "SELECT * FROM Praline WHERE produkt_id = '"
-					+ produkt_id + "'";;
-	try {
-			connection = DB.getConnection();
-			PreparedStatement pstmt1 = connection.prepareStatement(waehlenT);
-			ResultSet rs1 = pstmt1.executeQuery();
-			if (rs1.next()) {
-				bestandT = new Integer(rs1.getInt("bestand"));
+
+	public static JsonNode zeigeAktuelleMenge(JsonNode obj) {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		JsonNode jsonMenge = null;
+		String name = obj.get("name").asText();
+		Integer menge = null;
+
+		try {
+			conn = DB.getConnection();
+			stmt = conn.createStatement();
+			rs = stmt
+					.executeQuery("SELECT * FROM Torte WHERE name = '"
+							+ name + "' ;");
+
+			if (rs.next()) {
+				menge = new Integer(rs.getInt("bestand"));
 			}
-			
-			PreparedStatement pstmt2 = connection.prepareStatement(waehlenP);
-			ResultSet rs2 = pstmt2.executeQuery();
-			if (rs2.next()) {
-				bestandP = new Integer(rs2.getInt("bestand"));
+
+			ObjectMapper mapper = new ObjectMapper();
+			jsonMenge = mapper.readTree("{\"name\":\"" + name
+					+ "\",\"Menge\":\"" + menge.toString() + "\"}");
+			System.out.println("JSON-Menge: " + jsonMenge);
+
+		} catch (SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
 			}
-			Parameter[0]=bestandT;
-			Parameter[1]=bestandP;
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
 		}
 
-	catch (Exception e) {
-	System.err.println(e.getClass().getName() + ": " + e.getMessage());
+		return jsonMenge;
 	}
-	connection.close();
-	return Parameter;
-	}
+
+	
+	
+	
+	
+	
+	
+	
+
 }

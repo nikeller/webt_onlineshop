@@ -41,6 +41,7 @@ import play.libs.F.Callback0;
 import play.mvc.*;
 import views.html.*;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson; 
 import com.google.gson.JsonArray; 
 import com.google.gson.JsonObject; 
@@ -159,7 +160,6 @@ public class Application extends Controller {
     		
     		String email = values.get("email")[0];
     		String passwort = values.get("passwort")[0];
-    		String passwortWDH = "braucht niemand";
     		String vorname = values.get("vorname")[0];
     		String nachname = values.get("nachname")[0];
     		String adresse = values.get("adresse")[0];
@@ -167,7 +167,7 @@ public class Application extends Controller {
     		int hash = passwort.hashCode();
     		String hashString = Integer.toString(hash);
     		
-    		database.insertIntoUser(email, hashString, passwortWDH, vorname, nachname, adresse, plz);
+    		database.insertIntoUser(email, hashString, vorname, nachname, adresse, plz);
     		    
 
     		System.out.println(email + passwort +  vorname + nachname + adresse + plz + hash);
@@ -244,16 +244,13 @@ public class Application extends Controller {
 		            
 					return redirect("/");
 				} else {
-					int b = -1;
 					return redirect("/Registrierung");
 				}
 			} else {
-				int b = -1;
 				return redirect("/Registrierung");
 			}
 		} else {
 		
-			int b = -1;
 			return redirect("/Registrierung");
 
 		}
@@ -262,6 +259,7 @@ public class Application extends Controller {
     
     public static Result Abmeldung(){
     	String user = session("connected");
+    	System.out.println(user+"öööööööööööööööööööööööööööööööööööööööö");
     	session().clear();
     	return redirect("/");
     }
@@ -320,35 +318,43 @@ public class Application extends Controller {
     	return redirect("/Warenkorb");
     }
     public static Result Anmeldung(){
+    	session().clear();
     	return ok(Anmeldung.render());
     }
     
-//    public static WebSocket<Integer[]> socket() {
-//
-//		return new WebSocket<Integer[]>() {
-//
-//			public void onReady(WebSocket.In<Integer[]> in,
-//					final WebSocket.Out<Integer[]> out) {
-//				System.out.println("WebSocketArtikel ready");
-//				final ObserverPage observerP = new ObserverPage();
-//				observerP.shop = out;
-//				
-//				in.onMessage(new Callback<Integer[]>() {
-//					public void invoke(Integer[] obj) {
-//					}
-//
-//				});
-//
-//				in.onClose(new Callback0() {
-//					public void invoke() {
-//						Model.sharedInstance.deleteObserver(observerP);
-//					}
-//				});
-//
-//			}
-//		};
-//	}
-//    
+    public static WebSocket<JsonNode> socket() {
+    	System.out.println("in socket");
+		return new WebSocket<JsonNode>() {
+			
+			public void onReady(WebSocket.In<JsonNode> in,
+					final WebSocket.Out<JsonNode> out) {
+				System.out.println(": WebSocketArtikel ready...");
+				final ObserverPage obs = new ObserverPage();
+				obs.shop = out;
+				System.out.println(": Anzahl observer: "
+						+ Model.sharedInstance.countObservers());
+				in.onMessage(new Callback<JsonNode>() {
+					public void invoke(JsonNode obj) {
+
+					}
+
+				});
+
+				in.onClose(new Callback0() {
+					public void invoke() {
+						// observer.remove(id);
+						Model.sharedInstance.deleteObserver(obs);
+
+						System.out.println(": Artikelansicht verlassen...");
+						System.out.println( ": Anzahl observer: "+ Model.sharedInstance.countObservers());
+					}
+				});
+
+			}
+		};
+	}
+
+    
     
     
 

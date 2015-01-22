@@ -13,8 +13,25 @@
 
 <!-- <script language="JavaScript" type="text/javascript"
 	src="ajax_search.js"></script> -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">>
+		//WebSocket Skript
+var webSocket;
+$(function() {
+	var WS = window["MozWebSocket"] ? MozWebSocket : WebSocket;
+	webSocket = new WS("@routes.Application.socket().webSocketURL(request)");
+	webSocket.onmessage = receiveEvent;
+})
+		
+function receiveEvent(event){
+	var obj = JSON.parse(event.data);
 
+	$("#menge"+obj.name).html("<p>Menge: "+obj.Menge);
+	
+};
+
+</script>
 <script type="text/javascript">
+
 
 function uebergabe(cake) {
 	var ware = cake.cells[0].innerHTML;
@@ -114,7 +131,7 @@ function uebergabe(cake) {
 					<tr id="Cake@torte.getProdukt_id">	
 						<td id="ware@torte.getProdukt_id">@torte.produkt_name</td>
 						<td><img class="img-responsive" alt="Responsives Bild" src="@torte.bild"></td>
-						<td id="bestand">@torte.bestand</td>
+						<td id="bestand@torte.getProdukt_name">@torte.bestand</td>
 						<td id="preis@torte.getProdukt_id">@torte.preis</td>
 					</tr>
 					}
