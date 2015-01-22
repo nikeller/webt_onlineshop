@@ -26,7 +26,7 @@ public class Model extends Observable {
 		initDB();
 		
 	}
-	private static Connection connection = DB.getConnection();
+
 	public static ArrayList<Torte> torte = new ArrayList<Torte>();
 	public static ArrayList<Praline> praline = new ArrayList<Praline>();
 	public ArrayList<User> users = new ArrayList<User>();
@@ -38,8 +38,9 @@ public class Model extends Observable {
 	 /////////////////////////////////////////////////////////////////////////////////
 	public ArrayList<Torte> getTorten() {
 		torte.clear();
-		ResultSet rs =null;
+		Connection connection = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			connection = DB.getConnection();
 			String torteInfoSQL = "SELECT * FROM Torte;";
@@ -54,14 +55,26 @@ public class Model extends Observable {
 
 			}
 		}catch (SQLException e) {
-			System.out.println("Fehler beim Aufruf getTorten");
+
 			e.printStackTrace();
 		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
 			}
 		}
 		return torte;
@@ -72,8 +85,9 @@ public class Model extends Observable {
 	 /////////////////////////////////////////////////////////////////////////////////
 	public ArrayList<Praline> getPralinen(){
 		praline.clear();
-		ResultSet rs = null;
+		Connection connection = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			connection =DB.getConnection();
 			String pralineInfoSQL = "SELECT * FROM Praline;";
@@ -88,14 +102,26 @@ public class Model extends Observable {
 
 			}
 		} catch (SQLException e) {
-			System.out.println("Fehler beim Aufruf getPralinen");
+
 			e.printStackTrace();
 		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
 			}
 		}
 		return praline;
@@ -109,11 +135,13 @@ public class Model extends Observable {
 	 /////////////////////////////////////////////////////////////////////////////////
 
 	public User getUser(String email){
-		String getUserSQL = "SELECT * FROM User WHERE User.email = '"
-				+ email + "'";
-		ResultSet rs = null;
+
+		Connection connection = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
+			String getUserSQL = "SELECT * FROM User WHERE User.email = '"
+					+ email + "'";
 			connection =DB.getConnection();
 			pstmt = connection.prepareStatement(getUserSQL);
 			rs = pstmt.executeQuery();
@@ -123,15 +151,27 @@ public class Model extends Observable {
 					rs.getString("plz"));
 			return user;
 		} catch (SQLException e) {
-			System.out.println("Fehler beim Aufruf getUser");
+
 			e.printStackTrace();
 		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}	
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
+			}
 		}
 		return null;
 		
@@ -143,6 +183,7 @@ public class Model extends Observable {
 
 	public ArrayList<WarenkorbM> getWarenkorb(String email){
 		ArrayList<WarenkorbM > warenkorbL = new ArrayList<WarenkorbM>();
+		Connection connection = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		if(warenkorbL!=null){
@@ -162,15 +203,27 @@ public class Model extends Observable {
 			warenkorbL.add(WKM);
 			}
 		} catch (SQLException e) {
-			System.out.println("Fehler beim Aufruf getWarenkorb");
+
 			e.printStackTrace();
 		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}	
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
+			}
 		}
 		return warenkorbL;
 		
@@ -180,23 +233,28 @@ public class Model extends Observable {
 	 /////////////////////////////////////////////////////////////////////////////////
 
 	public void WarenkorbL(String email) {
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+	
 		Statement stmt2 = null;
 		Statement stmt3 = null;
 		Statement stmt4 = null;
 		Statement stmt5 = null;
 		Statement stmt6 = null;
-		int anzahlUpdateT=0;
-		int anzahlUpdateP=0;
-		short eins = -1;
+
 		ResultSet rs = null;
 		ResultSet produkt_id_torte = null;
 		ResultSet produkt_id_praline = null;
+		
+		int anzahlUpdateT=0;
+		int anzahlUpdateP=0;
+		short eins = -1;
 		try {	
 			connection = DB.getConnection();
 			String getProduktNamen = "SELECT * FROM Warenkorb WHERE email = '"
 					+ email + "'";
 			
-			PreparedStatement pstmt = connection.prepareStatement(getProduktNamen);
+			pstmt = connection.prepareStatement(getProduktNamen);
 			rs = pstmt.executeQuery();
 			
 	
@@ -265,32 +323,42 @@ public class Model extends Observable {
 			stmt6.executeUpdate(strWarenkorbL);
 			
 		} catch (SQLException e) {
-			System.out.println("Fehler beim Aufruf WarenkorbL");
+
 			e.printStackTrace();
 		} finally {
-			try {
-				
+			if (rs != null) {
+				try {
 					rs.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (produkt_id_torte != null) {
+				try {
 					produkt_id_torte.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (produkt_id_praline != null) {
+				try {
 					produkt_id_praline.close();
-					
-					stmt2.close();
-					
-				
-					stmt3.close();
-					
-				
-				if(stmt4!=null){
-					stmt4.close();
-					}
-				if(stmt5!=null){
-					stmt5.close();
-					}
-				stmt6.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}	
+				} catch (SQLException e) {
+				}
+			}
+			if (pstmt != null) {try {pstmt.close();} catch (SQLException e) {}}
+			if (stmt2 != null) {try {stmt2.close();} catch (SQLException e) {}}
+			if (stmt3 != null) {try {stmt3.close();} catch (SQLException e) {}}
+			if (stmt4 != null) {try {stmt4.close();} catch (SQLException e) {}}
+			if (stmt5 != null) {try {stmt5.close();} catch (SQLException e) {}}
+			if (stmt6 != null) {try {stmt6.close();} catch (SQLException e) {}}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
+			}
 		}
+		
 		
 		System.out.println("If did not exist: Table deleted");
 	}
@@ -353,6 +421,7 @@ public class Model extends Observable {
 	 public void insertIntoUser(String email, String passwort,
 			String vorname, String nachname, String adresse, String PLZ){
 			Statement stmt = null;
+			Connection connection = null;
 
 			try {
 				connection = DB.getConnection();
@@ -379,13 +448,21 @@ public class Model extends Observable {
 				stmt.close();
 				System.out.println("InsertIntoUser fertig___________________________________");
 			}  catch (SQLException e) {
-				System.out.println("Fehler beim Aufruf getWarenkorb");
+
 				e.printStackTrace();
 			} finally {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+			
+				if (stmt != null) {
+					try {
+						stmt.close();
+					} catch (SQLException e) {
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+					}
 				}
 			}
 			System.out.println("Records created successfully");
@@ -398,11 +475,10 @@ public class Model extends Observable {
 	 public void insertIntoWarenkorb(String email, String ware,
 				double preis){
 			Statement stmt = null;
-
+			Connection connection = null;
 			try {
 				connection = DB.getConnection();
 
-				// Insert Student
 				stmt = connection.createStatement();
 				String strInsertIntoWarenkorb = "INSERT INTO Warenkorb (email, ware, preis) VALUES ('"
 						+ email
@@ -415,16 +491,23 @@ public class Model extends Observable {
 				System.out.println(strInsertIntoWarenkorb);
 				stmt.executeUpdate(strInsertIntoWarenkorb);
 				stmt.close();
-				connection.close();
 				System.out.println("InsertInToWarenkorb fertig-----------------------------");
 			} catch (SQLException e) {
-				System.out.println("Fehler beim Aufruf getWarenkorb");
+
 				e.printStackTrace();
 			} finally {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+			
+				if (stmt != null) {
+					try {
+						stmt.close();
+					} catch (SQLException e) {
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+					}
 				}
 			}
 			System.out.println("Records created successfully");
@@ -433,7 +516,8 @@ public class Model extends Observable {
 	
 	public void initDB()
 	{
-		 Statement stmt = null;
+		Statement stmt = null;
+		Connection connection = null;
 		 try {
 			 
 			 
@@ -536,13 +620,21 @@ public class Model extends Observable {
 
 		      stmt.close();
 		    } catch (SQLException e) {
-				System.out.println("Fehler beim Aufruf InitDB");
+
 				e.printStackTrace();
 			} finally {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+			
+				if (stmt != null) {
+					try {
+						stmt.close();
+					} catch (SQLException e) {
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+					}
 				}
 			}
 		    System.out.println("Records created successfully");

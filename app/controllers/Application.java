@@ -71,7 +71,7 @@ public class Application extends Controller {
     		return ok();      
    }
 
-	public static Result Kategorie_Torten() {
+	public static Result Kategorie_Torten() throws IOException {
 
 		String user = session("connected");
 		System.out.println(user);
@@ -93,7 +93,7 @@ public class Application extends Controller {
 	
     }
     
-    public static Result Kategorie_Pralinen(){
+    public static Result Kategorie_Pralinen() throws IOException{
     	String user = session("connected");
     	if (user!=null){
     		System.out.println("Pralinen: immernoch eingeloggt");
@@ -235,7 +235,7 @@ public class Application extends Controller {
     }
     
     
-    public static Result Warenkorb() throws IOException{
+    public static Result Warenkorb(){
     	String user = session("connected");
     	if (user!=null){
     		System.out.println("Warenkorb: immernoch eingeloggt");
@@ -247,18 +247,15 @@ public class Application extends Controller {
     	}
 
     	Collection<WarenkorbM> WKM = new HashSet<WarenkorbM>();
-    	
     	if(WKM!=null){
-    		for (int i=0;i<WKM.size();i++){
-    			WKM.remove(i);
-    		}
-    	}
+			for (int i=0;i<WKM.size();i++){
+					WKM.remove(i);
+				}
+			}
 
     	WKM = Model.sharedInstance.getWarenkorb(user);
     	int listenSize = WKM.size();
-    	System.out.println("Größeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee:"+listenSize);
-
-    	return ok(Warenkorb.render(listenSize, WKM, status));
+       	return ok(Warenkorb.render(listenSize, WKM, status));
     	
     }
    
