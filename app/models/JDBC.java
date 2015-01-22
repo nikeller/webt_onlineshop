@@ -5,11 +5,14 @@ import java.sql.*;
 import play.db.*;
 
 public class JDBC {
-
-	 public void createTable()
+	/////////////////////////////////////////////////////////////////////////////////
+	//				Application Aufruf: erstellen der Tabelle (1 malig)			   //
+	/////////////////////////////////////////////////////////////////////////////////
+	 public void createTable() throws SQLException
 	  {
+		 Connection c = null;
 		     try {
-		      Connection c = DB.getConnection();
+		      c = DB.getConnection();
 		      Statement stmt = null;
 		      stmt = c.createStatement();
 		      String strCreateTorte =
@@ -27,33 +30,35 @@ public class JDBC {
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		      System.exit(0);
+		      c.close();
 		    }
 		   
 		     System.out.println("If did not exist: Table Torte created successfully");
 		  }
-	  
-	 public void insertInto(){
-		 
+	/////////////////////////////////////////////////////////////////////////////////
+	//				Application Aufruf: einfügen in die Tabelle (1 malig)		   //
+	/////////////////////////////////////////////////////////////////////////////////
+	 public void insertInto() throws SQLException{
+		 Connection c = null;
 		 try {
-			  Connection c = DB.getConnection();
+			  c = DB.getConnection();
 		      Statement stmt = null;
 		      stmt = c.createStatement();
 
 		      String strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
 		                   "VALUES ('Goldene Freude', '/assets/images/Torte_001.jpg',"
-		                   + "'Hochzeitstorte', 'T', 35.50, 10);"; 
+		                   + "'Hochzeitstorte', 'T', 35.50, 30);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 			 
 		      stmt = c.createStatement();
 		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
 		                   "VALUES ('Himmlische Torte', '/assets/images/Torte_002.jpg',"
-		                   + "'Passend zur Hochzeit, Geburtstag', 'T', 33.0, 20);"; 
+		                   + "'Passend zur Hochzeit, Geburtstag', 'T', 33.0, 36);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 
 		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
 	                   "VALUES ('Hochzeitstorte', '/assets/images/Torte_003.jpg',"
-	                   + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 10);"; 
+	                   + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 53);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 		      
 		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
@@ -63,23 +68,27 @@ public class JDBC {
 		      
 		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
 	                   "VALUES ('Wuff-Wuff', '/assets/images/Torte_005.jpg',"
-	                   + "'Passend zum Kindergeburtstag', 'T', 25.00, 30);"; 
+	                   + "'Passend zum Kindergeburtstag', 'T', 25.00, 42);"; 
 		      stmt.executeUpdate(strInsertIntoTorte);
 		      
 		      stmt.close();
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		      System.exit(0);
+		      c.close();
 		    }
 		    System.out.println("Records(Torte) created successfully");
 	 }
 	 
+	 /////////////////////////////////////////////////////////////////////////////////
+	 //				Application Aufruf: einfügen in die Tabelle (1 malig)		    //
+	 ///////////////////////////////////////////////////////////////////////////////// 
 	 
-	 public void createTablePraline()
+	 public void createTablePraline() throws SQLException
 	  {
+		 Connection c = null;
 		     try {
-		      Connection c = DB.getConnection();
+		      c = DB.getConnection();
 		      Statement stmt = null;
 		      stmt = c.createStatement();
 		      String strCreatePraline =
@@ -97,103 +106,19 @@ public class JDBC {
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		      System.exit(0);
+		      c.close();
 		    }
 		   
 		     System.out.println("If did not exist: Table Praline created successfully");
 		  }
-	 
-	 public void createTableUser()
-	  {
-		     try {
-		      Connection c = DB.getConnection();
-		      Statement stmt = null;
-		      stmt = c.createStatement();
-		      String strCreateUser =
-		    		  "CREATE TABLE IF NOT EXISTS User (" +
-								"email  VARCHAR(50) PRIMARY KEY, "	+
-								"passwort VARCHAR(50) NOT NULL, " +
-								"vorname VARCHAR(50) NOT NULL, " +
-								"nachname VARCHAR(50) NOT NULL, " +
-								"adresse  VARCHAR(100) NOT NULL," +
-								"PLZ INTEGER NOT NULL" +
-								")";
-		      stmt.executeUpdate(strCreateUser);
-		      stmt.close();
-		      c.close();
-		    } catch ( Exception e ) {
-		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		      System.exit(0);
-		    }
-		   
-		     System.out.println("If did not exist: Table User created successfully");
-		  }
-	 
-	 public void createTableWarenkorb()
-	  {
-		     try {
-		      Connection c = DB.getConnection();
-		      Statement stmt = null;
-		      stmt = c.createStatement();
-		      String strCreateWarenkorb =
-		    		  "CREATE TABLE IF NOT EXISTS Warenkorb (" +
-		    				  	"id  INTEGER PRIMARY KEY AUTOINCREMENT,"	+
-								"email VARCHAR(100) NOT NULL, " +
-								"ware  VARCHAR(100) NOT NULL," +
-								"preis decimal(4,2) NOT NULL" +
-								")";
-		      stmt.executeUpdate(strCreateWarenkorb);
-		      stmt.close();
-		      c.close();
-		    } catch ( Exception e ) {
-		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );		   
-		      System.exit(0);
-		    }
-		   
-		     System.out.println("If did not exist: Table Warenkorb created successfully");
-		  }
-	 
-	
-	 public void insertIntoUser(String email, String passwort, String passwortWDH,
-				String vorname, String nachname, String adresse, String PLZ) {
-			Connection c = null;
-			Statement stmt = null;
-
-			try {
-				c = DB.getConnection();
-
-				// Insert Student
-				stmt = c.createStatement();
-				String strInsertIntoUser = "INSERT INTO User (email, passwort, vorname, nachname, adresse, PLZ) VALUES ('"
-						+ email
-						+ "','"
-						+ passwort
-						+ "','"
-						+ vorname
-						+ "','" 
-						+ nachname 
-						+ "','" 
-						+ adresse
-						+ "','"
-						+PLZ +"'"+
-						")";
-				
-				System.out.println(strInsertIntoUser);
-				stmt.executeUpdate(strInsertIntoUser);
-
-				stmt.close();
-				c.close();
-			} catch (Exception e) {
-				System.err.println(e.getClass().getName() + ": " + e.getMessage());
-				System.exit(0);
-			}
-			System.out.println("Records created successfully");
-		}
-	  
-	 public void insertIntoPraline(){
-		 
+	/////////////////////////////////////////////////////////////////////////////////
+	//				Application Aufruf: einfügen in die Tabelle (1 malig)		   //
+	/////////////////////////////////////////////////////////////////////////////////
+	 public void insertIntoPraline() throws SQLException{
+		 Connection c = null;
 		 try {
-			  Connection c = DB.getConnection();
+			 
+			  c = DB.getConnection();
 		      Statement stmt = null;
 		      stmt = c.createStatement();
 
@@ -227,87 +152,68 @@ public class JDBC {
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		      System.exit(0);
+		      c.close();
 		    }
 		    System.out.println("Records(Praline) created successfully");
 	 }
 	 
-	 public void insertIntoWarenkorb(String email, String ware,
-				double preis) {
-			Connection c = null;
-			Statement stmt = null;
-
-			try {
-				c = DB.getConnection();
-
-				// Insert Student
-				stmt = c.createStatement();
-				String strInsertIntoWarenkorb = "INSERT INTO Warenkorb (email, ware, preis) VALUES ('"
-						+ email
-						+ "','"
-						+ ware
-						+ "','" 
-						+preis +"'"+
-						")";
-				
-				System.out.println(strInsertIntoWarenkorb);
-				stmt.executeUpdate(strInsertIntoWarenkorb);
-				stmt.close();
-				c.close();
-			} catch (Exception e) {
-				System.err.println(e.getClass().getName() + ": " + e.getMessage());
-				System.exit(0);
-			}
-			System.out.println("Records created successfully");
-		}
-	 
-
-	 public void select() {
-		 try {
-			  Connection c = DB.getConnection();
+	 /////////////////////////////////////////////////////////////////////////////////
+	 //				Application Aufruf: einfügen in die Tabelle (1 malig)		    //
+	 /////////////////////////////////////////////////////////////////////////////////
+	 public void createTableUser() throws SQLException
+	  {
+		 Connection c = null;
+		     try {
+		      c = DB.getConnection();
 		      Statement stmt = null;
 		      stmt = c.createStatement();
-		      ResultSet rs = stmt.executeQuery( "SELECT * FROM Torte;" );
-		      
-//		      Schema: (id,name,pfad,beschr,kategorie_id, preis, bestand)
-		      while ( rs.next() ) {
-		         int id = rs.getInt("id");
-		         String  name = rs.getString("name");
-		         String  pfad = rs.getString("pfad");
-		         String  beschr = rs.getString("beschr");
-		         String  kategorie_id = rs.getString("kategorie_id");
-		         float preis = rs.getFloat("preis");
-		         int bestand =rs.getInt("bestand");
-		         System.out.println( "ID = " + id );
-		         System.out.println( "NAME = " + name );
-		         System.out.println( "PFAD = " + pfad );
-		         System.out.println( "BESCHR = " + beschr );
-		         System.out.println( "KATEGORIE_ID = " + kategorie_id );
-		         System.out.println( "PREIS = " + preis );
-		         System.out.println( "LAGERBESTAND = " + bestand);
-		         System.out.println(); 
-		         System.out.println("Operation done successfully");
-      
-    
-		      }
-//		      ResultSet rs = stmt.executeQuery( "SELECT * FROM Search;" );
-//		      while ( rs.next() ) {
-//		         int idS = rs.getInt("id");
-//		         String  nameS = rs.getString("name");
-//		         System.out.println( "ID = " + idS );
-//		         System.out.println( "NAME = " + nameS );
-//		         System.out.println();
-//			    System.out.println("Operation done successfully");
-//			  }
-		      rs.close();
+		      String strCreateUser =
+		    		  "CREATE TABLE IF NOT EXISTS User (" +
+								"email  VARCHAR(50) PRIMARY KEY, "	+
+								"passwort VARCHAR(50) NOT NULL, " +
+								"vorname VARCHAR(50) NOT NULL, " +
+								"nachname VARCHAR(50) NOT NULL, " +
+								"adresse  VARCHAR(100) NOT NULL," +
+								"PLZ INTEGER NOT NULL" +
+								")";
+		      stmt.executeUpdate(strCreateUser);
 		      stmt.close();
 		      c.close();
 		    } catch ( Exception e ) {
 		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-		      System.exit(0);
+		      c.close();
 		    }
-		 
+		   
+		     System.out.println("If did not exist: Table User created successfully");
+		  }
+	 /////////////////////////////////////////////////////////////////////////////////
+	 //				Application Aufruf: einfügen in die Tabelle (1 malig)		    //
+	 /////////////////////////////////////////////////////////////////////////////////
+	 public void createTableWarenkorb() throws SQLException
+	  {
+		 Connection c = null;
+		     try {
+		      c = DB.getConnection();
+		      Statement stmt = null;
+		      stmt = c.createStatement();
+		      String strCreateWarenkorb =
+		    		  "CREATE TABLE IF NOT EXISTS Warenkorb (" +
+		    				  	"id  INTEGER PRIMARY KEY AUTOINCREMENT,"	+
+								"email VARCHAR(100) NOT NULL, " +
+								"ware  VARCHAR(100) NOT NULL," +
+								"preis decimal(4,2) NOT NULL" +
+								")";
+		      stmt.executeUpdate(strCreateWarenkorb);
+		      stmt.close();
+		      c.close();
+		    } catch ( Exception e ) {
+		      System.err.println( e.getClass().getName() + ": " + e.getMessage() );		   
+		      c.close();
+		    }
+		   
+		     System.out.println("If did not exist: Table Warenkorb created successfully");
+		  }
+	 
 
 	 
-	 }
 }
