@@ -1,68 +1,52 @@
 package controllers;
 
-import java.awt.Font;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+
 
 import play.libs.F.Callback;
 import play.libs.F.Callback0;
 import play.mvc.WebSocket;
 
 import java.util.Map;
-import java.util.Random;
 
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import models.Gebaeck;
 //import models.JDBC;
 import models.Model;
 import models.Praline;
 import models.Torte;
 import models.User;
 import models.WarenkorbM;
-import play.*;
-import play.api.mvc.Session;
-import play.data.*;
-import play.libs.F.Callback0;
+
 import play.mvc.*;
 import views.html.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson; 
-import com.google.gson.JsonArray; 
+ 
 import com.google.gson.JsonObject; 
 
 public class Application extends Controller {
 	private static final Object lock = new Object();
-	private static Application application = new Application();
-	private static final Object JDialog = null;
+
 	public static HashMap<String, HashMap<String, String>> outerMap = new HashMap<String, HashMap<String, String>>();
 	public static HashMap<String, String> innerMap = new HashMap<String, String>();
 	public static int a;
 	public static int eingeloggt;
-//	static JDBC database = new JDBC();
 	public static int status; 
-    private static Random rand = new Random();
-    private static int i=0;
     
     
     public static Result index(){
-//session().clear();
-//    	Model.sharedInstance.deleteWk();
+
     	String user = session("connected");
 		System.out.println(user);
     	if (user!=null){
@@ -80,13 +64,8 @@ public class Application extends Controller {
     	String email = session("connected");
     	double preisd = Double.parseDouble(preis);
 
-
-//    	final Map<String, float[]> values = request().body().asFormUrlEncoded();
-//    	if (Model.sharedInstance.getUser(values.get("email")[0]) == null) {
     	Model.sharedInstance.insertIntoWarenkorb(email, ware, preisd);
-    
-//    		models.Warenkorb warenkorb = Model.sharedInstance.getWarenkorb(email);
-//    		int a =warenkorb.getNr();    
+       
     		Warenkorb();
     		System.out.println(email +  ware + preisd);
     		return ok();      
@@ -109,15 +88,6 @@ public class Application extends Controller {
 	      
 	      Collection<Torte> Torten =  new HashSet<Torte>();
 	      Torten = Model.sharedInstance.getTorten();
-//    	Ausführungszeilen zu JDBC
-//    JDBC ausgabe = new JDBC();
-//    	ausgabe.createTable();
-//    	ausgabe.insertInto();
-//    	ausgabe.createTablePraline();
-//    	ausgabe.insertIntoPraline();
-//    	ausgabe.createTableUser();
-//    	ausgabe.select();
-//		ausgabe.createTableWarenkorb();
     	
 		return ok(Kategorie_Torten.render(Torten, status));
 	
@@ -203,7 +173,7 @@ public class Application extends Controller {
     	            {
     
     	            	allePLZ= "<p id='"+i+"' abc("+i+")'>" +aktuellerWert+"</p>" + allePLZ;
-//    	            	allePLZ= aktuellerWert+  "." + allePLZ ;
+
     	            } 
     	            
     	            reader.close();    
@@ -314,7 +284,7 @@ public class Application extends Controller {
     }
     public static Result WaitingTime() throws InterruptedException{
     	synchronized(lock){
-    		lock.wait(250);}
+    		lock.wait(10);}
     	return redirect("/Warenkorb");
     }
     public static Result Anmeldung(){

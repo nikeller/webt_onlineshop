@@ -1,7 +1,6 @@
 package models;
 
 
-import java.awt.Font;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,22 +8,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
+
 import java.util.Observable;
-import java.util.Observer;
-import java.text.*;
 
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 import play.db.DB;
-import controllers.Assets;
+
 
 public class Model extends Observable {
 
@@ -320,7 +312,6 @@ public class Model extends Observable {
 			System.out.println("JSON-Menge: " + jsonMenge);
 
 		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if (rs != null) {
@@ -335,12 +326,7 @@ public class Model extends Observable {
 				} catch (SQLException e) {
 				}
 			}
-			if (connection != null) {
-				try {
-					connection.close();
-				} catch (SQLException e) {
-				}
-			}
+
 		}
 
 		return jsonMenge;
@@ -536,7 +522,7 @@ public class Model extends Observable {
 
 		      stmt.close();
 		    } catch (SQLException e) {
-				System.out.println("Fehler beim Aufruf getWarenkorb");
+				System.out.println("Fehler beim Aufruf InitDB");
 				e.printStackTrace();
 			} finally {
 				try {
@@ -545,7 +531,7 @@ public class Model extends Observable {
 					e.printStackTrace();
 				}
 			}
-		    System.out.println("Records(Praline) created successfully");
+		    System.out.println("Records created successfully");
 	 }
 	 
 	
