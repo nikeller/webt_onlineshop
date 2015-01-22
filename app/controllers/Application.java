@@ -71,7 +71,7 @@ public class Application extends Controller {
     		return ok();      
    }
 
-	public static Result Kategorie_Torten() throws SQLException {
+	public static Result Kategorie_Torten() {
 
 		String user = session("connected");
 		System.out.println(user);
@@ -200,8 +200,8 @@ public class Application extends Controller {
 		User KundeReg = Model.sharedInstance.getUser(Help);
 		String EmailCheck = values.get("emailA")[0];
 		String PasswortCheck = values.get("passwortA")[0];
-		 System.out.println(EmailCheck+" "+ PasswortCheck);
-		 System.out.println(KundeReg);
+		System.out.println(EmailCheck+" "+ PasswortCheck);
+		System.out.println(KundeReg);
         
 		if (KundeReg != null) {
 			if (KundeReg.getEmail().equals(EmailCheck)) {
@@ -247,29 +247,36 @@ public class Application extends Controller {
     	}
 
     	Collection<WarenkorbM> WKM = new HashSet<WarenkorbM>();
+    	
     	if(WKM!=null){
     		for (int i=0;i<WKM.size();i++){
     			WKM.remove(i);
     		}
     	}
-		//System.out.print("----------------"+WKM.size());
+
     	WKM = Model.sharedInstance.getWarenkorb(user);
-//		System.out.print(WKM.size());
-    	return ok(Warenkorb.render(WKM, status));
+    	int listenSize = WKM.size();
+    	System.out.println("Größeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee:"+listenSize);
+
+    	return ok(Warenkorb.render(listenSize, WKM, status));
     	
     }
    
     public static Result Bestellung(){
-    	Collection<WarenkorbM> WKM = new HashSet<WarenkorbM>();
 
-		for (int i=0;i<WKM.size();i++){
-		WKM.remove(i);
-		}
-		
     	String user = session("connected");
+    	
     	if (user!=null){
-    		WKM = Model.sharedInstance.getWarenkorb(user);
-    		Model.sharedInstance.WarenkorbL(user);
+        		Collection<WarenkorbM> WKM = new HashSet<WarenkorbM>();
+        		if(WKM!=null){
+        			for (int i=0;i<WKM.size();i++){
+        					WKM.remove(i);
+        				}
+        			}
+    			WKM = Model.sharedInstance.getWarenkorb(user);
+    			if (WKM!=null){
+    					Model.sharedInstance.WarenkorbL(user);
+    				}
     		return redirect("/");
     		}
     	else{
@@ -283,7 +290,7 @@ public class Application extends Controller {
     }
     public static Result WaitingTime() throws InterruptedException{
     	synchronized(lock){
-    		lock.wait(10);}
+    		lock.wait(150);}
     	return redirect("/Warenkorb");
     }
     public static Result Anmeldung(){

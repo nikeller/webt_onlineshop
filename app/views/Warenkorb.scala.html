@@ -1,4 +1,4 @@
-@(warenkoerbe: Collection[WarenkorbM], status: Int)
+@(listensize: Int, warenkoerbe: Collection[WarenkorbM], status: Int)
 @main("Warenkorb"){
 
 <!DOCTYPE html>
@@ -29,7 +29,16 @@
   <div class="clearfix visible-xs-block"></div>
 <!--   <div class="clearfix visible-xs-block"></div> -->
 		<div class="col-xs-6 col-sm-4">
-			
+			<ul class="nav navbar-nav navbar-right">
+				@if(status==1){
+				<li><form action="/Abmeldung"><button class="btn btn-default">Abmelden</button></form></li>
+					} else {
+					
+					<li><form action="@routes.Application.Anmeldung">
+						<button class="btn btn-default">Anmelden</button>
+					</form></li>
+					}
+			</ul>
 		</div>
 	</div>
   
@@ -58,11 +67,10 @@
 </table>
 
 
-<form action="@routes.Application.index">
-			<button>weiter Einkaufen</button>
-		</form>
-		<form action="/Bestellung"><button>Bestellen</button></form>
-
+<form action="@routes.Application.index"><button>weiter Einkaufen</button></form>
+@if(listensize>0){		
+<form action="/Bestellung"><button>Bestellen</button></form>
+}
   </div>
 </div>
 

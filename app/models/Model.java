@@ -38,12 +38,13 @@ public class Model extends Observable {
 	 /////////////////////////////////////////////////////////////////////////////////
 	public ArrayList<Torte> getTorten() {
 		torte.clear();
+		ResultSet rs =null;
 		PreparedStatement pstmt = null;
 		try {
 			connection = DB.getConnection();
 			String torteInfoSQL = "SELECT * FROM Torte;";
 			pstmt = connection.prepareStatement(torteInfoSQL);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Torte torten = new Torte(rs.getInt("id"), rs.getString("name"),
 						rs.getString("beschr"), rs.getString("pfad"),
@@ -57,6 +58,7 @@ public class Model extends Observable {
 			e.printStackTrace();
 		} finally {
 			try {
+				rs.close();
 				pstmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -70,12 +72,13 @@ public class Model extends Observable {
 	 /////////////////////////////////////////////////////////////////////////////////
 	public ArrayList<Praline> getPralinen(){
 		praline.clear();
+		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		try {
 			connection =DB.getConnection();
 			String pralineInfoSQL = "SELECT * FROM Praline;";
 			pstmt = connection.prepareStatement(pralineInfoSQL);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Praline pralinen = new Praline(rs.getInt("id"), rs.getString("name"),
 						rs.getString("beschr"), rs.getString("pfad"),
@@ -89,6 +92,7 @@ public class Model extends Observable {
 			e.printStackTrace();
 		} finally {
 			try {
+				rs.close();
 				pstmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -107,11 +111,12 @@ public class Model extends Observable {
 	public User getUser(String email){
 		String getUserSQL = "SELECT * FROM User WHERE User.email = '"
 				+ email + "'";
+		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		try {
 			connection =DB.getConnection();
 			pstmt = connection.prepareStatement(getUserSQL);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			User user = new User(rs.getString("email"),
 					rs.getString("passwort"), rs.getString("vorname"),
 					rs.getString("nachname"), rs.getString("adresse"),
@@ -122,6 +127,7 @@ public class Model extends Observable {
 			e.printStackTrace();
 		} finally {
 			try {
+				rs.close();
 				pstmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -138,6 +144,7 @@ public class Model extends Observable {
 	public ArrayList<WarenkorbM> getWarenkorb(String email){
 		ArrayList<WarenkorbM > warenkorbL = new ArrayList<WarenkorbM>();
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		if(warenkorbL!=null){
 			for (int i=0;i<warenkorbL.size();i++){
 				warenkorbL.remove(i);	
@@ -148,7 +155,7 @@ public class Model extends Observable {
 		try {
 			connection =DB.getConnection();
 			pstmt = connection.prepareStatement(getWarenkorbSQL);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
 			WarenkorbM WKM = new WarenkorbM(rs.getInt("id"), rs.getString("email"), rs.getString("ware"),
 					rs.getDouble("preis"));
@@ -159,6 +166,7 @@ public class Model extends Observable {
 			e.printStackTrace();
 		} finally {
 			try {
+				rs.close();
 				pstmt.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -180,14 +188,16 @@ public class Model extends Observable {
 		int anzahlUpdateT=0;
 		int anzahlUpdateP=0;
 		short eins = -1;
-	
+		ResultSet rs = null;
+		ResultSet produkt_id_torte = null;
+		ResultSet produkt_id_praline = null;
 		try {	
 			connection = DB.getConnection();
 			String getProduktNamen = "SELECT * FROM Warenkorb WHERE email = '"
 					+ email + "'";
 			
 			PreparedStatement pstmt = connection.prepareStatement(getProduktNamen);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			
 	
 			while(rs.next()){
@@ -200,11 +210,11 @@ public class Model extends Observable {
 					+ Name + "'";
 			
 			stmt2 = connection.createStatement();
-			ResultSet produkt_id_torte = stmt2.executeQuery(getKategorieIDT);
+			produkt_id_torte = stmt2.executeQuery(getKategorieIDT);
 
 			
 			stmt3 = connection.createStatement();
-			ResultSet produkt_id_praline = stmt3.executeQuery(getKategorieIDP);
+			produkt_id_praline = stmt3.executeQuery(getKategorieIDP);
 
 			
 			if(produkt_id_torte != null){
@@ -216,13 +226,12 @@ public class Model extends Observable {
 					
 					anzahlUpdateT = stmt4.executeUpdate(UpdateStringT);	
 
-					int observertestt = countObservers();
-					System.out.println("Anzahl Observer="+observertestt);
 
-					if (countObservers() > 0) {
-						setChanged();
-						notifyObservers(produkt_id_torte.getString("name"));
-						}
+
+//					if (countObservers() > 0) {
+//						setChanged();
+//						notifyObservers(produkt_id_torte.getString("name"));
+//						}
 				
 				
 					}
@@ -239,13 +248,12 @@ public class Model extends Observable {
 					
 					anzahlUpdateP = stmt5.executeUpdate(UpdateStringP);	
 
-					int observertestp = countObservers();
-					System.out.println("Anzahl Observer="+observertestp);
 
-					if (countObservers() > 0) {
-						setChanged();
-						notifyObservers(produkt_id_praline.getString("name"));
-						}
+
+//					if (countObservers() > 0) {
+//						setChanged();
+//						notifyObservers(produkt_id_praline.getString("name"));
+//						}
 				}
 			}
 			System.out.println("--------If did not exist: Table created successfully");}
@@ -262,6 +270,10 @@ public class Model extends Observable {
 		} finally {
 			try {
 				
+					rs.close();
+					produkt_id_torte.close();
+					produkt_id_praline.close();
+					
 					stmt2.close();
 					
 				
