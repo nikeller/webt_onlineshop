@@ -28,7 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import models.Gebaeck;
-import models.JDBC;
+//import models.JDBC;
 import models.Model;
 import models.Praline;
 import models.Torte;
@@ -54,7 +54,7 @@ public class Application extends Controller {
 	public static HashMap<String, String> innerMap = new HashMap<String, String>();
 	public static int a;
 	public static int eingeloggt;
-	static JDBC database = new JDBC();
+//	static JDBC database = new JDBC();
 	public static int status; 
     private static Random rand = new Random();
     private static int i=0;
