@@ -239,10 +239,7 @@ public class Application extends Controller {
     	String user = session("connected");
     	if (user!=null){
     		System.out.println("Warenkorb: immernoch eingeloggt");
-    		status = 1;
-    		
-    		
-    		
+    		status = 1;	
     	}
     	else {
     		System.out.println("Warenkorb: nicht eingeloggt");
@@ -250,9 +247,11 @@ public class Application extends Controller {
     	}
 
     	Collection<WarenkorbM> WKM = new HashSet<WarenkorbM>();
-		for (int i=0;i<WKM.size();i++){
-		WKM.remove(i);
-		}
+    	if(WKM!=null){
+    		for (int i=0;i<WKM.size();i++){
+    			WKM.remove(i);
+    		}
+    	}
 		//System.out.print("----------------"+WKM.size());
     	WKM = Model.sharedInstance.getWarenkorb(user);
 //		System.out.print(WKM.size());
@@ -292,37 +291,37 @@ public class Application extends Controller {
     	return ok(Anmeldung.render());
     }
     
-    public static WebSocket<JsonNode> socket() {
-    	System.out.println("in socket");
-		return new WebSocket<JsonNode>() {
-			
-			public void onReady(WebSocket.In<JsonNode> in,
-					final WebSocket.Out<JsonNode> out) {
-				System.out.println(": WebSocketArtikel ready...");
-				final ObserverPage obs = new ObserverPage();
-				obs.shop = out;
-				System.out.println(": Anzahl observer: "
-						+ Model.sharedInstance.countObservers());
-				in.onMessage(new Callback<JsonNode>() {
-					public void invoke(JsonNode obj) {
-
-					}
-
-				});
-
-				in.onClose(new Callback0() {
-					public void invoke() {
-						// observer.remove(id);
-						Model.sharedInstance.deleteObserver(obs);
-
-						System.out.println(": Artikelansicht verlassen...");
-						System.out.println( ": Anzahl observer: "+ Model.sharedInstance.countObservers());
-					}
-				});
-
-			}
-		};
-	}
+//    public static WebSocket<JsonNode> socket() {
+//    	System.out.println("in socket");
+//		return new WebSocket<JsonNode>() {
+//			
+//			public void onReady(WebSocket.In<JsonNode> in,
+//					final WebSocket.Out<JsonNode> out) {
+//				System.out.println(": WebSocketArtikel ready...");
+//				final ObserverPage obs = new ObserverPage();
+//				obs.shop = out;
+//				System.out.println(": Anzahl observer: "
+//						+ Model.sharedInstance.countObservers());
+//				in.onMessage(new Callback<JsonNode>() {
+//					public void invoke(JsonNode obj) {
+//
+//					}
+//
+//				});
+//
+//				in.onClose(new Callback0() {
+//					public void invoke() {
+//						// observer.remove(id);
+//						Model.sharedInstance.deleteObserver(obs);
+//
+//						System.out.println(": Artikelansicht verlassen...");
+//						System.out.println( ": Anzahl observer: "+ Model.sharedInstance.countObservers());
+//					}
+//				});
+//
+//			}
+//		};
+//	}
 
     
     

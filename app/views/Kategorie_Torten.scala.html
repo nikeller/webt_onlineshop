@@ -13,23 +13,7 @@
 
 <!-- <script language="JavaScript" type="text/javascript"
 	src="ajax_search.js"></script> -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">>
-		//WebSocket Skript
-var webSocket;
-$(function() {
-	var WS = window["MozWebSocket"] ? MozWebSocket : WebSocket;
-	webSocket = new WS("@routes.Application.socket().webSocketURL(request)");
-	webSocket.onmessage = receiveEvent;
-})
-		
-function receiveEvent(event){
-	var obj = JSON.parse(event.data);
 
-	$("#bestand"+obj.name).html(obj.Menge);
-	
-};
-
-</script>
 <script type="text/javascript">
 
 
