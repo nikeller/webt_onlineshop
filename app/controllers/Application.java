@@ -244,7 +244,7 @@ public class Application extends Controller {
 		            
 					return redirect("/");
 				} else {
-					return redirect("/Registrierung");
+					return redirect("/Anmeldung");
 				}
 			} else {
 				return redirect("/Registrierung");
