@@ -22,8 +22,8 @@ $(function() {
 		
 function receiveEvent(event){
 	var obj = JSON.parse(event.data);
-
-	$("#menge"+obj.name).html("<p>Menge: "+obj.Menge);
+	
+	$("#bestand"+obj.name).html(obj.Menge);
 	
 };
 
@@ -137,7 +137,7 @@ function uebergabe(chocolate) {
 					<tr id="Chocolate@praline.getProdukt_id">	
 						<td id="ware@praline.getProdukt_id">@praline.produkt_name</td>
 						<td><img class="img-responsive" alt="Responsives Bild" src="@praline.bild"></td>
-						<td id="bestand">@praline.bestand</td>
+						<td id="bestand@praline.getProdukt_name">@praline.bestand</td>
 						<td id="preis@praline.getProdukt_id">@praline.preis</td>
 						<td><form onsubmit="uebergabe(Chocolate@praline.getProdukt_id);" action="@routes.Application.WaitingTime">
 								<button type="submit">In

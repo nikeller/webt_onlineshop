@@ -2,7 +2,6 @@ package models;
 
 
 import java.awt.Font;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,16 +12,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Observable;
+import java.util.Observer;
 import java.text.*;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
-import org.json.*;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 import play.db.DB;
 import controllers.Assets;
@@ -186,7 +185,7 @@ public class Model extends Observable {
 		int anzahlUpdateT=0;
 		int anzahlUpdateP=0;
 		short eins = -1;
-		System.out.println("übergebene E-Mail: "+email);
+	
 		try {	
 			connection = DB.getConnection();
 			String getProduktNamen = "SELECT * FROM Warenkorb WHERE email = '"
@@ -195,7 +194,7 @@ public class Model extends Observable {
 			PreparedStatement pstmt = connection.prepareStatement(getProduktNamen);
 			ResultSet rs = pstmt.executeQuery();
 			
-			System.out.println("aus DB gelesen: ware aus Warenkorb: "+ rs);
+	
 			while(rs.next()){
 				
 			String Name = rs.getString("ware");
@@ -207,29 +206,27 @@ public class Model extends Observable {
 			
 			stmt2 = connection.createStatement();
 			ResultSet produkt_id_torte = stmt2.executeQuery(getKategorieIDT);
-			System.out.println("aus Torten gelesen: "+ produkt_id_torte);
+
 			
 			stmt3 = connection.createStatement();
 			ResultSet produkt_id_praline = stmt3.executeQuery(getKategorieIDP);
-			System.out.println("aus Pralinen gelesen: "+ produkt_id_praline);
+
 			
 			if(produkt_id_torte != null){
 				while(produkt_id_torte.next()){
-				
+					System.out.println("übergebene E-Mail: "+email);
 					stmt4 = connection.createStatement();
 					String UpdateStringT = "UPDATE Torte SET bestand = bestand" + eins
 											+ " WHERE id = '" + produkt_id_torte.getInt("id") +"';";
 					
 					anzahlUpdateT = stmt4.executeUpdate(UpdateStringT);	
-			
-					System.out.println(" ArtikelNummer "
-							+ produkt_id_torte.getInt("id") + " bestellt...");
-				
+
 					int observertestt = countObservers();
 					System.out.println("Anzahl Observer="+observertestt);
+
 					if (countObservers() > 0) {
 						setChanged();
-						notifyObservers(produkt_id_torte.getInt("id"));
+						notifyObservers(produkt_id_torte.getString("name"));
 						}
 				
 				
@@ -240,19 +237,19 @@ public class Model extends Observable {
 			
 			if(produkt_id_praline != null){
 				while(produkt_id_praline.next()){
+					System.out.println("übergebene E-Mail: "+email);
 					stmt5 = connection.createStatement();
 					String UpdateStringP = "UPDATE Praline SET bestand = bestand" + eins
 											+ " WHERE id = '" + produkt_id_praline.getInt("id") +"';";
 					
 					anzahlUpdateP = stmt5.executeUpdate(UpdateStringP);	
-					
-					System.out.println(" ArtikelNummer "
-							+ produkt_id_praline.getInt("id") + " bestellt...");
+
 					int observertestp = countObservers();
 					System.out.println("Anzahl Observer="+observertestp);
+
 					if (countObservers() > 0) {
 						setChanged();
-						notifyObservers(produkt_id_praline.getInt("id"));	
+						notifyObservers(produkt_id_praline.getString("name"));
 						}
 				}
 			}
@@ -263,21 +260,25 @@ public class Model extends Observable {
 			
 			stmt6 = connection.createStatement();
 			stmt6.executeUpdate(strWarenkorbL);
-			System.out.println(strWarenkorbL);
 			
 		} catch (SQLException e) {
 			System.out.println("Fehler beim Aufruf WarenkorbL");
 			e.printStackTrace();
 		} finally {
 			try {
-				stmt2.close();
-				stmt3.close();
+				
+					stmt2.close();
+					
+				
+					stmt3.close();
+					
+				
 				if(stmt4!=null){
-				stmt4.close();
-				}
+					stmt4.close();
+					}
 				if(stmt5!=null){
-				stmt5.close();
-				}
+					stmt5.close();
+					}
 				stmt6.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -298,16 +299,18 @@ public class Model extends Observable {
 		JsonNode jsonMenge = null;
 		String name = obj.get("name").asText();
 		Integer menge = null;
-
+		System.out.println("Init done ");
 		try {
+			System.out.println("in try ");
 			connection = DB.getConnection();
 			stmt = connection.createStatement();
 			rs = stmt
-					.executeQuery("SELECT * FROM Torte WHERE name = '"
+					.executeQuery("SELECT * FROM Torte, Praline WHERE name = '"
 							+ name + "' ;");
 
 			if (rs.next()) {
 				menge = new Integer(rs.getInt("bestand"));
+				System.out.println("in rs next");
 			}
 
 			ObjectMapper mapper = new ObjectMapper();
