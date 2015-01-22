@@ -25,7 +25,7 @@ $(function() {
 function receiveEvent(event){
 	var obj = JSON.parse(event.data);
 
-	$("#menge"+obj.name).html("<p>Menge: "+obj.Menge);
+	$("#bestand"+obj.name).html(obj.Menge);
 	
 };
 

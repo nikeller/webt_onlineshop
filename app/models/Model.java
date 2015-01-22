@@ -2,6 +2,7 @@ package models;
 
 
 import java.awt.Font;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Observable;
+import java.text.*;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -32,21 +34,23 @@ public class Model extends Observable {
 	public Model() {
 		
 	}
-
+	private static Connection connection = DB.getConnection();
 	public static ArrayList<Torte> torte = new ArrayList<Torte>();
 	public static ArrayList<Praline> praline = new ArrayList<Praline>();
-	public static ArrayList<Gebaeck> gebaeck = new ArrayList<Gebaeck>();
+	public ArrayList<User> users = new ArrayList<User>();
 	
 
 
-
-	public ArrayList<Torte> getTorten() throws SQLException {
-		Connection connection = null;
+	 /////////////////////////////////////////////////////////////////////////////////
+	 //				Application Aufruf: Kategorie Torten				     	    //
+	 /////////////////////////////////////////////////////////////////////////////////
+	public ArrayList<Torte> getTorten() {
 		torte.clear();
+		PreparedStatement pstmt = null;
 		try {
-			connection =DB.getConnection();
+			connection = DB.getConnection();
 			String torteInfoSQL = "SELECT * FROM Torte;";
-			PreparedStatement pstmt = connection.prepareStatement(torteInfoSQL);
+			pstmt = connection.prepareStatement(torteInfoSQL);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Torte torten = new Torte(rs.getInt("id"), rs.getString("name"),
@@ -56,22 +60,29 @@ public class Model extends Observable {
 				torte.add(torten);
 
 			}
-		} catch (Exception e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			connection.close();
+		}catch (SQLException e) {
+			System.out.println("Fehler beim Aufruf getTorten");
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		connection.close();
 		return torte;
 
 	}
-
-	public ArrayList<Praline> getPralinen() throws SQLException {
-		Connection connection = null;
+	 /////////////////////////////////////////////////////////////////////////////////
+	 //				Application Aufruf: Kategorie Pralinen				     	    //
+	 /////////////////////////////////////////////////////////////////////////////////
+	public ArrayList<Praline> getPralinen(){
 		praline.clear();
+		PreparedStatement pstmt = null;
 		try {
 			connection =DB.getConnection();
 			String pralineInfoSQL = "SELECT * FROM Praline;";
-			PreparedStatement pstmt = connection.prepareStatement(pralineInfoSQL);
+			pstmt = connection.prepareStatement(pralineInfoSQL);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Praline pralinen = new Praline(rs.getInt("id"), rs.getString("name"),
@@ -81,50 +92,33 @@ public class Model extends Observable {
 				praline.add(pralinen);
 
 			}
-		} catch (Exception e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			connection.close();
+		} catch (SQLException e) {
+			System.out.println("Fehler beim Aufruf getPralinen");
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		connection.close();
 		return praline;
 
 	}
-	
-	public ArrayList<Gebaeck> getGebaeck() throws SQLException {
-		Connection connection = null;
-		gebaeck.clear();
-		try {
-			connection =DB.getConnection();
-			String gebaeckInfoSQL = "SELECT * FROM Gebaeck;";
-			PreparedStatement pstmt = connection.prepareStatement(gebaeckInfoSQL);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				Gebaeck gebaecken = new Gebaeck(rs.getInt("id"), rs.getString("name"),
-						rs.getString("pfad"), rs.getString("beschr"),
-						rs.getString("kategorie_id"), rs.getFloat("preis"));
-
-				gebaeck.add(gebaecken);
-
-			}
-		} catch (Exception e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			connection.close();
-		}
-		connection.close();
-		return gebaeck;
-	}
 
 
-	public ArrayList<User> users = new ArrayList<User>();
-	
 
-	public User getUser(String email) throws SQLException {
-		Connection connection = null;
+	 /////////////////////////////////////////////////////////////////////////////////
+	 //				Application Aufruf: RegistrierungP, AnmeldenP 			     	//
+	 /////////////////////////////////////////////////////////////////////////////////
+
+	public User getUser(String email){
 		String getUserSQL = "SELECT * FROM User WHERE User.email = '"
 				+ email + "'";
+		PreparedStatement pstmt = null;
 		try {
 			connection =DB.getConnection();
-			PreparedStatement pstmt = connection.prepareStatement(getUserSQL);
+			pstmt = connection.prepareStatement(getUserSQL);
 			ResultSet rs = pstmt.executeQuery();
 			User user = new User(rs.getString("email"),
 					rs.getString("passwort"), rs.getString("vorname"),
@@ -132,20 +126,26 @@ public class Model extends Observable {
 					rs.getString("plz"));
 			return user;
 		} catch (SQLException e) {
-			System.out.println("User mit EMail " + email + " nicht gefunden!");
+			System.out.println("Fehler beim Aufruf getUser");
 			e.printStackTrace();
-			connection.close();
-		
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}	
 		}
-		connection.close();
 		return null;
 		
 	}
 
-	
-	public ArrayList<WarenkorbM> getWarenkorb(String email) throws SQLException {
-		Connection connection = null;
+	 /////////////////////////////////////////////////////////////////////////////////
+	 //				Application Aufruf: Bestellung, Warenkorb				     	//
+	 /////////////////////////////////////////////////////////////////////////////////
+
+	public ArrayList<WarenkorbM> getWarenkorb(String email){
 		ArrayList<WarenkorbM > warenkorbL = new ArrayList<WarenkorbM>();
+		PreparedStatement pstmt = null;
 		for (int i=0;i<warenkorbL.size();i++){
 			warenkorbL.remove(i);	
 			}
@@ -153,7 +153,7 @@ public class Model extends Observable {
 				+ email + "'";
 		try {
 			connection =DB.getConnection();
-			PreparedStatement pstmt = connection.prepareStatement(getWarenkorbSQL);
+			pstmt = connection.prepareStatement(getWarenkorbSQL);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 			WarenkorbM WKM = new WarenkorbM(rs.getInt("id"), rs.getString("email"), rs.getString("ware"),
@@ -161,18 +161,23 @@ public class Model extends Observable {
 			warenkorbL.add(WKM);
 			}
 		} catch (SQLException e) {
-			System.out.println("User mit EMail " + email + " nicht gefunden!");
+			System.out.println("Fehler beim Aufruf getWarenkorb");
 			e.printStackTrace();
-			connection.close();
-		
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}	
 		}
-		connection.close();
 		return warenkorbL;
 		
 	}
-	
+	 /////////////////////////////////////////////////////////////////////////////////
+	 //				Application Aufruf: Bestellung			     				    //
+	 /////////////////////////////////////////////////////////////////////////////////
+
 	public void WarenkorbL(String email) {
-		Connection c = null;
 		Statement stmt2 = null;
 		Statement stmt3 = null;
 		Statement stmt4 = null;
@@ -181,13 +186,13 @@ public class Model extends Observable {
 		int anzahlUpdateT=0;
 		int anzahlUpdateP=0;
 		short eins = -1;
-		System.out.println("alles angelegt");
+		System.out.println("übergebene E-Mail: "+email);
 		try {	
-			c = DB.getConnection();
+			connection = DB.getConnection();
 			String getProduktNamen = "SELECT * FROM Warenkorb WHERE email = '"
 					+ email + "'";
 			
-			PreparedStatement pstmt = c.prepareStatement(getProduktNamen);
+			PreparedStatement pstmt = connection.prepareStatement(getProduktNamen);
 			ResultSet rs = pstmt.executeQuery();
 			
 			System.out.println("aus DB gelesen: ware aus Warenkorb: "+ rs);
@@ -200,18 +205,18 @@ public class Model extends Observable {
 			String getKategorieIDP = "SELECT id FROM Praline WHERE name = '"
 					+ Name + "'";
 			
-			stmt2 = c.createStatement();
+			stmt2 = connection.createStatement();
 			ResultSet produkt_id_torte = stmt2.executeQuery(getKategorieIDT);
 			System.out.println("aus Torten gelesen: "+ produkt_id_torte);
 			
-			stmt3 = c.createStatement();
+			stmt3 = connection.createStatement();
 			ResultSet produkt_id_praline = stmt3.executeQuery(getKategorieIDP);
 			System.out.println("aus Pralinen gelesen: "+ produkt_id_praline);
 			
 			if(produkt_id_torte != null){
 				while(produkt_id_torte.next()){
 				
-					stmt4 = c.createStatement();
+					stmt4 = connection.createStatement();
 					String UpdateStringT = "UPDATE Torte SET bestand = bestand" + eins
 											+ " WHERE id = '" + produkt_id_torte.getInt("id") +"';";
 					
@@ -235,7 +240,7 @@ public class Model extends Observable {
 			
 			if(produkt_id_praline != null){
 				while(produkt_id_praline.next()){
-					stmt5 = c.createStatement();
+					stmt5 = connection.createStatement();
 					String UpdateStringP = "UPDATE Praline SET bestand = bestand" + eins
 											+ " WHERE id = '" + produkt_id_praline.getInt("id") +"';";
 					
@@ -255,24 +260,38 @@ public class Model extends Observable {
 
 			String strWarenkorbL = "DELETE" + " FROM Warenkorb"
 					+ " WHERE email = '" + email + "';";
+			
+			stmt6 = connection.createStatement();
+			stmt6.executeUpdate(strWarenkorbL);
 			System.out.println(strWarenkorbL);
 			
-			stmt6 = c.createStatement();
-			stmt6.executeUpdate(strWarenkorbL);
-			stmt6.close();
-			c.close();
-			
-		} catch (Exception e) {
-			System.err.println(e.getClass().getName() + ": " + e.getMessage());
+		} catch (SQLException e) {
+			System.out.println("Fehler beim Aufruf WarenkorbL");
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt2.close();
+				stmt3.close();
+				if(stmt4!=null){
+				stmt4.close();
+				}
+				if(stmt5!=null){
+				stmt5.close();
+				}
+				stmt6.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}	
 		}
 		
 		System.out.println("If did not exist: Table deleted");
 	}
 
 	
-
+	 /////////////////////////////////////////////////////////////////////////////////
+	 //				Application Aufruf: Observer			     				    //
+	 /////////////////////////////////////////////////////////////////////////////////
 	public static JsonNode zeigeAktuelleMenge(JsonNode obj) {
-		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 
@@ -281,8 +300,8 @@ public class Model extends Observable {
 		Integer menge = null;
 
 		try {
-			conn = DB.getConnection();
-			stmt = conn.createStatement();
+			connection = DB.getConnection();
+			stmt = connection.createStatement();
 			rs = stmt
 					.executeQuery("SELECT * FROM Torte WHERE name = '"
 							+ name + "' ;");
@@ -312,9 +331,9 @@ public class Model extends Observable {
 				} catch (SQLException e) {
 				}
 			}
-			if (conn != null) {
+			if (connection != null) {
 				try {
-					conn.close();
+					connection.close();
 				} catch (SQLException e) {
 				}
 			}
@@ -324,7 +343,88 @@ public class Model extends Observable {
 	}
 
 	
-	
+	 /////////////////////////////////////////////////////////////////////////////////
+	 //				Application Aufruf: beim Registrieren						    //
+	 /////////////////////////////////////////////////////////////////////////////////
+	 public void insertIntoUser(String email, String passwort,
+			String vorname, String nachname, String adresse, String PLZ){
+			Statement stmt = null;
+
+			try {
+				connection = DB.getConnection();
+
+				// Insert Student
+				stmt = connection.createStatement();
+				String strInsertIntoUser = "INSERT INTO User (email, passwort, vorname, nachname, adresse, PLZ) VALUES ('"
+						+ email
+						+ "','"
+						+ passwort
+						+ "','"
+						+ vorname
+						+ "','" 
+						+ nachname 
+						+ "','" 
+						+ adresse
+						+ "','"
+						+PLZ +"'"+
+						")";
+				
+				System.out.println(strInsertIntoUser);
+				stmt.executeUpdate(strInsertIntoUser);
+
+				stmt.close();
+				System.out.println("InsertIntoUser fertig___________________________________");
+			}  catch (SQLException e) {
+				System.out.println("Fehler beim Aufruf getWarenkorb");
+				e.printStackTrace();
+			} finally {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			System.out.println("Records created successfully");
+		}
+	  
+	 
+	/////////////////////////////////////////////////////////////////////////////////
+	//				Application Aufruf: beim Click in den Warenkorb				  //
+	////////////////////////////////////////////////////////////////////////////////
+	 public void insertIntoWarenkorb(String email, String ware,
+				double preis){
+			Statement stmt = null;
+
+			try {
+				connection = DB.getConnection();
+
+				// Insert Student
+				stmt = connection.createStatement();
+				String strInsertIntoWarenkorb = "INSERT INTO Warenkorb (email, ware, preis) VALUES ('"
+						+ email
+						+ "','"
+						+ ware
+						+ "','" 
+						+preis +"'"+
+						")";
+				
+				System.out.println(strInsertIntoWarenkorb);
+				stmt.executeUpdate(strInsertIntoWarenkorb);
+				stmt.close();
+				connection.close();
+				System.out.println("InsertInToWarenkorb fertig-----------------------------");
+			} catch (SQLException e) {
+				System.out.println("Fehler beim Aufruf getWarenkorb");
+				e.printStackTrace();
+			} finally {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			System.out.println("Records created successfully");
+		}
 	
 	
 	

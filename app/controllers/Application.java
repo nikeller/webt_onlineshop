@@ -60,7 +60,7 @@ public class Application extends Controller {
     private static int i=0;
     
     
-    public static Result index() throws SQLException {
+    public static Result index(){
 //session().clear();
 //    	Model.sharedInstance.deleteWk();
     	String user = session("connected");
@@ -76,14 +76,14 @@ public class Application extends Controller {
         return ok(index.render(status));
     }
    
-    public static Result submit(String ware, String preis) throws IOException, SQLException{
+    public static Result submit(String ware, String preis) throws IOException{
     	String email = session("connected");
     	double preisd = Double.parseDouble(preis);
 
 
 //    	final Map<String, float[]> values = request().body().asFormUrlEncoded();
 //    	if (Model.sharedInstance.getUser(values.get("email")[0]) == null) {
-    		database.insertIntoWarenkorb(email, ware, preisd);
+    	Model.sharedInstance.insertIntoWarenkorb(email, ware, preisd);
     
 //    		models.Warenkorb warenkorb = Model.sharedInstance.getWarenkorb(email);
 //    		int a =warenkorb.getNr();    
@@ -123,7 +123,7 @@ public class Application extends Controller {
 	
     }
     
-    public static Result Kategorie_Pralinen() throws SQLException {
+    public static Result Kategorie_Pralinen(){
     	String user = session("connected");
     	if (user!=null){
     		System.out.println("Pralinen: immernoch eingeloggt");
@@ -153,7 +153,7 @@ public class Application extends Controller {
 			return ok(Registrierung.render(""));
     }
     
-    public static Result RegistrierungP() throws SQLException {
+    public static Result RegistrierungP(){
         
     	final Map<String, String[]> values = request().body().asFormUrlEncoded();
     	if (Model.sharedInstance.getUser(values.get("email")[0]) == null) {
@@ -167,7 +167,7 @@ public class Application extends Controller {
     		int hash = passwort.hashCode();
     		String hashString = Integer.toString(hash);
     		
-    		database.insertIntoUser(email, hashString, vorname, nachname, adresse, plz);
+    		Model.sharedInstance.insertIntoUser(email, hashString, vorname, nachname, adresse, plz);
     		    
 
     		System.out.println(email + passwort +  vorname + nachname + adresse + plz + hash);
@@ -222,7 +222,7 @@ public class Application extends Controller {
 
     
     
-    public static Result AnmeldenP() throws SQLException {
+    public static Result AnmeldenP(){
     	
 		final Map<String, String[]> values = request().body().asFormUrlEncoded();
 		String Help= values.get("emailA")[0];
@@ -265,7 +265,7 @@ public class Application extends Controller {
     }
     
     
-    public static Result Warenkorb() throws IOException, SQLException{
+    public static Result Warenkorb() throws IOException{
     	String user = session("connected");
     	if (user!=null){
     		System.out.println("Warenkorb: immernoch eingeloggt");
@@ -290,7 +290,7 @@ public class Application extends Controller {
     	
     }
    
-    public static Result Bestellung() throws SQLException{
+    public static Result Bestellung(){
     	Collection<WarenkorbM> WKM = new HashSet<WarenkorbM>();
 
 		for (int i=0;i<WKM.size();i++){
