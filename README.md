@@ -7,7 +7,7 @@ Im Rahmen der Veranstaltung Web-Technologien wurde der Online-Shop „Sweet Shop
 
 ##### Anforderungsanalyse
 Use-Cases
-![Use-Cases](/public/images/Use-Case.jpg)
+![Use-Cases](app/public/images/Use-Case.jpg)
 
 ##### Funktionale Anforderungen
 1.	Der User sollte sich registrieren können
@@ -29,21 +29,21 @@ Die erste Idee des Projekts wurde in verschiedenen Mockups dargestellt.
 Die Mockups werden hier mit der tatsächlichen Realisierung verglichen. 
 
 Die Startseite sollte ein Suchfeld, einen Anmelde-Button und einen Warenkorb-Button enthalten. Auf der linken Seite sollen verschiedene Kategorien aufgeführt werden. Den Hauptteil der Startseite soll eine Bilderübersicht der Produkte der verschiedenen Kategorien ausfüllen. 
-![Startseite](/public/images/Mockup1.jpg)
+![Startseite](/nikeller/webt_onlineshop/blob/master/public/images/Mockup1.jpg)
 Bei der Realisierung der Startseite wurde auf das Suchfeld verzichtet und die Bildübersicht der Produkte der verschiedenen Kategorien wurde durch eine Slideshow ersetzt. 
-![Startseite](/public/images/Screenshot1.jpg)
+![Startseite](/nikeller/webt_onlineshop/blob/master/public/images/Screenshot1.jpg)
 Die weitere Idee war, dass jedes Produkt einzeln angeklickt werden kann, um auf die Seite des Produktes zu gelangen, auf der mehr Informationen, wie zum Beispiel eine Produktbeschreibung enthalten ist. Dort sollte dann auch ein Button sein, mit dem das Produkt in den Warenkorb gelegt werden kann. 
-![Produkt](/public/images/Mockup2.jpg)
+![Produkt](/nikeller/webt_onlineshop/blob/master/public/images/Mockup2.jpg)
 In der Realisierung  können die Produkte jetzt direkt aus der Kategorie in den Warenkorb gelegt werden und müssen nicht noch extra angeklickt werden. 
-![Produkt](/public/images/Screenshot2.jpg)
+![Produkt](/nikeller/webt_onlineshop/blob/master/public/images/Screenshot2.jpg)
 Im Warenkorb sollten dann die dort hineingelegten Produkte nochmals aufgelistet und der Gesamtpreis ermittelt werden. Hier kann dann entschieden werden, ob noch weiter eingekauft oder zur Kasse gegangen werden soll. 
-![Warenkorb](/public/images/Mockup3.jpg)
+![Warenkorb](/nikeller/webt_onlineshop/blob/master/public/images/Mockup3.jpg)
 Bei der Realisierung des Warenkorbs erscheint jetzt kein Gesamtpreis, der im Warenkorb befindlichen Produkte. Außerdem wurde der Schritt „zur Kasse gehen“ übersprungen. Somit können die Produkte direkt aus dem Warenkorb bestellt werden.
-![Warenkorb](/public/images/Screenshot3.jpg)
+![Warenkorb](/nikeller/webt_onlineshop/blob/master/public/images/Screenshot3.jpg)
 
 #### Architektur
 ##### Klassendiagramm
-![Klassendiagramm](/public/images/Klassendiagramm.jpg)
+![Klassendiagramm](/nikeller/webt_onlineshop/blob/master/public/images/Klassendiagramm.jpg)
 
 ##### Verwendete Technologien
 In dem Projekt wurden die folgenden Technologien verwendet: HTML5, CSS, JavaScript/JQuery, AJAX mit JSON, Java und WebSockets mit JSON.
