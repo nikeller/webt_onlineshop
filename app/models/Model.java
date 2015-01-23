@@ -140,10 +140,10 @@ public class Model extends Observable {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			String getUserSQL = "SELECT * FROM User WHERE User.email = '"
-					+ email + "'";
+			String getUserSQL = "SELECT * FROM User WHERE User.email = ?";
 			connection =DB.getConnection();
 			pstmt = connection.prepareStatement(getUserSQL);
+			pstmt.setString(1,  email);
 			rs = pstmt.executeQuery();
 			User user = new User(rs.getString("email"),
 					rs.getString("passwort"), rs.getString("vorname"),
@@ -191,11 +191,11 @@ public class Model extends Observable {
 				warenkorbL.remove(i);	
 				}
 		}
-		String getWarenkorbSQL = "SELECT * FROM Warenkorb WHERE Warenkorb.email = '"
-				+ email + "'";
+		String getWarenkorbSQL = "SELECT * FROM Warenkorb WHERE Warenkorb.email = ?";
 		try {
 			connection =DB.getConnection();
 			pstmt = connection.prepareStatement(getWarenkorbSQL);
+			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 			WarenkorbM WKM = new WarenkorbM(rs.getInt("id"), rs.getString("email"), rs.getString("ware"),
@@ -535,30 +535,30 @@ public class Model extends Observable {
 								")";
 		      stmt.executeUpdate(strCreateTorte);
 	      
-		      String strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
-	                   "VALUES ('Goldene Freude', '/assets/images/Torte_001.jpg',"
-	                   + "'Hochzeitstorte', 'T', 35.50, 30);"; 
-		      stmt.executeUpdate(strInsertIntoTorte);
-			 
-		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
-		                   "VALUES ('Himmlische Torte', '/assets/images/Torte_002.jpg',"
-		                   + "'Passend zur Hochzeit, Geburtstag', 'T', 33.0, 36);"; 
-		      stmt.executeUpdate(strInsertIntoTorte);
-	
-		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
-	                  "VALUES ('Hochzeitstorte', '/assets/images/Torte_003.jpg',"
-	                  + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 53);"; 
-		      stmt.executeUpdate(strInsertIntoTorte);
-		      
-		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
-	                  "VALUES ('Nusstorte', '/assets/images/Torte_004.jpg',"
-	                  + "'Zum Frühstück oder Geburtstag', 'T', 10.00, 50);"; 
-		      stmt.executeUpdate(strInsertIntoTorte);
-		      
-		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
-	                  "VALUES ('Wuff-Wuff', '/assets/images/Torte_005.jpg',"
-	                  + "'Passend zum Kindergeburtstag', 'T', 25.00, 42);"; 
-		      stmt.executeUpdate(strInsertIntoTorte);
+//		      String strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                   "VALUES ('Goldene Freude', '/assets/images/Torte_001.jpg',"
+//	                   + "'Hochzeitstorte', 'T', 35.50, 30);"; 
+//		      stmt.executeUpdate(strInsertIntoTorte);
+//			 
+//		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//		                   "VALUES ('Himmlische Torte', '/assets/images/Torte_002.jpg',"
+//		                   + "'Passend zur Hochzeit, Geburtstag', 'T', 33.0, 36);"; 
+//		      stmt.executeUpdate(strInsertIntoTorte);
+//	
+//		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                  "VALUES ('Hochzeitstorte', '/assets/images/Torte_003.jpg',"
+//	                  + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 53);"; 
+//		      stmt.executeUpdate(strInsertIntoTorte);
+//		      
+//		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                  "VALUES ('Nusstorte', '/assets/images/Torte_004.jpg',"
+//	                  + "'Zum Frühstück oder Geburtstag', 'T', 10.00, 50);"; 
+//		      stmt.executeUpdate(strInsertIntoTorte);
+//		      
+//		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                  "VALUES ('Wuff-Wuff', '/assets/images/Torte_005.jpg',"
+//	                  + "'Passend zum Kindergeburtstag', 'T', 25.00, 42);"; 
+//		      stmt.executeUpdate(strInsertIntoTorte);
 		      
 		      
 		      String strCreatePraline =
@@ -573,30 +573,30 @@ public class Model extends Observable {
 								")";
 		      stmt.executeUpdate(strCreatePraline);
 		      
-		      String strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
-		                   "VALUES ('Pralinen aus Milchschokolade', '/assets/images/Praline_001.jpg',"
-		                   + "'Für unsere Lieblinge', 'P', 10.00, 50);"; 
-		      stmt.executeUpdate(strInsertIntoPraline);
-			 
-		      strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
-		                   "VALUES ('Marmorpralinen', '/assets/images/Praline_002.jpg',"
-		                   + "'Für unsere Lieblinge', 'P', 8.00, 30);"; 
-		      stmt.executeUpdate(strInsertIntoPraline);
-
-		      strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
-	                   "VALUES ('Pralinen aus weisser Schokolade', '/assets/images/Praline_003.jpg',"
-	                   + "'Für unsere Lieblinge', 'P', 9.00, 10);"; 
-		      stmt.executeUpdate(strInsertIntoPraline);
-		      
-		      strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
-	                   "VALUES ('Pralinen-Assorti', '/assets/images/Praline_004.jpg',"
-	                   + "'Für unsere Lieblinge', 'P', 12.50, 10);"; 
-		      stmt.executeUpdate(strInsertIntoPraline);
-		      
-		      strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
-	                   "VALUES ('Assorti', '/assets/images/Praline_005.jpg',"
-	                   + "'Für unsere Lieblinge', 'P', 11.00, 10);"; 
-		      stmt.executeUpdate(strInsertIntoPraline);
+//		      String strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//		                   "VALUES ('Pralinen aus Milchschokolade', '/assets/images/Praline_001.jpg',"
+//		                   + "'Für unsere Lieblinge', 'P', 10.00, 50);"; 
+//		      stmt.executeUpdate(strInsertIntoPraline);
+//			 
+//		      strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//		                   "VALUES ('Marmorpralinen', '/assets/images/Praline_002.jpg',"
+//		                   + "'Für unsere Lieblinge', 'P', 8.00, 30);"; 
+//		      stmt.executeUpdate(strInsertIntoPraline);
+//
+//		      strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                   "VALUES ('Pralinen aus weisser Schokolade', '/assets/images/Praline_003.jpg',"
+//	                   + "'Für unsere Lieblinge', 'P', 9.00, 10);"; 
+//		      stmt.executeUpdate(strInsertIntoPraline);
+//		      
+//		      strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                   "VALUES ('Pralinen-Assorti', '/assets/images/Praline_004.jpg',"
+//	                   + "'Für unsere Lieblinge', 'P', 12.50, 10);"; 
+//		      stmt.executeUpdate(strInsertIntoPraline);
+//		      
+//		      strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                   "VALUES ('Assorti', '/assets/images/Praline_005.jpg',"
+//	                   + "'Für unsere Lieblinge', 'P', 11.00, 10);"; 
+//		      stmt.executeUpdate(strInsertIntoPraline);
 		      
 		      String strCreateWarenkorb =
 		    		  "CREATE TABLE IF NOT EXISTS Warenkorb (" +

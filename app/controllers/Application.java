@@ -214,7 +214,7 @@ public class Application extends Controller {
 		            
 					return redirect("/");
 				} else {
-					return redirect("/Registrierung");
+					return redirect("/Anmeldung");
 				}
 			} else {
 				return redirect("/Registrierung");
@@ -229,7 +229,7 @@ public class Application extends Controller {
     
     public static Result Abmeldung(){
     	String user = session("connected");
-    	System.out.println(user+"öööööööööööööööööööööööööööööööööööööööö");
+    	System.out.println(user+" ist abgemeldet");
     	session().clear();
     	return redirect("/");
     }
