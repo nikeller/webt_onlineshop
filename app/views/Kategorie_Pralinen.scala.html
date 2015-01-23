@@ -10,7 +10,22 @@
     <!-- Bootstrap -->
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")">
+<script type="text/javascript" src=@routes.Assets.at("javascripts/jquery-2.0.0.min.js")>
+var webSocket;
+$(function() {
+	alert();
+	var WS = window["MozWebSocket"] ? MozWebSocket : WebSocket;
+	webSocket = new WS("@routes.Application.socket().webSocketURL(request)");
+	webSocket.onmessage = receiveEvent;
+})
 
+function receiveEvent(event){
+	var obj = JSON.parse(event.data);
+
+	$("#bestand"+obj.name).html(obj.Menge);
+	
+};
+</script>
 <script type="text/javascript">
 
 function uebergabe(chocolate) {
