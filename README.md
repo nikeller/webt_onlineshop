@@ -66,7 +66,7 @@ In dem Projekt wurden die folgenden Technologien verwendet: HTML5, CSS, JavaScri
 HTML5 und CSS wurden verwendet, um den Inhalt und die Formatierung der Web-Applikation darzustellen. 
 JavaScript/JQuery wurden zur dynamischen Manipulation der Web-Applikation verwendet. Dies kam unter anderem auf der Startseite für die Slideshow zur Anwendung. 
 AJAX/JSON wurden zum asynchronen Nachladen von Daten verwendet. Realisiert wurde dies beim Registrieren-Formular. Wenn der Benutzer in dem Feld PLZ und Ort die PLZ eintippt, sollen per AJAX Vorschläge für die Eingabe asynchron nachgeladen werden. Die PLZ-Daten sind in einer JSON-Datei enthalten. 
-Java wurde für die gesamte Logik verwendet. Zu nennen wären hier…
+Java wurde für die gesamte Logik verwendet.
 
 Mit WebSockets wurde eine Verbindung zwischen dem Webbrowser (Client) und dem Server hergestellt. Die Idee der Implementierung war die Verfügbarkeit der Waren darzustellen und zu aktualisieren, ohne dass die Seite neu geladen werden muss 	.
 
