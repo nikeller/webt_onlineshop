@@ -12,9 +12,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import play.mvc.WebSocket;
 
-public class ObserverPage implements Observer {
+public class ObserverPage implements java.util.Observer {
 	
 	public WebSocket.Out<JsonNode> sweetshop;
+	public WebSocket.Out<String> name;
 	
 	public ObserverPage(){
 		Model.sharedInstance.addObserver(this);
@@ -36,7 +37,7 @@ public class ObserverPage implements Observer {
 			e.printStackTrace();
 		}
 		
-		sweetshop.write(Model.sharedInstance.zeigeAktuelleMenge(jsonname));
+		sweetshop.write(Model.sharedInstance.MengeAktualisiert(jsonname));
 	}
 
 }

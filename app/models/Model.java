@@ -371,7 +371,7 @@ public class Model extends Observable {
 	 /////////////////////////////////////////////////////////////////////////////////
 	
 	
-	public static JsonNode zeigeAktuelleMenge(JsonNode obj) {
+	public JsonNode MengeAktualisiert(JsonNode obj) {
 		Connection connection = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -388,7 +388,7 @@ public class Model extends Observable {
 					.executeQuery("SELECT * FROM Torte, Praline WHERE name = '"
 							+ name + "' ;");
 
-			if (rs.next()) {
+			while (rs.next()) {
 				menge = new Integer(rs.getInt("bestand"));
 				System.out.println("in rs next");
 			}
@@ -543,7 +543,12 @@ public class Model extends Observable {
 								"bestand Integer NOT NULL" +
 								")";
 		      stmt.executeUpdate(strCreateTorte);
-	      
+		      
+		      
+	      ///////////////////////////////////////////////////////////////////////////////////////////////
+		   //   Diese Inserts müssen auskommentiert werden, nachdem das Projekt erstmalig mit dem activator gestartet wurde,
+		   // hier wurde auf das auskommentieren verzichtet, da die Inserts für Heroku notwendig sind//////////
+		    ///////////////////////////////////////////////////////////////////////////////////////////////  
 		      String strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
 	                   "VALUES ('Goldene Freude', '/assets/images/Torte_001.jpg',"
 	                   + "'Hochzeitstorte', 'T', 35.50, 30);"; 
@@ -582,6 +587,12 @@ public class Model extends Observable {
 								")";
 		      stmt.executeUpdate(strCreatePraline);
 		      
+		      
+		      
+		      ///////////////////////////////////////////////////////////////////////////////////////////////
+			   //   Diese Inserts müssen auskommentiert werden, nachdem das Projekt erstmalig mit dem activator gestartet wurde,
+			   // hier wurde auf das Auskommentieren verzichtet, da die Inserts für Heroku notwendig sind//////////
+			    /////////////////////////////////////////////////////////////////////////////////////////////// 
 		      String strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
 		                   "VALUES ('Pralinen aus Milchschokolade', '/assets/images/Praline_001.jpg',"
 		                   + "'Für unsere Lieblinge', 'P', 10.00, 50);"; 
