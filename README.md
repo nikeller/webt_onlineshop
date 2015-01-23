@@ -8,7 +8,7 @@ Im Rahmen der Veranstaltung Web-Technologien wurde der Online-Shop „Sweet Shop
 ##### Anforderungsanalyse
 Use-Cases
 
-![Use-Cases](/public/images/Use-Case.jpg)
+![Use-Cases](/public/images/Use-Case.JPG.jpg)
 
 ##### Funktionale Anforderungen
 1.	Der User soll sich registrieren können.
@@ -26,7 +26,7 @@ WebSockets verwendet werden
 5.	Die Web-Applikation soll auf Heroku deployed werden
 
 ##### Erste Idee / Realisierung
-Die erste Idee des Projekts wurde in verschiedenen Mockups dargestellt. Diejenigen Mockups, die sich von der Realisierung unterscheiden sollen hier aufgezeigt werden. Außerdem wird die Abweichungen zur realisierten Version eingegangen. 
+Die erste Idee des Projekts wurde in verschiedenen Mockups dargestellt. Diejenigen Mockups, die sich von der Realisierung unterscheiden sollen hier aufgezeigt werden. Außerdem wird auf die Abweichungen zur realisierten Version eingegangen. 
 
 Die Startseite sollte ein Suchfeld, einen Anmelde-Button und einen Warenkorb-Button enthalten. Auf der linken Seite sollen verschiedene Kategorien aufgeführt werden. Den Hauptteil der Startseite soll eine Bilderübersicht der Produkte der verschiedenen Kategorien ausfüllen. 
 
