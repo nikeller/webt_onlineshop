@@ -193,12 +193,11 @@ public class Model extends Observable {
 				warenkorbL.remove(i);	
 				}
 		}
-		String getWarenkorbSQL = "SELECT * FROM Warenkorb WHERE Warenkorb.email = '"
-				+ email + "'";
+		String getWarenkorbSQL = "SELECT * FROM Warenkorb WHERE Warenkorb.email = ?";
 		try {
 			connection =DB.getConnection();
 			pstmt = connection.prepareStatement(getWarenkorbSQL);
-//			pstmt.setString(1, email);
+			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 			WarenkorbM WKM = new WarenkorbM(rs.getInt("id"), rs.getString("email"), rs.getString("ware"),
@@ -372,57 +371,57 @@ public class Model extends Observable {
 	 /////////////////////////////////////////////////////////////////////////////////
 	
 	
-//	public static JsonNode zeigeAktuelleMenge(JsonNode obj) {
-//		Connection connection = null;
-//		Statement stmt = null;
-//		ResultSet rs = null;
-//
-//		JsonNode jsonMenge = null;
-//		String name = obj.get("name").asText();
-//		Integer menge = null;
-//		System.out.println("Init done ");
-//		try {
-//			System.out.println("in try ");
-//			connection = DB.getConnection();
-//			stmt = connection.createStatement();
-//			rs = stmt
-//					.executeQuery("SELECT * FROM Torte, Praline WHERE name = '"
-//							+ name + "' ;");
-//
-//			if (rs.next()) {
-//				menge = new Integer(rs.getInt("bestand"));
-//				System.out.println("in rs next");
-//			}
-//
-//			ObjectMapper mapper = new ObjectMapper();
-//			jsonMenge = mapper.readTree("{\"name\":\"" + name
-//					+ "\",\"Menge\":\"" + menge.toString() + "\"}");
-//			System.out.println("JSON-Menge: " + jsonMenge);
-//
-//		} catch (SQLException | IOException e) {
-//			e.printStackTrace();
-//		} finally {
-//			if (rs != null) {
-//				try {
-//					rs.close();
-//				} catch (SQLException e) {
-//				}
-//			}
-//			if (stmt != null) {
-//				try {
-//					stmt.close();
-//				} catch (SQLException e) {
-//				}
-//			}
-//			if (connection != null) {
-//				try {
-//					connection.close();
-//				} catch (SQLException e) {
-//				}
-//			}
-//		}
-//		return jsonMenge;
-//	}
+	public static JsonNode zeigeAktuelleMenge(JsonNode obj) {
+		Connection connection = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		JsonNode jsonMenge = null;
+		String name = obj.get("name").asText();
+		Integer menge = null;
+		System.out.println("Init done ");
+		try {
+			System.out.println("in try ");
+			connection = DB.getConnection();
+			stmt = connection.createStatement();
+			rs = stmt
+					.executeQuery("SELECT * FROM Torte, Praline WHERE name = '"
+							+ name + "' ;");
+
+			if (rs.next()) {
+				menge = new Integer(rs.getInt("bestand"));
+				System.out.println("in rs next");
+			}
+
+			ObjectMapper mapper = new ObjectMapper();
+			jsonMenge = mapper.readTree("{\"name\":\"" + name
+					+ "\",\"Menge\":\"" + menge.toString() + "\"}");
+			System.out.println("JSON-Menge: " + jsonMenge);
+
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		return jsonMenge;
+	}
 
 	
 	 /////////////////////////////////////////////////////////////////////////////////

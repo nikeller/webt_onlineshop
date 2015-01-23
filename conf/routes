@@ -16,6 +16,7 @@ GET		/Warenkorb					controllers.Application.Warenkorb()
 GET		/Bestellung					controllers.Application.Bestellung()
 GET		/Kasse						controllers.Application.Kasse()
 GET		/WaitingTime				controllers.Application.WaitingTime()
+GET		/Socket						controllers.Application.socket()
 POST	/RegistrierungP				controllers.Application.RegistrierungP()
 POST	/AnmeldenP					controllers.Application.AnmeldenP()
 

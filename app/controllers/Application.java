@@ -63,7 +63,6 @@ public class Application extends Controller {
     public static Result submit(String ware, String preis) throws IOException{
     	String email = session("connected");
     	double preisd = Double.parseDouble(preis);
-
     	Model.sharedInstance.insertIntoWarenkorb(email, ware, preisd);
        
     		Warenkorb();
@@ -295,37 +294,33 @@ public class Application extends Controller {
     	return ok(Anmeldung.render());
     }
     
-//    public static WebSocket<JsonNode> socket() {
-//    	System.out.println("in socket");
-//		return new WebSocket<JsonNode>() {
-//			
-//			public void onReady(WebSocket.In<JsonNode> in,
-//					final WebSocket.Out<JsonNode> out) {
-//				System.out.println(": WebSocketArtikel ready...");
-//				final ObserverPage obs = new ObserverPage();
-//				obs.shop = out;
-//				System.out.println(": Anzahl observer: "
-//						+ Model.sharedInstance.countObservers());
-//				in.onMessage(new Callback<JsonNode>() {
-//					public void invoke(JsonNode obj) {
-//
-//					}
-//
-//				});
-//
-//				in.onClose(new Callback0() {
-//					public void invoke() {
-//						// observer.remove(id);
-//						Model.sharedInstance.deleteObserver(obs);
-//
-//						System.out.println(": Artikelansicht verlassen...");
-//						System.out.println( ": Anzahl observer: "+ Model.sharedInstance.countObservers());
-//					}
-//				});
-//
-//			}
-//		};
-//	}
+    public static WebSocket<JsonNode> socket() {
+    	System.out.println("in socket");
+		return new WebSocket<JsonNode>() {
+			
+			public void onReady(WebSocket.In<JsonNode> in,
+					final WebSocket.Out<JsonNode> out) {
+				final ObserverPage obs = new ObserverPage();
+				obs.sweetshop = out;
+				in.onMessage(new Callback<JsonNode>() {
+					public void invoke(JsonNode obj) {
+
+					}
+
+				});
+
+				in.onClose(new Callback0() {
+					public void invoke() {
+					
+						Model.sharedInstance.deleteObserver(obs);
+
+		
+					}
+				});
+
+			}
+		};
+	}
 
     
     
