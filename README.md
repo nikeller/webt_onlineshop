@@ -7,7 +7,7 @@ Im Rahmen der Veranstaltung Web-Technologien wurde der Online-Shop „Sweet Shop
 
 ##### Anforderungsanalyse
 Use-Cases
-![Use-Cases](/public/images/Use-Case.jpg)
+![Use-Cases](/public/images/Use-Case.JPG.jpg)
 
 ##### Funktionale Anforderungen
 1.	Der User sollte sich registrieren können
