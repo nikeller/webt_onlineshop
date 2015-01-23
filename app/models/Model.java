@@ -1,8 +1,6 @@
 package models;
 
 
-import java.awt.Font;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,31 +8,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
+
 import java.util.Observable;
-import java.text.*;
 
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-
-import org.json.*;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 import play.db.DB;
-import controllers.Assets;
+
 
 public class Model extends Observable {
 
 	public static final Model sharedInstance = new Model();
 
 	public Model() {
+		initDB();
 		
 	}
-	private static Connection connection = DB.getConnection();
+
 	public static ArrayList<Torte> torte = new ArrayList<Torte>();
 	public static ArrayList<Praline> praline = new ArrayList<Praline>();
 	public ArrayList<User> users = new ArrayList<User>();
@@ -46,12 +38,14 @@ public class Model extends Observable {
 	 /////////////////////////////////////////////////////////////////////////////////
 	public ArrayList<Torte> getTorten() {
 		torte.clear();
+		Connection connection = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			connection = DB.getConnection();
 			String torteInfoSQL = "SELECT * FROM Torte;";
 			pstmt = connection.prepareStatement(torteInfoSQL);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Torte torten = new Torte(rs.getInt("id"), rs.getString("name"),
 						rs.getString("beschr"), rs.getString("pfad"),
@@ -61,13 +55,26 @@ public class Model extends Observable {
 
 			}
 		}catch (SQLException e) {
-			System.out.println("Fehler beim Aufruf getTorten");
+
 			e.printStackTrace();
 		} finally {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
 			}
 		}
 		return torte;
@@ -78,12 +85,14 @@ public class Model extends Observable {
 	 /////////////////////////////////////////////////////////////////////////////////
 	public ArrayList<Praline> getPralinen(){
 		praline.clear();
+		Connection connection = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			connection =DB.getConnection();
 			String pralineInfoSQL = "SELECT * FROM Praline;";
 			pstmt = connection.prepareStatement(pralineInfoSQL);
-			ResultSet rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				Praline pralinen = new Praline(rs.getInt("id"), rs.getString("name"),
 						rs.getString("beschr"), rs.getString("pfad"),
@@ -93,13 +102,26 @@ public class Model extends Observable {
 
 			}
 		} catch (SQLException e) {
-			System.out.println("Fehler beim Aufruf getPralinen");
+
 			e.printStackTrace();
 		} finally {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
 			}
 		}
 		return praline;
@@ -113,27 +135,43 @@ public class Model extends Observable {
 	 /////////////////////////////////////////////////////////////////////////////////
 
 	public User getUser(String email){
-		String getUserSQL = "SELECT * FROM User WHERE User.email = '"
-				+ email + "'";
+
+		Connection connection = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
+			String getUserSQL = "SELECT * FROM User WHERE User.email = ?";
 			connection =DB.getConnection();
 			pstmt = connection.prepareStatement(getUserSQL);
-			ResultSet rs = pstmt.executeQuery();
+			pstmt.setString(1,  email);
+			rs = pstmt.executeQuery();
 			User user = new User(rs.getString("email"),
 					rs.getString("passwort"), rs.getString("vorname"),
 					rs.getString("nachname"), rs.getString("adresse"),
 					rs.getString("plz"));
 			return user;
 		} catch (SQLException e) {
-			System.out.println("Fehler beim Aufruf getUser");
+
 			e.printStackTrace();
 		} finally {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}	
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
+			}
 		}
 		return null;
 		
@@ -145,178 +183,27 @@ public class Model extends Observable {
 
 	public ArrayList<WarenkorbM> getWarenkorb(String email){
 		ArrayList<WarenkorbM > warenkorbL = new ArrayList<WarenkorbM>();
+		Connection connection = null;
 		PreparedStatement pstmt = null;
-		for (int i=0;i<warenkorbL.size();i++){
-			warenkorbL.remove(i);	
-			}
-		String getWarenkorbSQL = "SELECT * FROM Warenkorb WHERE Warenkorb.email = '"
-				+ email + "'";
+		ResultSet rs = null;
+		if(warenkorbL!=null){
+			for (int i=0;i<warenkorbL.size();i++){
+				warenkorbL.remove(i);	
+				}
+		}
+		String getWarenkorbSQL = "SELECT * FROM Warenkorb WHERE Warenkorb.email = ?";
 		try {
 			connection =DB.getConnection();
 			pstmt = connection.prepareStatement(getWarenkorbSQL);
-			ResultSet rs = pstmt.executeQuery();
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
 			while (rs.next()) {
 			WarenkorbM WKM = new WarenkorbM(rs.getInt("id"), rs.getString("email"), rs.getString("ware"),
 					rs.getDouble("preis"));
 			warenkorbL.add(WKM);
 			}
 		} catch (SQLException e) {
-			System.out.println("Fehler beim Aufruf getWarenkorb");
-			e.printStackTrace();
-		} finally {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}	
-		}
-		return warenkorbL;
-		
-	}
-	 /////////////////////////////////////////////////////////////////////////////////
-	 //				Application Aufruf: Bestellung			     				    //
-	 /////////////////////////////////////////////////////////////////////////////////
 
-	public void WarenkorbL(String email) {
-		Statement stmt2 = null;
-		Statement stmt3 = null;
-		Statement stmt4 = null;
-		Statement stmt5 = null;
-		Statement stmt6 = null;
-		int anzahlUpdateT=0;
-		int anzahlUpdateP=0;
-		short eins = -1;
-		System.out.println("übergebene E-Mail: "+email);
-		try {	
-			connection = DB.getConnection();
-			String getProduktNamen = "SELECT * FROM Warenkorb WHERE email = '"
-					+ email + "'";
-			
-			PreparedStatement pstmt = connection.prepareStatement(getProduktNamen);
-			ResultSet rs = pstmt.executeQuery();
-			
-			System.out.println("aus DB gelesen: ware aus Warenkorb: "+ rs);
-			while(rs.next()){
-				
-			String Name = rs.getString("ware");
-			
-			String getKategorieIDT = "SELECT id FROM Torte WHERE name = '"
-					+ Name + "'";
-			String getKategorieIDP = "SELECT id FROM Praline WHERE name = '"
-					+ Name + "'";
-			
-			stmt2 = connection.createStatement();
-			ResultSet produkt_id_torte = stmt2.executeQuery(getKategorieIDT);
-			System.out.println("aus Torten gelesen: "+ produkt_id_torte);
-			
-			stmt3 = connection.createStatement();
-			ResultSet produkt_id_praline = stmt3.executeQuery(getKategorieIDP);
-			System.out.println("aus Pralinen gelesen: "+ produkt_id_praline);
-			
-			if(produkt_id_torte != null){
-				while(produkt_id_torte.next()){
-				
-					stmt4 = connection.createStatement();
-					String UpdateStringT = "UPDATE Torte SET bestand = bestand" + eins
-											+ " WHERE id = '" + produkt_id_torte.getInt("id") +"';";
-					
-					anzahlUpdateT = stmt4.executeUpdate(UpdateStringT);	
-			
-					System.out.println(" ArtikelNummer "
-							+ produkt_id_torte.getInt("id") + " bestellt...");
-				
-					int observertestt = countObservers();
-					System.out.println("Anzahl Observer="+observertestt);
-					if (countObservers() > 0) {
-						setChanged();
-						notifyObservers(produkt_id_torte.getInt("id"));
-						}
-				
-				
-					}
-			}
-			
-			
-			
-			if(produkt_id_praline != null){
-				while(produkt_id_praline.next()){
-					stmt5 = connection.createStatement();
-					String UpdateStringP = "UPDATE Praline SET bestand = bestand" + eins
-											+ " WHERE id = '" + produkt_id_praline.getInt("id") +"';";
-					
-					anzahlUpdateP = stmt5.executeUpdate(UpdateStringP);	
-					
-					System.out.println(" ArtikelNummer "
-							+ produkt_id_praline.getInt("id") + " bestellt...");
-					int observertestp = countObservers();
-					System.out.println("Anzahl Observer="+observertestp);
-					if (countObservers() > 0) {
-						setChanged();
-						notifyObservers(produkt_id_praline.getInt("id"));	
-						}
-				}
-			}
-			System.out.println("--------If did not exist: Table created successfully");}
-
-			String strWarenkorbL = "DELETE" + " FROM Warenkorb"
-					+ " WHERE email = '" + email + "';";
-			
-			stmt6 = connection.createStatement();
-			stmt6.executeUpdate(strWarenkorbL);
-			System.out.println(strWarenkorbL);
-			
-		} catch (SQLException e) {
-			System.out.println("Fehler beim Aufruf WarenkorbL");
-			e.printStackTrace();
-		} finally {
-			try {
-				stmt2.close();
-				stmt3.close();
-				if(stmt4!=null){
-				stmt4.close();
-				}
-				if(stmt5!=null){
-				stmt5.close();
-				}
-				stmt6.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}	
-		}
-		
-		System.out.println("If did not exist: Table deleted");
-	}
-
-	
-	 /////////////////////////////////////////////////////////////////////////////////
-	 //				Application Aufruf: Observer			     				    //
-	 /////////////////////////////////////////////////////////////////////////////////
-	public static JsonNode zeigeAktuelleMenge(JsonNode obj) {
-		Statement stmt = null;
-		ResultSet rs = null;
-
-		JsonNode jsonMenge = null;
-		String name = obj.get("name").asText();
-		Integer menge = null;
-
-		try {
-			connection = DB.getConnection();
-			stmt = connection.createStatement();
-			rs = stmt
-					.executeQuery("SELECT * FROM Torte WHERE name = '"
-							+ name + "' ;");
-
-			if (rs.next()) {
-				menge = new Integer(rs.getInt("bestand"));
-			}
-
-			ObjectMapper mapper = new ObjectMapper();
-			jsonMenge = mapper.readTree("{\"name\":\"" + name
-					+ "\",\"Menge\":\"" + menge.toString() + "\"}");
-			System.out.println("JSON-Menge: " + jsonMenge);
-
-		} catch (SQLException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if (rs != null) {
@@ -325,9 +212,9 @@ public class Model extends Observable {
 				} catch (SQLException e) {
 				}
 			}
-			if (stmt != null) {
+			if (pstmt != null) {
 				try {
-					stmt.close();
+					pstmt.close();
 				} catch (SQLException e) {
 				}
 			}
@@ -338,9 +225,194 @@ public class Model extends Observable {
 				}
 			}
 		}
-
-		return jsonMenge;
+		return warenkorbL;
+		
 	}
+	 /////////////////////////////////////////////////////////////////////////////////
+	 //				Application Aufruf: Bestellung			     				    //
+	 /////////////////////////////////////////////////////////////////////////////////
+
+	public void WarenkorbL(String email) {
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+	
+		Statement stmt2 = null;
+		Statement stmt3 = null;
+		Statement stmt4 = null;
+		Statement stmt5 = null;
+		Statement stmt6 = null;
+
+		ResultSet rs = null;
+		ResultSet produkt_id_torte = null;
+		ResultSet produkt_id_praline = null;
+		
+		int anzahlUpdateT=0;
+		int anzahlUpdateP=0;
+		short eins = -1;
+		try {	
+			connection = DB.getConnection();
+			String getProduktNamen = "SELECT * FROM Warenkorb WHERE email = '"
+					+ email + "'";
+			
+			pstmt = connection.prepareStatement(getProduktNamen);
+			rs = pstmt.executeQuery();
+			
+	
+			while(rs.next()){
+				
+			String Name = rs.getString("ware");
+			
+			String getKategorieIDT = "SELECT id FROM Torte WHERE name = '"
+					+ Name + "'";
+			String getKategorieIDP = "SELECT id FROM Praline WHERE name = '"
+					+ Name + "'";
+			
+			stmt2 = connection.createStatement();
+			produkt_id_torte = stmt2.executeQuery(getKategorieIDT);
+
+			
+			stmt3 = connection.createStatement();
+			produkt_id_praline = stmt3.executeQuery(getKategorieIDP);
+
+			
+			if(produkt_id_torte != null){
+				while(produkt_id_torte.next()){
+					System.out.println("übergebene E-Mail: "+email);
+					stmt4 = connection.createStatement();
+					String UpdateStringT = "UPDATE Torte SET bestand = bestand" + eins
+											+ " WHERE id = '" + produkt_id_torte.getInt("id") +"';";
+					
+					anzahlUpdateT = stmt4.executeUpdate(UpdateStringT);	
+
+
+
+//					if (countObservers() > 0) {
+//						setChanged();
+//						notifyObservers(produkt_id_torte.getString("name"));
+//						}
+				
+				
+					}
+			}
+			
+			
+			
+			if(produkt_id_praline != null){
+				while(produkt_id_praline.next()){
+					System.out.println("übergebene E-Mail: "+email);
+					stmt5 = connection.createStatement();
+					String UpdateStringP = "UPDATE Praline SET bestand = bestand" + eins
+											+ " WHERE id = '" + produkt_id_praline.getInt("id") +"';";
+					
+					anzahlUpdateP = stmt5.executeUpdate(UpdateStringP);	
+
+
+
+//					if (countObservers() > 0) {
+//						setChanged();
+//						notifyObservers(produkt_id_praline.getString("name"));
+//						}
+				}
+			}
+			System.out.println("--------If did not exist: Table created successfully");}
+
+			String strWarenkorbL = "DELETE" + " FROM Warenkorb"
+					+ " WHERE email = '" + email + "';";
+			
+			stmt6 = connection.createStatement();
+			stmt6.executeUpdate(strWarenkorbL);
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (produkt_id_torte != null) {
+				try {
+					produkt_id_torte.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (produkt_id_praline != null) {
+				try {
+					produkt_id_praline.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (pstmt != null) {try {pstmt.close();} catch (SQLException e) {}}
+			if (stmt2 != null) {try {stmt2.close();} catch (SQLException e) {}}
+			if (stmt3 != null) {try {stmt3.close();} catch (SQLException e) {}}
+			if (stmt4 != null) {try {stmt4.close();} catch (SQLException e) {}}
+			if (stmt5 != null) {try {stmt5.close();} catch (SQLException e) {}}
+			if (stmt6 != null) {try {stmt6.close();} catch (SQLException e) {}}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		
+		
+		System.out.println("If did not exist: Table deleted");
+	}
+
+	
+	 /////////////////////////////////////////////////////////////////////////////////
+	 //				Application Aufruf: Observer			     				    //
+	 /////////////////////////////////////////////////////////////////////////////////
+//	public static JsonNode zeigeAktuelleMenge(JsonNode obj) {
+//		Statement stmt = null;
+//		ResultSet rs = null;
+//
+//		JsonNode jsonMenge = null;
+//		String name = obj.get("name").asText();
+//		Integer menge = null;
+//		System.out.println("Init done ");
+//		try {
+//			System.out.println("in try ");
+//			connection = DB.getConnection();
+//			stmt = connection.createStatement();
+//			rs = stmt
+//					.executeQuery("SELECT * FROM Torte, Praline WHERE name = '"
+//							+ name + "' ;");
+//
+//			if (rs.next()) {
+//				menge = new Integer(rs.getInt("bestand"));
+//				System.out.println("in rs next");
+//			}
+//
+//			ObjectMapper mapper = new ObjectMapper();
+//			jsonMenge = mapper.readTree("{\"name\":\"" + name
+//					+ "\",\"Menge\":\"" + menge.toString() + "\"}");
+//			System.out.println("JSON-Menge: " + jsonMenge);
+//
+//		} catch (SQLException | IOException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException e) {
+//				}
+//			}
+//			if (stmt != null) {
+//				try {
+//					stmt.close();
+//				} catch (SQLException e) {
+//				}
+//			}
+//
+//		}
+//
+//		return jsonMenge;
+//	}
 
 	
 	 /////////////////////////////////////////////////////////////////////////////////
@@ -349,6 +421,7 @@ public class Model extends Observable {
 	 public void insertIntoUser(String email, String passwort,
 			String vorname, String nachname, String adresse, String PLZ){
 			Statement stmt = null;
+			Connection connection = null;
 
 			try {
 				connection = DB.getConnection();
@@ -375,13 +448,21 @@ public class Model extends Observable {
 				stmt.close();
 				System.out.println("InsertIntoUser fertig___________________________________");
 			}  catch (SQLException e) {
-				System.out.println("Fehler beim Aufruf getWarenkorb");
+
 				e.printStackTrace();
 			} finally {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+			
+				if (stmt != null) {
+					try {
+						stmt.close();
+					} catch (SQLException e) {
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+					}
 				}
 			}
 			System.out.println("Records created successfully");
@@ -394,11 +475,10 @@ public class Model extends Observable {
 	 public void insertIntoWarenkorb(String email, String ware,
 				double preis){
 			Statement stmt = null;
-
+			Connection connection = null;
 			try {
 				connection = DB.getConnection();
 
-				// Insert Student
 				stmt = connection.createStatement();
 				String strInsertIntoWarenkorb = "INSERT INTO Warenkorb (email, ware, preis) VALUES ('"
 						+ email
@@ -411,24 +491,155 @@ public class Model extends Observable {
 				System.out.println(strInsertIntoWarenkorb);
 				stmt.executeUpdate(strInsertIntoWarenkorb);
 				stmt.close();
-				connection.close();
 				System.out.println("InsertInToWarenkorb fertig-----------------------------");
 			} catch (SQLException e) {
-				System.out.println("Fehler beim Aufruf getWarenkorb");
+
 				e.printStackTrace();
 			} finally {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+			
+				if (stmt != null) {
+					try {
+						stmt.close();
+					} catch (SQLException e) {
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+					}
 				}
 			}
 			System.out.println("Records created successfully");
 		}
 	
 	
-	
-	
+	public void initDB()
+	{
+		Statement stmt = null;
+		Connection connection = null;
+		 try {
+			 
+			 
+			  connection = DB.getConnection();  
+		      stmt = connection.createStatement();
+		      String strCreateTorte =
+		    		  "CREATE TABLE IF NOT EXISTS Torte (" +
+								"id  INTEGER PRIMARY KEY AUTOINCREMENT,"	+
+								"name VARCHAR(50) NOT NULL, " +
+								"pfad  VARCHAR(100) NOT NULL," +
+								"beschr VARCHAR(150)," +
+								"kategorie_id VARCHAR(10) NOT NULL," +
+								"preis decimal(4,2) NOT NULL," +
+								"bestand Integer NOT NULL" +
+								")";
+		      stmt.executeUpdate(strCreateTorte);
+	      
+//		      String strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                   "VALUES ('Goldene Freude', '/assets/images/Torte_001.jpg',"
+//	                   + "'Hochzeitstorte', 'T', 35.50, 30);"; 
+//		      stmt.executeUpdate(strInsertIntoTorte);
+//			 
+//		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//		                   "VALUES ('Himmlische Torte', '/assets/images/Torte_002.jpg',"
+//		                   + "'Passend zur Hochzeit, Geburtstag', 'T', 33.0, 36);"; 
+//		      stmt.executeUpdate(strInsertIntoTorte);
+//	
+//		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                  "VALUES ('Hochzeitstorte', '/assets/images/Torte_003.jpg',"
+//	                  + "'Dreistöckige Torte für besondere Anlässe', 'T', 70.50, 53);"; 
+//		      stmt.executeUpdate(strInsertIntoTorte);
+//		      
+//		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                  "VALUES ('Nusstorte', '/assets/images/Torte_004.jpg',"
+//	                  + "'Zum Frühstück oder Geburtstag', 'T', 10.00, 50);"; 
+//		      stmt.executeUpdate(strInsertIntoTorte);
+//		      
+//		      strInsertIntoTorte = "INSERT INTO Torte (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                  "VALUES ('Wuff-Wuff', '/assets/images/Torte_005.jpg',"
+//	                  + "'Passend zum Kindergeburtstag', 'T', 25.00, 42);"; 
+//		      stmt.executeUpdate(strInsertIntoTorte);
+		      
+		      
+		      String strCreatePraline =
+		    		  "CREATE TABLE IF NOT EXISTS Praline (" +
+								"id  INTEGER PRIMARY KEY AUTOINCREMENT,"	+
+								"name VARCHAR(50) NOT NULL, " +
+								"pfad  VARCHAR(100) NOT NULL," +
+								"beschr VARCHAR(150)," +
+								"kategorie_id VARCHAR(10) NOT NULL," +
+								"preis decimal(4,2) NOT NULL," +
+								"bestand INTEGER NOT NULL" +
+								")";
+		      stmt.executeUpdate(strCreatePraline);
+		      
+//		      String strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//		                   "VALUES ('Pralinen aus Milchschokolade', '/assets/images/Praline_001.jpg',"
+//		                   + "'Für unsere Lieblinge', 'P', 10.00, 50);"; 
+//		      stmt.executeUpdate(strInsertIntoPraline);
+//			 
+//		      strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//		                   "VALUES ('Marmorpralinen', '/assets/images/Praline_002.jpg',"
+//		                   + "'Für unsere Lieblinge', 'P', 8.00, 30);"; 
+//		      stmt.executeUpdate(strInsertIntoPraline);
+//
+//		      strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                   "VALUES ('Pralinen aus weisser Schokolade', '/assets/images/Praline_003.jpg',"
+//	                   + "'Für unsere Lieblinge', 'P', 9.00, 10);"; 
+//		      stmt.executeUpdate(strInsertIntoPraline);
+//		      
+//		      strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                   "VALUES ('Pralinen-Assorti', '/assets/images/Praline_004.jpg',"
+//	                   + "'Für unsere Lieblinge', 'P', 12.50, 10);"; 
+//		      stmt.executeUpdate(strInsertIntoPraline);
+//		      
+//		      strInsertIntoPraline = "INSERT INTO Praline (name, pfad, beschr, kategorie_id, preis, bestand) " +
+//	                   "VALUES ('Assorti', '/assets/images/Praline_005.jpg',"
+//	                   + "'Für unsere Lieblinge', 'P', 11.00, 10);"; 
+//		      stmt.executeUpdate(strInsertIntoPraline);
+		      
+		      String strCreateWarenkorb =
+		    		  "CREATE TABLE IF NOT EXISTS Warenkorb (" +
+		    				  	"id  INTEGER PRIMARY KEY AUTOINCREMENT,"	+
+								"email VARCHAR(100) NOT NULL, " +
+								"ware  VARCHAR(100) NOT NULL," +
+								"preis decimal(4,2) NOT NULL" +
+								")";
+		      stmt.executeUpdate(strCreateWarenkorb);
+		      
+		      String strCreateUser =
+		    		  "CREATE TABLE IF NOT EXISTS User (" +
+								"email  VARCHAR(50) PRIMARY KEY, "	+
+								"passwort VARCHAR(50) NOT NULL, " +
+								"vorname VARCHAR(50) NOT NULL, " +
+								"nachname VARCHAR(50) NOT NULL, " +
+								"adresse  VARCHAR(100) NOT NULL," +
+								"PLZ INTEGER NOT NULL" +
+								")";
+		      stmt.executeUpdate(strCreateUser);
+
+		      stmt.close();
+		    } catch (SQLException e) {
+
+				e.printStackTrace();
+			} finally {
+			
+				if (stmt != null) {
+					try {
+						stmt.close();
+					} catch (SQLException e) {
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+					}
+				}
+			}
+		    System.out.println("Records created successfully");
+	 }
+	 
 	
 
 }

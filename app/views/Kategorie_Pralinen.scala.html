@@ -11,23 +11,6 @@
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 <link rel="stylesheet" href="@routes.Assets.at("stylesheets/mainStyleSheet.css")">
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">>
-		//WebSocket Skript
-var webSocket;
-$(function() {
-	var WS = window["MozWebSocket"] ? MozWebSocket : WebSocket;
-	webSocket = new WS("@routes.Application.socket().webSocketURL(request)");
-	webSocket.onmessage = receiveEvent;
-})
-		
-function receiveEvent(event){
-	var obj = JSON.parse(event.data);
-
-	$("#menge"+obj.name).html("<p>Menge: "+obj.Menge);
-	
-};
-
-</script>
 <script type="text/javascript">
 
 function uebergabe(chocolate) {
@@ -117,7 +100,7 @@ function uebergabe(chocolate) {
 					<tr id="Chocolate@praline.getProdukt_id">	
 						<td id="ware@praline.getProdukt_id">@praline.produkt_name</td>
 						<td><img class="img-responsive" alt="Responsives Bild" src="@praline.bild"></td>
-						<td id="bestand">@praline.bestand</td>
+						<td id="bestand@praline.getProdukt_name">@praline.bestand</td>
 						<td id="preis@praline.getProdukt_id">@praline.preis</td>
 					</tr>
 					}
@@ -137,7 +120,7 @@ function uebergabe(chocolate) {
 					<tr id="Chocolate@praline.getProdukt_id">	
 						<td id="ware@praline.getProdukt_id">@praline.produkt_name</td>
 						<td><img class="img-responsive" alt="Responsives Bild" src="@praline.bild"></td>
-						<td id="bestand">@praline.bestand</td>
+						<td id="bestand@praline.getProdukt_name">@praline.bestand</td>
 						<td id="preis@praline.getProdukt_id">@praline.preis</td>
 						<td><form onsubmit="uebergabe(Chocolate@praline.getProdukt_id);" action="@routes.Application.WaitingTime">
 								<button type="submit">In

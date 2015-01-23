@@ -1,68 +1,52 @@
 package controllers;
 
-import java.awt.Font;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+
 
 import play.libs.F.Callback;
 import play.libs.F.Callback0;
 import play.mvc.WebSocket;
 
 import java.util.Map;
-import java.util.Random;
 
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import models.Gebaeck;
-import models.JDBC;
+//import models.JDBC;
 import models.Model;
 import models.Praline;
 import models.Torte;
 import models.User;
 import models.WarenkorbM;
-import play.*;
-import play.api.mvc.Session;
-import play.data.*;
-import play.libs.F.Callback0;
+
 import play.mvc.*;
 import views.html.*;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson; 
-import com.google.gson.JsonArray; 
+ 
 import com.google.gson.JsonObject; 
 
 public class Application extends Controller {
 	private static final Object lock = new Object();
-	private static Application application = new Application();
-	private static final Object JDialog = null;
+
 	public static HashMap<String, HashMap<String, String>> outerMap = new HashMap<String, HashMap<String, String>>();
 	public static HashMap<String, String> innerMap = new HashMap<String, String>();
 	public static int a;
 	public static int eingeloggt;
-	static JDBC database = new JDBC();
 	public static int status; 
-    private static Random rand = new Random();
-    private static int i=0;
     
     
     public static Result index(){
-//session().clear();
-//    	Model.sharedInstance.deleteWk();
+
     	String user = session("connected");
 		System.out.println(user);
     	if (user!=null){
@@ -80,19 +64,14 @@ public class Application extends Controller {
     	String email = session("connected");
     	double preisd = Double.parseDouble(preis);
 
-
-//    	final Map<String, float[]> values = request().body().asFormUrlEncoded();
-//    	if (Model.sharedInstance.getUser(values.get("email")[0]) == null) {
     	Model.sharedInstance.insertIntoWarenkorb(email, ware, preisd);
-    
-//    		models.Warenkorb warenkorb = Model.sharedInstance.getWarenkorb(email);
-//    		int a =warenkorb.getNr();    
+       
     		Warenkorb();
     		System.out.println(email +  ware + preisd);
     		return ok();      
    }
 
-	public static Result Kategorie_Torten() throws SQLException {
+	public static Result Kategorie_Torten() throws IOException {
 
 		String user = session("connected");
 		System.out.println(user);
@@ -109,21 +88,12 @@ public class Application extends Controller {
 	      
 	      Collection<Torte> Torten =  new HashSet<Torte>();
 	      Torten = Model.sharedInstance.getTorten();
-//    	Ausführungszeilen zu JDBC
-//    JDBC ausgabe = new JDBC();
-//    	ausgabe.createTable();
-//    	ausgabe.insertInto();
-//    	ausgabe.createTablePraline();
-//    	ausgabe.insertIntoPraline();
-//    	ausgabe.createTableUser();
-//    	ausgabe.select();
-//		ausgabe.createTableWarenkorb();
     	
 		return ok(Kategorie_Torten.render(Torten, status));
 	
     }
     
-    public static Result Kategorie_Pralinen(){
+    public static Result Kategorie_Pralinen() throws IOException{
     	String user = session("connected");
     	if (user!=null){
     		System.out.println("Pralinen: immernoch eingeloggt");
@@ -203,7 +173,7 @@ public class Application extends Controller {
     	            {
     
     	            	allePLZ= "<p id='"+i+"' abc("+i+")'>" +aktuellerWert+"</p>" + allePLZ;
-//    	            	allePLZ= aktuellerWert+  "." + allePLZ ;
+
     	            } 
     	            
     	            reader.close();    
@@ -230,8 +200,8 @@ public class Application extends Controller {
 		User KundeReg = Model.sharedInstance.getUser(Help);
 		String EmailCheck = values.get("emailA")[0];
 		String PasswortCheck = values.get("passwortA")[0];
-		 System.out.println(EmailCheck+" "+ PasswortCheck);
-		 System.out.println(KundeReg);
+		System.out.println(EmailCheck+" "+ PasswortCheck);
+		System.out.println(KundeReg);
         
 		if (KundeReg != null) {
 			if (KundeReg.getEmail().equals(EmailCheck)) {
@@ -244,7 +214,7 @@ public class Application extends Controller {
 		            
 					return redirect("/");
 				} else {
-					return redirect("/Registrierung");
+					return redirect("/Anmeldung");
 				}
 			} else {
 				return redirect("/Registrierung");
@@ -259,20 +229,17 @@ public class Application extends Controller {
     
     public static Result Abmeldung(){
     	String user = session("connected");
-    	System.out.println(user+"öööööööööööööööööööööööööööööööööööööööö");
+    	System.out.println(user+" ist abgemeldet");
     	session().clear();
     	return redirect("/");
     }
     
     
-    public static Result Warenkorb() throws IOException{
+    public static Result Warenkorb(){
     	String user = session("connected");
     	if (user!=null){
     		System.out.println("Warenkorb: immernoch eingeloggt");
-    		status = 1;
-    		
-    		
-    		
+    		status = 1;	
     	}
     	else {
     		System.out.println("Warenkorb: nicht eingeloggt");
@@ -280,27 +247,33 @@ public class Application extends Controller {
     	}
 
     	Collection<WarenkorbM> WKM = new HashSet<WarenkorbM>();
-		for (int i=0;i<WKM.size();i++){
-		WKM.remove(i);
-		}
-		//System.out.print("----------------"+WKM.size());
+    	if(WKM!=null){
+			for (int i=0;i<WKM.size();i++){
+					WKM.remove(i);
+				}
+			}
+
     	WKM = Model.sharedInstance.getWarenkorb(user);
-//		System.out.print(WKM.size());
-    	return ok(Warenkorb.render(WKM, status));
+    	int listenSize = WKM.size();
+       	return ok(Warenkorb.render(listenSize, WKM, status));
     	
     }
    
     public static Result Bestellung(){
-    	Collection<WarenkorbM> WKM = new HashSet<WarenkorbM>();
 
-		for (int i=0;i<WKM.size();i++){
-		WKM.remove(i);
-		}
-		
     	String user = session("connected");
+    	
     	if (user!=null){
-    		WKM = Model.sharedInstance.getWarenkorb(user);
-    		Model.sharedInstance.WarenkorbL(user);
+        		Collection<WarenkorbM> WKM = new HashSet<WarenkorbM>();
+        		if(WKM!=null){
+        			for (int i=0;i<WKM.size();i++){
+        					WKM.remove(i);
+        				}
+        			}
+    			WKM = Model.sharedInstance.getWarenkorb(user);
+    			if (WKM!=null){
+    					Model.sharedInstance.WarenkorbL(user);
+    				}
     		return redirect("/");
     		}
     	else{
@@ -314,7 +287,7 @@ public class Application extends Controller {
     }
     public static Result WaitingTime() throws InterruptedException{
     	synchronized(lock){
-    		lock.wait(250);}
+    		lock.wait(150);}
     	return redirect("/Warenkorb");
     }
     public static Result Anmeldung(){
@@ -322,37 +295,37 @@ public class Application extends Controller {
     	return ok(Anmeldung.render());
     }
     
-    public static WebSocket<JsonNode> socket() {
-    	System.out.println("in socket");
-		return new WebSocket<JsonNode>() {
-			
-			public void onReady(WebSocket.In<JsonNode> in,
-					final WebSocket.Out<JsonNode> out) {
-				System.out.println(": WebSocketArtikel ready...");
-				final ObserverPage obs = new ObserverPage();
-				obs.shop = out;
-				System.out.println(": Anzahl observer: "
-						+ Model.sharedInstance.countObservers());
-				in.onMessage(new Callback<JsonNode>() {
-					public void invoke(JsonNode obj) {
-
-					}
-
-				});
-
-				in.onClose(new Callback0() {
-					public void invoke() {
-						// observer.remove(id);
-						Model.sharedInstance.deleteObserver(obs);
-
-						System.out.println(": Artikelansicht verlassen...");
-						System.out.println( ": Anzahl observer: "+ Model.sharedInstance.countObservers());
-					}
-				});
-
-			}
-		};
-	}
+//    public static WebSocket<JsonNode> socket() {
+//    	System.out.println("in socket");
+//		return new WebSocket<JsonNode>() {
+//			
+//			public void onReady(WebSocket.In<JsonNode> in,
+//					final WebSocket.Out<JsonNode> out) {
+//				System.out.println(": WebSocketArtikel ready...");
+//				final ObserverPage obs = new ObserverPage();
+//				obs.shop = out;
+//				System.out.println(": Anzahl observer: "
+//						+ Model.sharedInstance.countObservers());
+//				in.onMessage(new Callback<JsonNode>() {
+//					public void invoke(JsonNode obj) {
+//
+//					}
+//
+//				});
+//
+//				in.onClose(new Callback0() {
+//					public void invoke() {
+//						// observer.remove(id);
+//						Model.sharedInstance.deleteObserver(obs);
+//
+//						System.out.println(": Artikelansicht verlassen...");
+//						System.out.println( ": Anzahl observer: "+ Model.sharedInstance.countObservers());
+//					}
+//				});
+//
+//			}
+//		};
+//	}
 
     
     
