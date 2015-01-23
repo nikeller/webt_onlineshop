@@ -29,7 +29,7 @@ Die erste Idee des Projekts wurde in verschiedenen Mockups dargestellt.
 Die Mockups werden hier mit der tatsächlichen Realisierung verglichen. 
 
 Die Startseite sollte ein Suchfeld, einen Anmelde-Button und einen Warenkorb-Button enthalten. Auf der linken Seite sollen verschiedene Kategorien aufgeführt werden. Den Hauptteil der Startseite soll eine Bilderübersicht der Produkte der verschiedenen Kategorien ausfüllen. 
-![Startseite](/nikeller/webt_onlineshop/blob/master/public/images/Mockup1.jpg)
+![Startseite](/public/images/Mockup1.jpg)
 Bei der Realisierung der Startseite wurde auf das Suchfeld verzichtet und die Bildübersicht der Produkte der verschiedenen Kategorien wurde durch eine Slideshow ersetzt. 
 ![Startseite](/nikeller/webt_onlineshop/blob/master/public/images/Screenshot1.jpg)
 Die weitere Idee war, dass jedes Produkt einzeln angeklickt werden kann, um auf die Seite des Produktes zu gelangen, auf der mehr Informationen, wie zum Beispiel eine Produktbeschreibung enthalten ist. Dort sollte dann auch ein Button sein, mit dem das Produkt in den Warenkorb gelegt werden kann. 
