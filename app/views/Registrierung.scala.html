@@ -26,21 +26,19 @@ function test() {
 				 var a = requestObj.responseText;
 				 var res = a.split(".");
 			 document.getElementById("stelle").innerHTML = res; 
-			 // save place array in 'postalcodes' to make it accessible from mouse event handlers
+			
 			 postalcodes = eingabe.postalcodes;
 		    	 
 			  if (res.length != 0) {
-			    // we got several places for the postalcode
-			    // make suggest box visible
+			    
 			    document.getElementById('stelle').style.visibility = 'visible';
 			    var suggestBoxHTML  = '';
-			    // iterate over places and build suggest box content
+			    
 			    for (i=0;i< res.length;i++) {
 			      // for every postalcode record we create a html div 
 			      // each div gets an id using the array index for later retrieval 
 			      // define mouse event handlers to highlight places on mouseover
 			      // and to select a place on click
-			      // all events receive the postalcode array index as input parameter
 			      suggestBoxMouseOver(i);
 			      suggestBoxHTML += "<div class='suggestions' id=pcId" + i + " onmousedown='suggestBoxMouseDown(" + i +")' onmouseover='suggestBoxMouseOver(" +  i +")' onmouseout='suggestBoxMouseOut(" + i +")'> " +'</div>';
 			  	 alert(suggestBoxHTML);
