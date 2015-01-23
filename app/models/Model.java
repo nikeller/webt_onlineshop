@@ -193,11 +193,12 @@ public class Model extends Observable {
 				warenkorbL.remove(i);	
 				}
 		}
-		String getWarenkorbSQL = "SELECT * FROM Warenkorb WHERE Warenkorb.email = ?";
+		String getWarenkorbSQL = "SELECT * FROM Warenkorb WHERE Warenkorb.email = '"
+				+ email + "'";
 		try {
 			connection =DB.getConnection();
 			pstmt = connection.prepareStatement(getWarenkorbSQL);
-			pstmt.setString(1, email);
+//			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 			WarenkorbM WKM = new WarenkorbM(rs.getInt("id"), rs.getString("email"), rs.getString("ware"),
